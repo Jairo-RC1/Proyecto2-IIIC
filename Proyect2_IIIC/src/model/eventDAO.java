@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
 import java.sql.PreparedStatement;
@@ -24,7 +21,7 @@ public class eventDAO {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, event.getName());
             ps.setString(2, event.getDescription());
-            ps.setDate(3, new java.sql.Date(event.getDate().getTime()));
+            ps.setDate(3, new java.sql.Date(event.getUtilDate().getTime()));
             ps.setString(4, event.getAddress());
             ps.setInt(5, event.getPostalCode());
             ps.setDouble(6, event.getPrice());
@@ -76,7 +73,7 @@ public class eventDAO {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, event.getName());
             ps.setString(2, event.getDescription());
-            ps.setDate(3, new java.sql.Date(event.getDate().getTime()));
+            ps.setDate(3, new java.sql.Date(event.getUtilDate().getTime()));
             ps.setString(4, event.getAddress());
             ps.setInt(5, event.getPostalCode());
             ps.setDouble(6, event.getPrice());

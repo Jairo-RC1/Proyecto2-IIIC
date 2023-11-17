@@ -1,11 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import model.eventDAO;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -33,37 +35,43 @@ public class ctrlEvent {
         model.setRowCount(0);
         List<event> events = eventDAO.readEvents();
         for (event event : events) {
-            Object[] row = { event.getId(), event.getName(), event.getDescription(), event.getDate(),
+            Object[] row = { event.getId(), event.getName(), event.getDescription(), event.getUtilDate(),
                     event.getAddress(), event.getPostalCode(), event.getPrice(), event.getRoom(),
                     event.getPlaceId() };
             model.addRow(row);
         }
     }
 
-    public void addEvent(JTextField name, JTextField description, JTextField date, JTextField address,
+    public void addEvent(JTextField name, JTextField description, JTextField utilDate, JTextField address,
             JTextField postalCode, JTextField price, JTextField room, JTextField placeId) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            
-            /*this.eventDAO.createEvent(new event(0, name.getText(), description.getText(), utilDate, address.getText(),
+            Date date = dateFormat.parse(utilDate.getText());
+            this.eventDAO.createEvent(new event(0, name.getText(), description.getText(), date, address.getText(),
                     Integer.parseInt(postalCode.getText()), Double.parseDouble(price.getText()),
-                    Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));*/
+                    Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento agregado con éxito");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error en el formato de datos: " + e.toString());
-        }
+        } catch (ParseException ex) {
+             Logger.getLogger(ctrlEvent.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
-    public void updateEvent(JTextField name, JTextField description, JTextField date, JTextField address,
+    public void updateEvent(JTextField name, JTextField description, JTextField utilDate, JTextField address,
             JTextField postalCode, JTextField price, JTextField room, JTextField placeId) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            
-            /*this.eventDAO.updateEvent(new event(this.id, name.getText(), description.getText(), utilDate,
+            Date date = dateFormat.parse(utilDate.getText());
+            this.eventDAO.updateEvent(new event(this.id, name.getText(), description.getText(), date,
                     address.getText(), Integer.parseInt(postalCode.getText()), Double.parseDouble(price.getText()),
-                    Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));*/
+                    Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento actualizado con éxito");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error en el formato de datos: " + e.toString());
-        }
+        } catch (ParseException ex) {
+             Logger.getLogger(ctrlEvent.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
     public void deleteEvent() {
