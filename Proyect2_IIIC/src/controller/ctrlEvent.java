@@ -44,7 +44,7 @@ public class ctrlEvent {
 
     public void addEvent(JTextField name, JTextField description, JTextField utilDate, JTextField address,
             JTextField postalCode, JTextField price, JTextField room, JTextField placeId) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(utilDate.getText());
             this.eventDAO.createEvent(new event(0, name.getText(), description.getText(), date, address.getText(),
