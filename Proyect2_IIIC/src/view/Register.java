@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.awt.Color;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,11 +30,14 @@ public class Register {
         initialize();
     }
 
-     private void initialize() {
+    private void initialize() {
         frame = new JFrame("Registro");
         frame.setBounds(100, 100, 800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(new Color(211, 82, 1));
+
         frame.getContentPane().setLayout(null);
 
         int componentWidth = 240; // Sets the width for the txt
@@ -158,7 +162,6 @@ public class Register {
                 String phoneNumber = phoneNumberField.getText();
                 String role = (String) roleComboBox.getSelectedItem();
 
-             
             }
         });
     }

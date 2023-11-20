@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
  *
  * @author JRS
  */
-
 public class Login {
 
     private JFrame frame;
@@ -43,6 +42,9 @@ public class Login {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setLocationRelativeTo(null);
+        frame.getContentPane().setBackground(new Color(211, 82, 1));
+
+        frame.getContentPane().setLayout(null);
 
         frame.getContentPane().setLayout(null);
 
@@ -90,5 +92,5 @@ public class Login {
             }
 
         });
-}
+    }
 }
