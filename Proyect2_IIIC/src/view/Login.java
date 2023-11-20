@@ -82,10 +82,10 @@ public class Login {
         });
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Aquí abres la clase mainView
+                // Opens window mainView
                 mainView mainView = new mainView();
                 mainView.setVisible(true);
-                // Cierras la ventana actual si es necesario
+                // Close currrent window
                 frame.dispose();
             }
 
