@@ -201,7 +201,7 @@ public class mainView extends javax.swing.JFrame {
 
         lblIcon.setBackground(new java.awt.Color(211, 82, 1));
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/TreeTravel.jpeg"))); // NOI18N
-        MainPanel.add(lblIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1000, 140));
+        MainPanel.add(lblIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1000, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

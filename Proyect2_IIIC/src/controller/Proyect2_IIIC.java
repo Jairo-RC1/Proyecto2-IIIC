@@ -10,7 +10,7 @@ public class Proyect2_IIIC {
  
     public static void main(String[] args) {
         FlatIntelliJLaf.setup();
-        mainView view = new mainView();
-        view.setVisible(true);      
+        login login = new login();
+        login.setVisible(true);
     }
 }
