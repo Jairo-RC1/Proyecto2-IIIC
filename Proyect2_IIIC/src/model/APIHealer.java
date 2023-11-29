@@ -2,6 +2,7 @@
 package model;
 
 import java.net.URL;
+import java.util.List;
 
 /**
  *
@@ -9,4 +10,9 @@ import java.net.URL;
  */
 public class APIHealer{
 
+    /*private static final String URL = "'https://api.content.tripadvisor.com/api/v1/";
+    
+    public List<place> searchByName(String name) throws Exception {
+        return fetchCocktails("search?" + name);
+    }*/
 }

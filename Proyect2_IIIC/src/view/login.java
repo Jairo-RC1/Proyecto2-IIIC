@@ -1,7 +1,10 @@
 package view;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.Color;
+import java.awt.Cursor;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -13,6 +16,8 @@ public class login extends javax.swing.JFrame {
 
     public login() {
         initComponents();
+        FlatIntelliJLaf.setup();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -26,7 +31,6 @@ public class login extends javax.swing.JFrame {
         btnEnter = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         lblser = new javax.swing.JLabel();
-        lblTitle = new javax.swing.JLabel();
         btnEnterMain = new javax.swing.JLabel();
         lblRegis = new javax.swing.JLabel();
         lblBackGround = new javax.swing.JLabel();
@@ -41,9 +45,19 @@ public class login extends javax.swing.JFrame {
         btnRegis.setForeground(new java.awt.Color(0, 0, 0));
         btnRegis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRegis.setText("Registrar");
-        btnRegis.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnRegis.setOpaque(true);
-        loginPane.add(btnRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 170, 50));
+        btnRegis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegisMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegisMouseExited(evt);
+            }
+        });
+        loginPane.add(btnRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 170, 50));
 
         lblClosePassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/eyeloked.png"))); // NOI18N
         lblClosePassword.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -51,55 +65,68 @@ public class login extends javax.swing.JFrame {
                 lblClosePasswordMouseClicked(evt);
             }
         });
-        loginPane.add(lblClosePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 40, 40));
+        loginPane.add(lblClosePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 40, 40));
 
         Password.setBackground(new java.awt.Color(255, 255, 255));
+        Password.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        Password.setForeground(new java.awt.Color(0, 0, 0));
+        Password.setText("********");
         Password.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 PasswordMousePressed(evt);
             }
         });
-        loginPane.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 320, 40));
+        loginPane.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 320, 40));
 
         btnEnter.setBackground(new java.awt.Color(0, 0, 0));
         loginPane.add(btnEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 90, 40));
 
         txtUser.setBackground(new java.awt.Color(255, 255, 255));
-        txtUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtUser.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtUser.setForeground(new java.awt.Color(0, 0, 0));
+        txtUser.setText("Ingrese su nombre de usuario");
         txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtUserMousePressed(evt);
             }
         });
-        loginPane.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 320, 40));
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
+        loginPane.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 320, 40));
 
         lblser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/user.png"))); // NOI18N
-        loginPane.add(lblser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 50, 40));
-
-        lblTitle.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(0, 0, 0));
-        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("TREE TRAVEL");
-        loginPane.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 520, 50));
+        loginPane.add(lblser, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 50, 40));
 
         btnEnterMain.setBackground(new java.awt.Color(255, 255, 255));
         btnEnterMain.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btnEnterMain.setForeground(new java.awt.Color(0, 0, 0));
         btnEnterMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnEnterMain.setText("Entrar");
-        btnEnterMain.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnEnterMain.setOpaque(true);
-        loginPane.add(btnEnterMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 170, 50));
+        btnEnterMain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEnterMainMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEnterMainMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEnterMainMouseExited(evt);
+            }
+        });
+        loginPane.add(btnEnterMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 170, 50));
 
-        lblRegis.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        lblRegis.setForeground(new java.awt.Color(0, 0, 0));
+        lblRegis.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
+        lblRegis.setForeground(new java.awt.Color(255, 255, 255));
         lblRegis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRegis.setText("¿No te has registrado?");
-        loginPane.add(lblRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 320, -1));
+        loginPane.add(lblRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 250, -1));
 
-        lblBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/TreeTravel2.jpeg"))); // NOI18N
-        loginPane.add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 520));
+        lblBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/LoginTreeTravel.jpg"))); // NOI18N
+        loginPane.add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,12 +136,20 @@ public class login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(loginPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(loginPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void labelColor(JLabel label) {
+        label.setBackground(new java.awt.Color(163,226,243));
+    }
+
+    private void resetLabelColor(JLabel label) {
+        label.setBackground(new java.awt.Color(255,255,255));
+    }
+    
     private void lblClosePasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblClosePasswordMouseClicked
         changeImage();
         togglePasswordVisibility();
@@ -139,8 +174,42 @@ public class login extends javax.swing.JFrame {
         if (String.valueOf(Password.getPassword()).isEmpty()) {
             Password.setText("********");
             Password.setForeground(Color.BLACK);
-        }
+        } 
     }//GEN-LAST:event_txtUserMousePressed
+
+    private void btnEnterMainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMainMouseEntered
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        labelColor(btnEnterMain);
+    }//GEN-LAST:event_btnEnterMainMouseEntered
+
+    private void btnEnterMainMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMainMouseExited
+        setCursor(Cursor.getDefaultCursor());
+        resetLabelColor(btnEnterMain);
+    }//GEN-LAST:event_btnEnterMainMouseExited
+
+    private void btnEnterMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMainMouseClicked
+        view.mainView MainView = new view.mainView();
+        MainView.setVisible(true);
+    }//GEN-LAST:event_btnEnterMainMouseClicked
+
+    private void btnRegisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseClicked
+        view.register regis = new register();
+        regis.setVisible(true);
+    }//GEN-LAST:event_btnRegisMouseClicked
+
+    private void btnRegisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseEntered
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        labelColor(btnRegis);
+    }//GEN-LAST:event_btnRegisMouseEntered
+
+    private void btnRegisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseExited
+        setCursor(Cursor.getDefaultCursor());
+        resetLabelColor(btnRegis);
+    }//GEN-LAST:event_btnRegisMouseExited
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
 
     private void changeImage() {
     if (imagen1) {
@@ -166,7 +235,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel lblBackGround;
     private javax.swing.JLabel lblClosePassword;
     private javax.swing.JLabel lblRegis;
-    private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblser;
     private javax.swing.JPanel loginPane;
     private javax.swing.JTextField txtUser;
