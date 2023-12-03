@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import model.loginDAO;
 
 public class login extends javax.swing.JFrame {
 
@@ -14,6 +16,11 @@ public class login extends javax.swing.JFrame {
         initComponents();
         FlatIntelliJLaf.setup();
         this.setLocationRelativeTo(null);
+    }
+
+    public void clear() {
+        this.txtUser.setText("");
+        this.Password.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -184,8 +191,22 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnterMainMouseExited
 
     private void btnEnterMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMainMouseClicked
-        view.mainView MainView = new view.mainView();
-        MainView.setVisible(true);
+        String username = txtUser.getText();
+        String password = new String(Password.getPassword());
+
+        loginDAO login = new loginDAO();
+        String roleName = login.loginUser(username, password);
+
+        if (!roleName.isEmpty()) {
+            view.mainView MainView = new view.mainView();
+            MainView.setVisible(true);
+            this.clear();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Credenciales incorrectos. Por favor, inténtelo de nuevo.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+            this.clear();
+        }
+
     }//GEN-LAST:event_btnEnterMainMouseClicked
 
     private void btnRegisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseClicked

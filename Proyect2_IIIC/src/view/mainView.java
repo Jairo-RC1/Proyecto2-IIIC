@@ -305,6 +305,11 @@ public class mainView extends javax.swing.JFrame {
                 txtPasswordMousePressed(evt);
             }
         });
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
         jPaneMain.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
 
         txtIdNumber.setBackground(new java.awt.Color(255, 255, 255));
@@ -314,6 +319,11 @@ public class mainView extends javax.swing.JFrame {
         txtIdNumber.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtIdNumberMousePressed(evt);
+            }
+        });
+        txtIdNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdNumberActionPerformed(evt);
             }
         });
         jPaneMain.add(txtIdNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 180, 40));
@@ -926,6 +936,14 @@ public class mainView extends javax.swing.JFrame {
     private void btnDeleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseExited
         resetPanelColor(btnDelete);
     }//GEN-LAST:event_btnDeleteMouseExited
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void txtIdNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdNumberActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
