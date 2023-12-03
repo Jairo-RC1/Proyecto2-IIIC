@@ -3,6 +3,7 @@ package view;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import controller.*;
 import java.awt.Color;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,13 +16,27 @@ import model.*;
 public class mainView extends javax.swing.JFrame {
 
     ctrlUser ctu = new ctrlUser();
+    private mainViewController controller;
 
     public mainView() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         FlatIntelliJLaf.setup();
+        this.controller = new mainViewController(this);
+        this.controller.loadEventData(); // Cargar datos de eventos al iniciar la vista
     }
+    
+     public String getSearchTerm() {
+        return txtSearch.getText();
+    }
+
+    public JButton getSearchButton() {
+        return searchButton;
+    }
+    public JLabel getEventNameLabel() {
+    return eventNameLabel; // Suponiendo que eventNameLabel es un JLabel en tu interfaz
+}
 
     public void setUserData(user currentUser) {
         ctu.loadUserDataIntoFields(txtIdNumber, txtName, txtLastName, txtBirthDate, txtEmail, txtPhoneNumber, txtPassword, currentUser);
@@ -87,6 +102,10 @@ public class mainView extends javax.swing.JFrame {
         btnRegis3 = new javax.swing.JLabel();
         lblSave3 = new javax.swing.JLabel();
         pnSerchEvent = new javax.swing.JPanel();
+        eventNameLabel = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        searchButton = new javax.swing.JButton();
         barPane = new javax.swing.JPanel();
         lblIcon = new javax.swing.JLabel();
 
@@ -529,6 +548,27 @@ public class mainView extends javax.swing.JFrame {
 
         pnSerchEvent.setBackground(new java.awt.Color(255, 255, 255));
         pnSerchEvent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        eventNameLabel.setBackground(new java.awt.Color(0, 0, 0));
+        eventNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eventNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        pnSerchEvent.add(eventNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 350, 160));
+        pnSerchEvent.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 170, 30));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Busqueda:");
+        pnSerchEvent.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
+
+        searchButton.setText("Buscar");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+        pnSerchEvent.add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, 30));
+
         Events.add(pnSerchEvent, "card2");
 
         DashBoard.add(Events, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 820, 520));
@@ -1000,6 +1040,10 @@ public class mainView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeleteMouseClicked
 
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
     private javax.swing.JPanel DashBoard;
@@ -1018,6 +1062,8 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel btnRegis3;
     private javax.swing.JPanel btnSave;
     private javax.swing.JPanel btnSave2;
+    private javax.swing.JLabel eventNameLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPaneMain;
     private javax.swing.JSeparator jSeparator1;
@@ -1050,6 +1096,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel pnBooking;
     private javax.swing.JPanel pnProfile;
     private javax.swing.JPanel pnSerchEvent;
+    private javax.swing.JButton searchButton;
     private javax.swing.JSeparator separator1;
     private javax.swing.JSeparator separator2;
     private javax.swing.JTextField txtBirthDate;
@@ -1059,6 +1106,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
 }
