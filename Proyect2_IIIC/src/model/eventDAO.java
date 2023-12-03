@@ -21,7 +21,7 @@ public class eventDAO {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, event.getName());
             ps.setString(2, event.getDescription());
-            ps.setDate(3, new java.sql.Date(event.getUtilDate().getTime()));
+            ps.setDate(3, new java.sql.Date(event.getDate().getTime()));
             ps.setString(4, event.getAddress());
             ps.setInt(5, event.getPostalCode());
             ps.setDouble(6, event.getPrice());
@@ -54,7 +54,8 @@ public class eventDAO {
                 double price = resultSet.getDouble("price");
                 int room = resultSet.getInt("room");
                 int placeId = resultSet.getInt("place_id");
-                event event = new event(id, name, description, date, address, postalCode, price, room, placeId);
+                String city = resultSet.getString("city");
+                event event = new event(id, name, description, date, address, postalCode,city, price, room, placeId);
                 events.add(event);
             }
         } catch (SQLException e) {
@@ -73,7 +74,7 @@ public class eventDAO {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, event.getName());
             ps.setString(2, event.getDescription());
-            ps.setDate(3, new java.sql.Date(event.getUtilDate().getTime()));
+            ps.setDate(3, new java.sql.Date(event.getDate().getTime()));
             ps.setString(4, event.getAddress());
             ps.setInt(5, event.getPostalCode());
             ps.setDouble(6, event.getPrice());

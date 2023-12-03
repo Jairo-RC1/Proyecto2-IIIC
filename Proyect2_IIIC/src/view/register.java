@@ -182,7 +182,7 @@ public class register extends javax.swing.JFrame {
         jPaneMain.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 40, 40));
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/logoAzulOscuro.jpeg"))); // NOI18N
-        jPaneMain.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 130, 130));
+        jPaneMain.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 100, 100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

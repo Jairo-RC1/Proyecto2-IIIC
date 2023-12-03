@@ -2,6 +2,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -12,38 +13,121 @@ public class event {
     private int id;
     private String name;
     private String description;
-    private Date utilDate;
+    private Date date;
     private String address;
     private int postalCode;
+    private String city;
     private double price;
     private int room;
     private int placeId;
+    private List <String> urlImages;
+    private String calification;
+    private String cantReviews;
+    private String calificationUrlImages;
+    private int locationId;
 
-    public event(int id, String name, String description, Date utilDate, String address, int postalCode, double price, int room, int placeId) {
+    public event(int id, String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId, List<String> urlImages, String calification, String cantReviews, String calificationUrlImages, int locationId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.utilDate = utilDate;
+        this.date = date;
         this.address = address;
         this.postalCode = postalCode;
+        this.city = city;
         this.price = price;
         this.room = room;
         this.placeId = placeId;
+        this.urlImages = urlImages;
+        this.calification = calification;
+        this.cantReviews = cantReviews;
+        this.calificationUrlImages = calificationUrlImages;
+        this.locationId = locationId;
     }
 
-    public event(String name, String description, Date utilDate, String address, int postalCode, double price, int room, int placeId) {
+    public event(String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId, List<String> urlImages, String calification, String cantReviews, String calificationUrlImages, int locationId) {
         this.name = name;
         this.description = description;
-        this.utilDate = utilDate;
+        this.date = date;
         this.address = address;
         this.postalCode = postalCode;
+        this.city = city;
+        this.price = price;
+        this.room = room;
+        this.placeId = placeId;
+        this.urlImages = urlImages;
+        this.calification = calification;
+        this.cantReviews = cantReviews;
+        this.calificationUrlImages = calificationUrlImages;
+        this.locationId = locationId;
+    }   
+
+    public event(int id, String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.city = city;
         this.price = price;
         this.room = room;
         this.placeId = placeId;
     }
+    
+    
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    
 
     public event() {
 
+    }
+
+    public List<String> getUrlImages() {
+        return urlImages;
+    }
+
+    public void setUrlImages(List<String> urlImages) {
+        this.urlImages = urlImages;
+    }
+
+    public String getCalification() {
+        return calification;
+    }
+
+    public void setCalification(String calification) {
+        this.calification = calification;
+    }
+
+    public String getCantReviews() {
+        return cantReviews;
+    }
+
+    public void setCantReviews(String cantReviews) {
+        this.cantReviews = cantReviews;
+    }
+
+    public String getCalificationUrlImages() {
+        return calificationUrlImages;
+    }
+
+    public void setCalificationUrlImages(String calificationUrlImages) {
+        this.calificationUrlImages = calificationUrlImages;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public int getId() {
@@ -70,12 +154,12 @@ public class event {
         this.description = description;
     }
 
-    public Date getUtilDate() {
-        return utilDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setUtilDate(Date utilDate) {
-        this.utilDate = utilDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getAddress() {
