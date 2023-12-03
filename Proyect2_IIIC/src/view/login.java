@@ -6,10 +6,6 @@ import java.awt.Cursor;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-/**
- *
- * @author jefry
- */
 public class login extends javax.swing.JFrame {
 
     private boolean imagen1 = true;
@@ -143,13 +139,13 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void labelColor(JLabel label) {
-        label.setBackground(new java.awt.Color(163,226,243));
+        label.setBackground(new java.awt.Color(163, 226, 243));
     }
 
     private void resetLabelColor(JLabel label) {
-        label.setBackground(new java.awt.Color(255,255,255));
+        label.setBackground(new java.awt.Color(255, 255, 255));
     }
-    
+
     private void lblClosePasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblClosePasswordMouseClicked
         changeImage();
         togglePasswordVisibility();
@@ -174,7 +170,7 @@ public class login extends javax.swing.JFrame {
         if (String.valueOf(Password.getPassword()).isEmpty()) {
             Password.setText("********");
             Password.setForeground(Color.BLACK);
-        } 
+        }
     }//GEN-LAST:event_txtUserMousePressed
 
     private void btnEnterMainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMainMouseEntered
@@ -212,19 +208,18 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserActionPerformed
 
     private void changeImage() {
-    if (imagen1) {
-        lblClosePassword.setIcon(new ImageIcon(getClass().getResource("/view/images/eye.png")));
-    } else {
-        lblClosePassword.setIcon(new ImageIcon(getClass().getResource("/view/images/eyeloked.png")));
+        if (imagen1) {
+            lblClosePassword.setIcon(new ImageIcon(getClass().getResource("/view/images/eye.png")));
+        } else {
+            lblClosePassword.setIcon(new ImageIcon(getClass().getResource("/view/images/eyeloked.png")));
+        }
+        imagen1 = !imagen1;
     }
-    imagen1 = !imagen1;
-}
-    
-    private void togglePasswordVisibility() {
-    char echoChar = Password.getEchoChar();
-    Password.setEchoChar(echoChar == 0 ? '*' : (char) 0);
-}   
 
+    private void togglePasswordVisibility() {
+        char echoChar = Password.getEchoChar();
+        Password.setEchoChar(echoChar == 0 ? '*' : (char) 0);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

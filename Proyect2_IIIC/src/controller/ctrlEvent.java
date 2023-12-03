@@ -1,4 +1,3 @@
-
 package controller;
 
 import java.text.ParseException;
@@ -21,7 +20,8 @@ import model.event;
  * @author JRS
  */
 public class ctrlEvent {
-     private eventDAO eventDAO;
+
+    private eventDAO eventDAO;
     private int id;
 
     public ctrlEvent() {
@@ -35,43 +35,43 @@ public class ctrlEvent {
         model.setRowCount(0);
         List<event> events = eventDAO.readEvents();
         for (event event : events) {
-            Object[] row = { event.getId(), event.getName(), event.getDescription(), event.getUtilDate(),
-                    event.getAddress(), event.getPostalCode(), event.getPrice(), event.getRoom(),
-                    event.getPlaceId() };
+            Object[] row = {event.getId(), event.getName(), event.getDescription(), event.getDate(),
+                event.getAddress(), event.getPostalCode(), event.getPrice(), event.getRoom(),
+                event.getPlaceId()};
             model.addRow(row);
         }
     }
 
     public void addEvent(JTextField name, JTextField description, JTextField utilDate, JTextField address,
-            JTextField postalCode, JTextField price, JTextField room, JTextField placeId) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            JTextField postalCode, JTextField city, JTextField price, JTextField room, JTextField placeId) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(utilDate.getText());
             this.eventDAO.createEvent(new event(0, name.getText(), description.getText(), date, address.getText(),
-                    Integer.parseInt(postalCode.getText()), Double.parseDouble(price.getText()),
+                    Integer.parseInt(postalCode.getText()), city.getText(), Double.parseDouble(price.getText()),
                     Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento agregado con éxito");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error en el formato de datos: " + e.toString());
         } catch (ParseException ex) {
-             Logger.getLogger(ctrlEvent.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            Logger.getLogger(ctrlEvent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void updateEvent(JTextField name, JTextField description, JTextField utilDate, JTextField address,
-            JTextField postalCode, JTextField price, JTextField room, JTextField placeId) {
+            JTextField postalCode, JTextField city, JTextField price, JTextField room, JTextField placeId) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(utilDate.getText());
             this.eventDAO.updateEvent(new event(this.id, name.getText(), description.getText(), date,
-                    address.getText(), Integer.parseInt(postalCode.getText()), Double.parseDouble(price.getText()),
+                    address.getText(), Integer.parseInt(postalCode.getText()), city.getText(), Double.parseDouble(price.getText()),
                     Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento actualizado con éxito");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error en el formato de datos: " + e.toString());
         } catch (ParseException ex) {
-             Logger.getLogger(ctrlEvent.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            Logger.getLogger(ctrlEvent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void deleteEvent() {

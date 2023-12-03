@@ -3,20 +3,19 @@ package view;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.Color;
 import javax.swing.JLabel;
+import controller.*;
+import java.text.ParseException;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author JRS
- */
 public class register extends javax.swing.JFrame {
 
-    /**
-     * Creates new form register
-     */
+    ctrlUser ctu = new ctrlUser();
+
     public register() {
         initComponents();
         FlatIntelliJLaf.setup();
         this.setLocationRelativeTo(null);
+        this.ctu.loadRolesToUserComboBox(cbxRoles);
     }
 
     @SuppressWarnings("unchecked")
@@ -31,7 +30,6 @@ public class register extends javax.swing.JFrame {
         txtIdNumber = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
-        btnRegis = new javax.swing.JLabel();
         btnExit = new javax.swing.JLabel();
         lblBirthDate = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
@@ -41,6 +39,9 @@ public class register extends javax.swing.JFrame {
         lblLastName = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
+        cbxRoles = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        btnRegis = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,7 +96,7 @@ public class register extends javax.swing.JFrame {
                 txtPasswordMousePressed(evt);
             }
         });
-        jPaneMain.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 180, 40));
+        jPaneMain.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 180, 40));
 
         txtIdNumber.setBackground(new java.awt.Color(255, 255, 255));
         txtIdNumber.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -130,22 +131,6 @@ public class register extends javax.swing.JFrame {
         });
         jPaneMain.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 180, 40));
 
-        btnRegis.setBackground(new java.awt.Color(255, 255, 255));
-        btnRegis.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        btnRegis.setForeground(new java.awt.Color(0, 0, 0));
-        btnRegis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnRegis.setText("Registrar");
-        btnRegis.setOpaque(true);
-        btnRegis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegisMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegisMouseExited(evt);
-            }
-        });
-        jPaneMain.add(btnRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 150, 40));
-
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/exit.png"))); // NOI18N
         btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -164,7 +149,7 @@ public class register extends javax.swing.JFrame {
         jPaneMain.add(lblBirthDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 40, 40));
 
         lblPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/password.png"))); // NOI18N
-        jPaneMain.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 40, 40));
+        jPaneMain.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 40, 40));
 
         lblPhoneNumber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/phone.png"))); // NOI18N
         jPaneMain.add(lblPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 40, 40));
@@ -182,7 +167,26 @@ public class register extends javax.swing.JFrame {
         jPaneMain.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 40, 40));
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/logoAzulOscuro.jpeg"))); // NOI18N
-        jPaneMain.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 100, 100));
+        jPaneMain.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 130, 130));
+
+        cbxRoles.setBackground(new java.awt.Color(255, 255, 255));
+        cbxRoles.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        cbxRoles.setForeground(new java.awt.Color(0, 0, 0));
+        jPaneMain.add(cbxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 206, 210, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/usuario.png"))); // NOI18N
+        jPaneMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 30, -1));
+
+        btnRegis.setBackground(new java.awt.Color(255, 255, 255));
+        btnRegis.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnRegis.setForeground(new java.awt.Color(0, 0, 0));
+        btnRegis.setText("REGISTRAR");
+        btnRegis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisActionPerformed(evt);
+            }
+        });
+        jPaneMain.add(btnRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 150, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,11 +203,11 @@ public class register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void labelColor(JLabel label) {
-        label.setBackground(new java.awt.Color(163,226,243));
+        label.setBackground(new java.awt.Color(163, 226, 243));
     }
 
     private void resetLabelColor(JLabel label) {
-        label.setBackground(new java.awt.Color(255,255,255));
+        label.setBackground(new java.awt.Color(255, 255, 255));
     }
     private void txtPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneNumberActionPerformed
 
@@ -218,15 +222,15 @@ public class register extends javax.swing.JFrame {
             txtLastName.setText("Apellido");
             txtLastName.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtIdNumber.getText()).isEmpty()){
+        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
             txtIdNumber.setText("Cedula");
             txtIdNumber.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtEmail.getText()).isEmpty()){
+        if (String.valueOf(txtEmail.getText()).isEmpty()) {
             txtEmail.setText("Correo electronico");
             txtEmail.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()){
+        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
             txtPhoneNumber.setText("Telefono");
             txtPhoneNumber.setForeground(Color.BLACK);
         }
@@ -234,7 +238,7 @@ public class register extends javax.swing.JFrame {
             txtBirthDate.setText("Fecha de nacimiento");
             txtBirthDate.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPassword.getText()).isEmpty()){
+        if (String.valueOf(txtPassword.getText()).isEmpty()) {
             txtPassword.setText("Contraseña");
             txtPassword.setForeground(Color.BLACK);
         }
@@ -253,7 +257,7 @@ public class register extends javax.swing.JFrame {
             txtIdNumber.setText("Cedula");
             txtIdNumber.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtEmail.getText()).isEmpty()){
+        if (String.valueOf(txtEmail.getText()).isEmpty()) {
             txtEmail.setText("Correo electronico");
             txtEmail.setForeground(Color.BLACK);
         }
@@ -288,7 +292,7 @@ public class register extends javax.swing.JFrame {
             txtEmail.setText("Correo electronico");
             txtEmail.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()){
+        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
             txtPhoneNumber.setText("Telefono");
             txtPhoneNumber.setForeground(Color.BLACK);
         }
@@ -296,7 +300,7 @@ public class register extends javax.swing.JFrame {
             txtBirthDate.setText("Fecha de nacimiento");
             txtBirthDate.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPassword.getText()).isEmpty()){
+        if (String.valueOf(txtPassword.getText()).isEmpty()) {
             txtPassword.setText("Contraseña");
             txtPassword.setForeground(Color.BLACK);
         }
@@ -327,11 +331,11 @@ public class register extends javax.swing.JFrame {
             txtBirthDate.setText("Fecha de nacimiento");
             txtBirthDate.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPassword.getText()).isEmpty()){
+        if (String.valueOf(txtPassword.getText()).isEmpty()) {
             txtPassword.setText("Contraseña");
             txtPassword.setForeground(Color.BLACK);
         }
-        
+
     }//GEN-LAST:event_txtEmailMousePressed
 
     private void txtPhoneNumberMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPhoneNumberMousePressed
@@ -432,25 +436,29 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitMouseClicked
 
     private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
-       labelColor(btnExit);
+        labelColor(btnExit);
     }//GEN-LAST:event_btnExitMouseEntered
-
-    private void btnRegisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseEntered
-         labelColor(btnRegis);
-    }//GEN-LAST:event_btnRegisMouseEntered
-
-    private void btnRegisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseExited
-       resetLabelColor(btnRegis);
-    }//GEN-LAST:event_btnRegisMouseExited
 
     private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
         resetLabelColor(btnExit);
     }//GEN-LAST:event_btnExitMouseExited
 
+    private void btnRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisActionPerformed
+        try {
+            this.ctu.addUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword, cbxRoles);
+        } catch (ParseException ex) {
+            // Manejo de la excepción ParseException
+            ex.printStackTrace(); // Aquí puedes imprimir o manejar la excepción según sea necesario
+            JOptionPane.showMessageDialog(null, "Error al procesar la fecha. Formato incorrecto.");
+        }
+    }//GEN-LAST:event_btnRegisActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
-    private javax.swing.JLabel btnRegis;
+    private javax.swing.JButton btnRegis;
+    private javax.swing.JComboBox<String> cbxRoles;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPaneMain;
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblEmail;
