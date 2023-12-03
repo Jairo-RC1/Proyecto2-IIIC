@@ -12,6 +12,7 @@ import model.*;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -34,6 +35,32 @@ public class ctrlUser {
             Object[] row = {user.getId(), user.getIdNumber(), user.getName(), user.getLastName(), user.getBirthDate(),
                 user.getEmail(), user.getPhoneNumber(), user.getPassword(), user.getRoleId()};
             model.addRow(row);
+        }
+    }
+
+    // Carga los datos del usuario en los campos de texto proporcionados
+    public void loadUserDataIntoFields(JTextField txtIdNumber, JTextField txtName, JTextField txtLastName,
+            JTextField txtBirthDate, JTextField txtEmail, JTextField txtPhoneNumber, JTextField txtPassword,
+            user currentUser) {
+
+        // Verificar si el usuario actual no es nulo
+        if (currentUser != null) {
+            // Establecer la información del usuario en los campos de texto
+            txtIdNumber.setText(String.valueOf(currentUser.getIdNumber()));
+            txtName.setText(currentUser.getName());
+            txtLastName.setText(currentUser.getLastName());
+
+            // Convertir la fecha de nacimiento a un formato legible
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String birthDateString = dateFormat.format(currentUser.getBirthDate());
+            txtBirthDate.setText(birthDateString);
+
+            txtEmail.setText(currentUser.getEmail());
+            txtPhoneNumber.setText(String.valueOf(currentUser.getPhoneNumber()));
+            txtPassword.setText(currentUser.getPassword());
+        } else {
+            // Si el usuario es nulo, podría manejar este caso según tus necesidades
+            System.out.println("El usuario actual es nulo");
         }
     }
 
@@ -89,6 +116,7 @@ public class ctrlUser {
             int roleId = ctrlRol.getRoleIdByName2(roleName);
 
             this.dao.createUser(new user(Integer.parseInt(idNumberText), nameText, lastNameText, flowDate, emailText, Integer.parseInt(phoneNumberText), passwordText, roleId));
+            this.clearFields(name, idNumber, lastName, email, birthDate, phoneNumber, password);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en legal ID o número de teléfono.");
         }

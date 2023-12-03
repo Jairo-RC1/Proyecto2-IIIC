@@ -45,6 +45,18 @@ public class user {
         this.roleId = roleId;
     }
 
+    public user(int id, int idNumber, String name, String lastName, Date birthDate, String email, int phoneNumber, String password) {
+        this.id = id;
+        this.idNumber = idNumber;
+        this.name = name;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
+    
+
     public int getId() {
         return id;
     }

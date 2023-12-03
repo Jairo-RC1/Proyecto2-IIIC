@@ -1,10 +1,12 @@
 package view;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import controller.*;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.*;
 
 /**
  *
@@ -12,9 +14,17 @@ import javax.swing.JPanel;
  */
 public class mainView extends javax.swing.JFrame {
 
+    ctrlUser ctu = new ctrlUser();
+
     public mainView() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         FlatIntelliJLaf.setup();
+    }
+
+    public void setUserData(user currentUser) {
+        ctu.loadUserDataIntoFields(txtIdNumber, txtName, txtLastName, txtBirthDate, txtEmail, txtPhoneNumber, txtPassword, currentUser);
     }
 
     @SuppressWarnings("unchecked")
@@ -337,6 +347,11 @@ public class mainView extends javax.swing.JFrame {
                 txtNameMousePressed(evt);
             }
         });
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
         jPaneMain.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 180, 40));
 
         txtLastName.setBackground(new java.awt.Color(255, 255, 255));
@@ -376,6 +391,9 @@ public class mainView extends javax.swing.JFrame {
 
         btnEdit.setBackground(new java.awt.Color(163, 226, 243));
         btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEditMouseEntered(evt);
             }
@@ -430,6 +448,9 @@ public class mainView extends javax.swing.JFrame {
 
         btnDelete.setBackground(new java.awt.Color(163, 226, 243));
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnDeleteMouseEntered(evt);
             }
@@ -460,7 +481,19 @@ public class mainView extends javax.swing.JFrame {
         jPaneMain.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, 170, 60));
 
         btnSave.setBackground(new java.awt.Color(163, 226, 243));
+        btnSave.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                btnSaveAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnSaveMouseEntered(evt);
             }
@@ -539,19 +572,19 @@ public class mainView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void labelColor(JLabel label) {
-        label.setBackground(new java.awt.Color(132,206,250));
+        label.setBackground(new java.awt.Color(132, 206, 250));
     }
 
     private void resetLabelColor(JLabel label) {
-        label.setBackground(new java.awt.Color(163,226,243));
+        label.setBackground(new java.awt.Color(163, 226, 243));
     }
 
     private void panelColor(JPanel panel) {
-        panel.setBackground(new java.awt.Color(132,206,250));
+        panel.setBackground(new java.awt.Color(132, 206, 250));
     }
 
     private void resetPanelColor(JPanel panel) {
-        panel.setBackground(new java.awt.Color(163,226,243));
+        panel.setBackground(new java.awt.Color(163, 226, 243));
     }
 
     int x = 250;
@@ -628,7 +661,7 @@ public class mainView extends javax.swing.JFrame {
         pnBooking.setVisible(false);
         pnProfile.setVisible(false);
 
-        SerchPane.setBackground(new java.awt.Color(132,206,250));
+        SerchPane.setBackground(new java.awt.Color(132, 206, 250));
     }//GEN-LAST:event_SerchPaneMouseClicked
 
     private void ProfilePaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfilePaneMouseClicked
@@ -636,11 +669,13 @@ public class mainView extends javax.swing.JFrame {
         pnBooking.setVisible(false);
         pnProfile.setVisible(true);
 
-        ProfilePane.setBackground(new java.awt.Color(132,206,250));
+        ProfilePane.setBackground(new java.awt.Color(132, 206, 250));
     }//GEN-LAST:event_ProfilePaneMouseClicked
 
     private void ExitPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitPaneMouseClicked
-        dispose();
+        login log = new login();
+        log.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ExitPaneMouseClicked
 
     private void ExitPaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitPaneMouseEntered
@@ -742,7 +777,7 @@ public class mainView extends javax.swing.JFrame {
             txtBirthDate.setText("Fecha de nacimiento");
             txtBirthDate.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPassword.getText()).isEmpty()){
+        if (String.valueOf(txtPassword.getText()).isEmpty()) {
             txtPassword.setText("Contraseña");
             txtPassword.setForeground(Color.BLACK);
         }
@@ -797,7 +832,7 @@ public class mainView extends javax.swing.JFrame {
             txtEmail.setText("Correo electronico");
             txtEmail.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()){
+        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
             txtPhoneNumber.setText("Telefono");
             txtPhoneNumber.setForeground(Color.BLACK);
         }
@@ -805,7 +840,7 @@ public class mainView extends javax.swing.JFrame {
             txtBirthDate.setText("Fecha de nacimiento");
             txtBirthDate.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPassword.getText()).isEmpty()){
+        if (String.valueOf(txtPassword.getText()).isEmpty()) {
             txtPassword.setText("Contraseña");
             txtPassword.setForeground(Color.BLACK);
         }
@@ -820,15 +855,15 @@ public class mainView extends javax.swing.JFrame {
             txtLastName.setText("Apellido");
             txtLastName.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtIdNumber.getText()).isEmpty()){
+        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
             txtIdNumber.setText("Cedula");
             txtIdNumber.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtEmail.getText()).isEmpty()){
+        if (String.valueOf(txtEmail.getText()).isEmpty()) {
             txtEmail.setText("Correo electronico");
             txtEmail.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()){
+        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
             txtPhoneNumber.setText("Telefono");
             txtPhoneNumber.setForeground(Color.BLACK);
         }
@@ -836,7 +871,7 @@ public class mainView extends javax.swing.JFrame {
             txtBirthDate.setText("Fecha de nacimiento");
             txtBirthDate.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtPassword.getText()).isEmpty()){
+        if (String.valueOf(txtPassword.getText()).isEmpty()) {
             txtPassword.setText("Contraseña");
             txtPassword.setForeground(Color.BLACK);
         }
@@ -855,7 +890,7 @@ public class mainView extends javax.swing.JFrame {
             txtIdNumber.setText("Cedula");
             txtIdNumber.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtEmail.getText()).isEmpty()){
+        if (String.valueOf(txtEmail.getText()).isEmpty()) {
             txtEmail.setText("Correo electronico");
             txtEmail.setForeground(Color.BLACK);
         }
@@ -910,7 +945,7 @@ public class mainView extends javax.swing.JFrame {
         pnBooking.setVisible(true);
         pnProfile.setVisible(false);
 
-        BookingPane.setBackground(new java.awt.Color(132,206,250));  
+        BookingPane.setBackground(new java.awt.Color(132, 206, 250));
     }//GEN-LAST:event_BookingPaneMouseClicked
 
     private void btnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseEntered
@@ -944,6 +979,26 @@ public class mainView extends javax.swing.JFrame {
     private void txtIdNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdNumberActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
+
+    private void btnSaveAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnSaveAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveAncestorAdded
+
+    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+
+    }//GEN-LAST:event_btnSaveMouseClicked
+
+    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+
+    }//GEN-LAST:event_btnEditMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+
+    }//GEN-LAST:event_btnDeleteMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;

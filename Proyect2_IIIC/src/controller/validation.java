@@ -63,8 +63,8 @@ public class validation {
     }
 
     public boolean validateID(String valor) {
-        //Validates id numbers legally used in Costa Rica
-        Pattern pat = Pattern.compile("^[0-9]{1}-[0-9]{4}-[0-9]{4}$");
+        // Valida que la cédula tenga 9 dígitos y sean solo números
+        Pattern pat = Pattern.compile("^[0-9]{9}$");
         Matcher mat = pat.matcher(valor);
         return mat.matches();
     }

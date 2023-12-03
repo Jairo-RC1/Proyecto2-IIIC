@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class userDAO {
 
@@ -60,6 +62,36 @@ public class userDAO {
                 String password = resultSet.getString("password");
                 int roleId = resultSet.getInt("role_id");
                 users.add(new user(id, idNumber, name, lastName, birthDate, email, phoneNumber, password, roleId));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return users;
+    }
+
+    public List<user> readUserTxt() {
+        DBConnectionJava db = new DBConnectionJava();
+        List<user> users = new ArrayList<>();
+        String sql = "SELECT id, id_number, name, last_name, birth_date, email, phone_number, password FROM users";
+
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int idNumber = resultSet.getInt("id_number");
+                String name = resultSet.getString("name");
+                String lastName = resultSet.getString("last_name");
+                Date birthDate = resultSet.getDate("birth_date");
+                String email = resultSet.getString("email");
+                int phoneNumber = resultSet.getInt("phone_number");
+                String password = resultSet.getString("password");
+                
+                // Crear y agregar un nuevo objeto user a la lista
+                user newUser = new user(id, idNumber, name, lastName, birthDate, email, phoneNumber, password);
+                users.add(newUser);
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());

@@ -15,6 +15,7 @@ public class register extends javax.swing.JFrame {
         initComponents();
         FlatIntelliJLaf.setup();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.ctu.loadRolesToUserComboBox(cbxRoles);
     }
 
@@ -432,7 +433,9 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordMousePressed
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
-        dispose();
+        login lg = new login();
+        lg.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnExitMouseClicked
 
     private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
@@ -446,6 +449,9 @@ public class register extends javax.swing.JFrame {
     private void btnRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisActionPerformed
         try {
             this.ctu.addUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword, cbxRoles);
+            login lg = new login();
+            lg.setVisible(true);
+            this.dispose();
         } catch (ParseException ex) {
             // Manejo de la excepción ParseException
             ex.printStackTrace(); // Aquí puedes imprimir o manejar la excepción según sea necesario
