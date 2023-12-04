@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 public class userDAO {
 
@@ -22,7 +20,7 @@ public class userDAO {
 
     public void createUser(user user) {
         DBConnectionJava db = new DBConnectionJava();
-        String consultaSQL = "INSERT INTO users (id_number, name, last_name, email, birth_date, phone_number, password, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String consultaSQL = "INSERT INTO users (id_number, name, last_name, email, birth_date, phone_number, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setInt(1, user.getIdNumber());
@@ -32,7 +30,6 @@ public class userDAO {
             ps.setDate(5, new java.sql.Date(user.getBirthDate().getTime()));
             ps.setInt(6, user.getPhoneNumber());
             ps.setString(7, user.getPassword());
-            ps.setInt(8, user.getRoleId());
 
             ps.execute();
             JOptionPane.showMessageDialog(null, "Usuario insertado correctamente");
@@ -60,8 +57,7 @@ public class userDAO {
                 String email = resultSet.getString("email");
                 int phoneNumber = resultSet.getInt("phone_number");
                 String password = resultSet.getString("password");
-                int roleId = resultSet.getInt("role_id");
-                users.add(new user(id, idNumber, name, lastName, birthDate, email, phoneNumber, password, roleId));
+                users.add(new user(id, idNumber, name, lastName, birthDate, email, phoneNumber, password));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -105,7 +101,7 @@ public class userDAO {
     public void updateUser(user user) {
         DBConnectionJava db = new DBConnectionJava();
 
-        String consultaSQL = "UPDATE users SET id_number=?, name=?, last_name=?, birth_date=?, email=?, phone_number=?, password=?, role_id=? WHERE id=?";
+        String consultaSQL = "UPDATE users SET id_number=?, name=?, last_name=?, birth_date=?, email=?, phone_number=?, password=? WHERE id=?";
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
@@ -116,8 +112,7 @@ public class userDAO {
             ps.setString(5, user.getEmail());
             ps.setInt(6, user.getPhoneNumber());
             ps.setString(7, user.getPassword());
-            ps.setInt(8, user.getRoleId());
-            ps.setInt(9, user.getId());
+            ps.setInt(8, user.getId());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Modificación Exitosa");
         } catch (SQLException e) {

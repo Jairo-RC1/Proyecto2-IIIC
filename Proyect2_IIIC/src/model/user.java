@@ -16,33 +16,9 @@ public class user {
     private String email;
     private int phoneNumber;
     private String password;
-    private int roleId;
 
     public user() {
 
-    }
-
-    public user(int id, int idNumber, String name, String lastName, Date birthDate, String email, int phoneNumber, String password, int roleId) {
-        this.id = id;
-        this.idNumber = idNumber;
-        this.name = name;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.roleId = roleId;
-    }
-
-    public user(int idNumber, String name, String lastName, Date birthDate, String email, int phoneNumber, String password, int roleId) {
-        this.idNumber = idNumber;
-        this.name = name;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.roleId = roleId;
     }
 
     public user(int id, int idNumber, String name, String lastName, Date birthDate, String email, int phoneNumber, String password) {
@@ -55,7 +31,18 @@ public class user {
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
-    
+
+    public user(int idNumber, String name, String lastName, Date birthDate, String email, int phoneNumber, String password) {
+        this.idNumber = idNumber;
+        this.name = name;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+
+    }
+
 
     public int getId() {
         return id;
@@ -119,14 +106,6 @@ public class user {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
     }
 
 }

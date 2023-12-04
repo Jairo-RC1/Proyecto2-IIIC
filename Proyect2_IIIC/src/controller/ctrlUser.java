@@ -33,7 +33,7 @@ public class ctrlUser {
         List<user> users = dao.readUser();
         for (user user : users) {
             Object[] row = {user.getId(), user.getIdNumber(), user.getName(), user.getLastName(), user.getBirthDate(),
-                user.getEmail(), user.getPhoneNumber(), user.getPassword(), user.getRoleId()};
+                user.getEmail(), user.getPhoneNumber(), user.getPassword()};
             model.addRow(row);
         }
     }
@@ -65,7 +65,7 @@ public class ctrlUser {
     }
 
     public void addUser(JTextField idNumber, JTextField name, JTextField lastName, JTextField email, JTextField phoneNumber,
-            JTextField birthDate, JTextField password, JComboBox<String> cbxRole) throws ParseException {
+            JTextField birthDate, JTextField password) throws ParseException {
         validation validator = new validation();
 
         // Validates date to be "yyyy-MM-dd"
@@ -111,18 +111,15 @@ public class ctrlUser {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date flowDate = dateFormat.parse(dateText);
-            ctrlRol ctrlRol = new ctrlRol();
-            String roleName = (String) cbxRole.getSelectedItem();
-            int roleId = ctrlRol.getRoleIdByName2(roleName);
 
-            this.dao.createUser(new user(Integer.parseInt(idNumberText), nameText, lastNameText, flowDate, emailText, Integer.parseInt(phoneNumberText), passwordText, roleId));
+            this.dao.createUser(new user(Integer.parseInt(idNumberText), nameText, lastNameText, flowDate, emailText, Integer.parseInt(phoneNumberText), passwordText));
             this.clearFields(name, idNumber, lastName, email, birthDate, phoneNumber, password);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en legal ID o número de teléfono.");
         }
     }
 
-    public void updateUser(JTextField idNumber, JTextField name, JTextField lastName, JTextField email, JTextField phoneNumber, JTextField password, JComboBox<String> cbxRole) {
+    public void updateUser(JTextField idNumber, JTextField name, JTextField lastName, JTextField email, JTextField phoneNumber, JTextField password) {
         validation validator = new validation();
 
         // Obtener los valores de los campos de texto
@@ -132,7 +129,6 @@ public class ctrlUser {
         String emailText = email.getText();
         String phoneNumberText = phoneNumber.getText();
         String passwordText = password.getText();
-        String roleName = (String) cbxRole.getSelectedItem();
 
         // Validaciones para idNumber, name, lastName, email, phoneNumber
         if (!validator.validateID(idNumberText)) {
@@ -156,12 +152,10 @@ public class ctrlUser {
         }
 
         // Obtener roleId a partir del nombre del rol seleccionado en el JComboBox
-        ctrlRol ctrlRol = new ctrlRol();
-        int roleId = ctrlRol.getRoleIdByName2(roleName);
 
         try {
             // Crear el objeto User con los datos validados
-            user user = new user(Integer.parseInt(idNumberText), nameText, lastNameText, new Date(), emailText, Integer.parseInt(phoneNumberText), passwordText, roleId);
+            user user = new user(Integer.parseInt(idNumberText), nameText, lastNameText, new Date(), emailText, Integer.parseInt(phoneNumberText), passwordText);
 
             // Llamar al método de actualización en el DAO
             dao.updateUser(user);

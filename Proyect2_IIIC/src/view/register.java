@@ -16,7 +16,6 @@ public class register extends javax.swing.JFrame {
         FlatIntelliJLaf.setup();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.ctu.loadRolesToUserComboBox(cbxRoles);
     }
 
     @SuppressWarnings("unchecked")
@@ -40,8 +39,6 @@ public class register extends javax.swing.JFrame {
         lblLastName = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
-        cbxRoles = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         btnRegis = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -169,14 +166,6 @@ public class register extends javax.swing.JFrame {
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/logoAzulOscuro.jpeg"))); // NOI18N
         jPaneMain.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 130, 130));
-
-        cbxRoles.setBackground(new java.awt.Color(255, 255, 255));
-        cbxRoles.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        cbxRoles.setForeground(new java.awt.Color(0, 0, 0));
-        jPaneMain.add(cbxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 206, 210, 40));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/usuario.png"))); // NOI18N
-        jPaneMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 30, -1));
 
         btnRegis.setBackground(new java.awt.Color(255, 255, 255));
         btnRegis.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -448,7 +437,7 @@ public class register extends javax.swing.JFrame {
 
     private void btnRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisActionPerformed
         try {
-            this.ctu.addUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword, cbxRoles);
+            this.ctu.addUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword);
             login lg = new login();
             lg.setVisible(true);
             this.dispose();
@@ -463,8 +452,6 @@ public class register extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
     private javax.swing.JButton btnRegis;
-    private javax.swing.JComboBox<String> cbxRoles;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPaneMain;
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblEmail;
