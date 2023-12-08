@@ -1,0 +1,25 @@
+Sistema de Reservas Este repositorio contiene el código fuente y la documentación para un sistema de reservas de eventos locales desarrollado como proyecto académico. El sistema permite a los usuarios buscar, visualizar y reservar eventos, proporcionando además un pronóstico del tiempo actualizado para la fecha y ubicación del evento seleccionado.
+
+Instrucciones Generales Repositorio en GitHub: El proyecto debe estar en un repositorio en GitHub compartido con el docente (Usuario: BryanChavesSalas19). Patrón MVC: El proyecto debe seguir el patrón de diseño Modelo-Vista-Controlador (MVC). Características del Proyecto Desarrollo en Grupos: El proyecto se desarrollará en grupos de 4 personas. Evaluación en Dos Partes: La evaluación consta de dos partes: programación (15%) y defensa (5%). Lenguaje y Herramientas: El proyecto se desarrollará en Java utilizando NetBeans y la base de datos MariaDB. Interfaz Gráfica: El proyecto es estrictamente con interfaz gráfica. Entrega y Plazos: Se debe entregar en la fecha establecida, no se recibirán entregas posteriores. Integridad Académica: Cualquier copia, plagio o incumplimiento de la legalidad resultará en la pérdida total del porcentaje del proyecto. Aspectos del Proyecto Aplicación Integral de Conocimientos: Utilizar lo aprendido en clases y explorar otras técnicas por cuenta propia. Buenas Prácticas de Código: Aplicar técnicas de código limpio y obtener la aprobación del docente para aspectos adicionales. CRUD en Bases de Datos: Cada tabla de la base de datos debe tener su respectivo CRUD. Descripción del Proyecto El sistema permite a los usuarios buscar, visualizar y reservar eventos locales. Además de las características básicas de búsqueda y reserva, el sistema proporciona un pronóstico del tiempo actualizado para la fecha y ubicación del evento seleccionado.
+
+Características Principales Búsqueda y Visualización de Eventos Los usuarios pueden buscar eventos por nombre, fecha, tipo, ubicación, entre otros criterios. Cada evento tiene una página detallada con información como descripción, fecha, hora, ubicación, precio y cupo disponible. Reserva de Eventos Los usuarios pueden reservar un evento, seleccionar el número de entradas y recibir una confirmación de su reserva. La reserva actualiza el cupo disponible para el evento. Pronóstico del Tiempo Al visualizar un evento, los usuarios ven un pronóstico del tiempo para la fecha y hora del evento basado en la ubicación del mismo. El pronóstico muestra datos relevantes como temperatura, probabilidad de lluvia, velocidad del viento, entre otros. Cuenta de Usuario Los usuarios pueden registrarse e iniciar sesión. Tienen un perfil donde pueden visualizar y gestionar sus reservas y configurar preferencias. Estructura del Repositorio Configuración del Entorno y Bases de la Aplicación (20 puntos)
+
+Configuración de NetBeans y MariaDB (5 puntos). Estructura inicial del proyecto con patrón MVC (15 puntos). Diseño de Base de Datos y Modelo (30 puntos)
+
+Creación de la base de datos con MariaDB (10 puntos). Diseño e implementación de las tablas: Eventos, Reservas y Lugares con todos sus atributos (10 puntos). Creación de clases de entidad en Java: Evento, Reserva, Lugar (10 puntos). Vista y Diseño de Interfaz de Usuario (15 puntos)
+
+Diseño de la interfaz de usuario con componentes Swing o JavaFX: buscador de eventos, detalle del evento, formulario de reserva (10 puntos). Implementación de la visualización del pronóstico del tiempo y reseñas/link de TripAdvisor en la interfaz (5 puntos). Controlador y Lógica de la Aplicación (25 puntos)
+
+Implementación del controlador que gestiona la comunicación entre Modelo y Vista (10 puntos). Lógica para realizar búsquedas, hacer reservas y consultar disponibilidad (10 puntos). Manejo de errores y excepciones (5 puntos). Documentación Interna (10 puntos)
+
+Documentación interna de todos los métodos desarrollados, redactada en inglés. Puntos Extra (20 puntos) Integración de APIs y Clases de API (20 puntos) Conexión y pruebas con la API de OpenWeatherMap para obtener pronósticos del tiempo (10 puntos). Conexión y pruebas con la API de TripAdvisor para obtener reseñas o links directos al perfil del hotel o sitio del evento (10 puntos). Aspectos a Considerar (Base de Datos - MariaDB) Tabla de Eventos:
+
+ID (PK) Nombre Descripción Fecha Hora Ubicación (Dirección, Ciudad, Código Postal) ID (FK a Tabla de Lugares) Precio Cupo Tabla de Reservas:
+
+ID_Reserva (PK) ID_Evento (FK a Tabla de Eventos) Nombre_Usuario Fecha_Reserva Cantidad Tabla de Lugares (Hoteles, Salones, etc.):
+
+ID (PK) Nombre Dirección Ciudad Código Postal Latitud Longitud Link_TripAdvisor
+
+Instrucciones para Ejecutar el Proyecto Clona el repositorio desde GitHub. Importa el proyecto en NetBeans. Configura el entorno de desarrollo y la base de datos. Ejecuta la aplicación y prueba las diversas funcionalidades. Requisitos del Sistema Java (20.0.1+9-29). NetBeans (IDE 17 o superior). MariaDB (HeidiSQL 12.3.0.6589). Colaboradores Jairo Abelardo Rodriguez Castro Jefry David Morera Espinoza Cristhofer Jose Matus Salas Jason Rojas Salas
+
+Contribuciones Contribuciones son bienvenidas.
