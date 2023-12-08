@@ -26,9 +26,15 @@ public class mainView extends javax.swing.JFrame {
 
     }
 
-    private String formatDate(Date date) {
+    public Date parseDate(String dateString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return dateFormat.format(date);
+        Date parsedDate = null;
+        try {
+            parsedDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace(); // Manejo del error en la conversión
+        }
+        return parsedDate;
     }
 
     public void setUserData(user currentUser) {
@@ -37,25 +43,28 @@ public class mainView extends javax.swing.JFrame {
     }
 
     public void updateUser() {
-        int idNumber = currentUser.getIdNumber();
-        String name = currentUser.getName();
-        String lastName = currentUser.getLastName();
-        String email = currentUser.getEmail();
-        int phoneNumber = currentUser.getPhoneNumber();
-        Date birthDate = currentUser.getBirthDate();
-        String password = currentUser.getPassword();
+        // Obtener los valores actualizados de los campos de texto
+        int idNumber = Integer.parseInt(txtIdNumber.getText());
+        String name = txtName.getText();
+        String lastName = txtLastName.getText();
+        String email = txtEmail.getText();
+        int phoneNumber = Integer.parseInt(txtPhoneNumber.getText());
 
-        // Establecer estos valores en los campos de texto
-        txtIdNumber.setText(String.valueOf(idNumber));
-        txtName.setText(name);
-        txtLastName.setText(lastName);
-        txtEmail.setText(email);
-        txtPhoneNumber.setText(String.valueOf(phoneNumber));
-        txtBirthDate.setText(formatDate(birthDate));
-        txtPassword.setText(password);
-        // Establecer otros campos
+        Date birthDate = parseDate(txtBirthDate.getText());
+        String password = txtPassword.getText();
 
-        ctu.updateUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword);
+        // Actualizar los valores en currentUser
+        currentUser.setIdNumber(idNumber);
+        currentUser.setName(name);
+        currentUser.setLastName(lastName);
+        currentUser.setEmail(email);
+        currentUser.setPhoneNumber(phoneNumber);
+        currentUser.setBirthDate(birthDate);
+        currentUser.setPassword(password);
+
+        // Actualizar la interfaz y la base de datos
+        // Llama al método para actualizar el usuario con los nuevos valores
+        ctu.updateUser(currentUser);
     }
 
     @SuppressWarnings("unchecked")
@@ -1217,37 +1226,11 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-        try {
-            if (currentUser != null) {
-                // Actualizar el usuario con los datos de los campos de texto
-                currentUser.setIdNumber(Integer.parseInt(txtIdNumber.getText()));
-                currentUser.setName(txtName.getText());
-                currentUser.setLastName(txtLastName.getText());
-                currentUser.setEmail(txtEmail.getText());
-                currentUser.setPhoneNumber(Integer.parseInt(txtPhoneNumber.getText()));
-                // Actualizar otros campos del usuario
-
-                // Obtener y convertir la fecha de nacimiento
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date birthDate = dateFormat.parse(txtBirthDate.getText());
-                currentUser.setBirthDate(birthDate);
-
-                currentUser.setPassword(txtPassword.getText());
-
-                // Llamar a updateUser en la vista para actualizar en la base de datos
-                this.updateUser();
-            } else {
-                // Manejar la situación en la que currentUser es nulo
-                System.out.println("El usuario no está cargado correctamente");
-            }
-        } catch (NumberFormatException ex) {
-            // Manejar errores de formato o conversión para números
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al actualizar el usuario. Formato de número incorrecto.");
-        } catch (ParseException ex) {
-            // Manejar errores de formato de fecha
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al actualizar el usuario. Formato de fecha incorrecto.");
+        if (currentUser != null) {
+            updateUser(); // Llama al método para actualizar la información del usuario en la interfaz
+        } else {
+            // Manejo de la situación en la que currentUser es nulo
+            System.out.println("El usuario no está cargado correctamente");
         }
     }//GEN-LAST:event_btnEditMouseClicked
 

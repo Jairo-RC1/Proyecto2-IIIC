@@ -40,7 +40,6 @@ public class userDAO {
         }
     }
 
-
     public List<user> readUserTxt() {
         DBConnectionJava db = new DBConnectionJava();
         List<user> users = new ArrayList<>();
@@ -58,7 +57,7 @@ public class userDAO {
                 String email = resultSet.getString("email");
                 int phoneNumber = resultSet.getInt("phone_number");
                 String password = resultSet.getString("password");
-                
+
                 // Crear y agregar un nuevo objeto user a la lista
                 user newUser = new user(id, idNumber, name, lastName, birthDate, email, phoneNumber, password);
                 users.add(newUser);
@@ -72,27 +71,30 @@ public class userDAO {
     }
 
     // Method to update an existing user in the database
-    public void updateUser(user user) {
-        DBConnectionJava db = new DBConnectionJava();
+    public void updateUser(user currentUser) {
+        if (currentUser != null) {
+            DBConnectionJava db = new DBConnectionJava();
+            String consultaSQL = "UPDATE users SET id_number=?, name=?, last_name=?, birth_date=?, email=?, phone_number=?, password=? WHERE id=?";
 
-        String consultaSQL = "UPDATE users SET id_number=?, name=?, last_name=?, birth_date=?, email=?, phone_number=?, password=? WHERE id=?";
-
-        try {
-            PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, user.getIdNumber());
-            ps.setString(2, user.getName());
-            ps.setString(3, user.getLastName());
-            ps.setDate(4, new java.sql.Date(user.getBirthDate().getTime()));
-            ps.setString(5, user.getEmail());
-            ps.setInt(6, user.getPhoneNumber());
-            ps.setString(7, user.getPassword());
-            ps.setInt(8, user.getId());
-            ps.execute();
-            JOptionPane.showMessageDialog(null, "Modificación Exitosa");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo modificar el usuario, error: " + e.getMessage());
-        } finally {
-            db.disconnect();
+            try {
+                PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
+                ps.setInt(1, currentUser.getIdNumber());
+                ps.setString(2, currentUser.getName());
+                ps.setString(3, currentUser.getLastName());
+                ps.setDate(4, new java.sql.Date(currentUser.getBirthDate().getTime()));
+                ps.setString(5, currentUser.getEmail());
+                ps.setInt(6, currentUser.getPhoneNumber());
+                ps.setString(7, currentUser.getPassword());
+                ps.setInt(8, currentUser.getId());
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Modificación exitosa");
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "No se pudo modificar el usuario, error: " + e.getMessage());
+            } finally {
+                db.disconnect();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El usuario actual es nulo. No se puede actualizar.");
         }
     }
 

@@ -119,7 +119,55 @@ public class ctrlUser {
         }
     }
 
-    public void updateUser(JTextField idNumber, JTextField name, JTextField lastName, JTextField email, JTextField phoneNumber, JTextField txtBirthDate, JTextField password) {
+    public void updateUser(user currentUser) {
+        if (validateUser(currentUser)) {
+            dao.updateUser(currentUser);
+        }
+    }
+
+    private boolean validateUser(user currentUser) {
+        String idNumberText = String.valueOf(currentUser.getIdNumber());
+        String nameText = currentUser.getName();
+        String lastNameText = currentUser.getLastName();
+        String emailText = currentUser.getEmail();
+        String phoneNumberText = String.valueOf(currentUser.getPhoneNumber());
+
+        validation validator = new validation();
+
+        if (!validator.validateID(idNumberText)) {
+            JOptionPane.showMessageDialog(null, "Número de cédula no válido. Debe seguir el formato correcto.");
+            return false;
+        }
+
+        if (!(validator.validateABCWithSpaces(nameText) && validator.validateABCWithSpaces(lastNameText))) {
+            JOptionPane.showMessageDialog(null, "Nombre o Apellido no válido");
+            return false;
+        }
+
+        if (!validator.validateMail(emailText)) {
+            JOptionPane.showMessageDialog(null, "Correo electrónico no válido. Debe tener un formato válido.");
+            return false;
+        }
+
+        if (!validator.validatePhone(phoneNumberText)) {
+            JOptionPane.showMessageDialog(null, "Número de teléfono no válido. Debe contener solo números.");
+            return false;
+        }
+
+        // Validar el formato de la fecha de nacimiento
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            // Formatear la fecha de nacimiento a un texto en el formato deseado
+            String birthDateText = dateFormat.format(currentUser.getBirthDate());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fecha de nacimiento no válida. Debe tener el formato aaaa-MM-dd.");
+            return false; // Detiene el proceso si la fecha no es válida
+        }
+
+        return true;
+    }
+
+    /*public void updateUser(JTextField idNumber, JTextField name, JTextField lastName, JTextField email, JTextField phoneNumber, JTextField txtBirthDate, JTextField password) {
         validation validator = new validation();
 
         // Obtener los valores de los campos de texto
@@ -171,9 +219,7 @@ public class ctrlUser {
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(null, "Error en el formato de fecha.");
         }
-    }
-
-    
+    }*/
     public void deleteUser() {
         dao.deleteUser(this.id);
     }
