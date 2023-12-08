@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author JRS
  */
-public class event {
+public class Event {
 
     private int id;
     private String name;
@@ -26,7 +26,7 @@ public class event {
     private String calificationUrlImages;
     private int locationId;
 
-    public event(int id, String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId, List<String> urlImages, String calification, String cantReviews, String calificationUrlImages, int locationId) {
+    public Event(int id, String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -37,14 +37,9 @@ public class event {
         this.price = price;
         this.room = room;
         this.placeId = placeId;
-        this.urlImages = urlImages;
-        this.calification = calification;
-        this.cantReviews = cantReviews;
-        this.calificationUrlImages = calificationUrlImages;
-        this.locationId = locationId;
     }
 
-    public event(String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId, List<String> urlImages, String calification, String cantReviews, String calificationUrlImages, int locationId) {
+    public Event(String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -54,27 +49,7 @@ public class event {
         this.price = price;
         this.room = room;
         this.placeId = placeId;
-        this.urlImages = urlImages;
-        this.calification = calification;
-        this.cantReviews = cantReviews;
-        this.calificationUrlImages = calificationUrlImages;
-        this.locationId = locationId;
     }   
-
-    public event(int id, String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.date = date;
-        this.address = address;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.price = price;
-        this.room = room;
-        this.placeId = placeId;
-    }
-    
-    
 
     public String getCity() {
         return city;
@@ -84,9 +59,7 @@ public class event {
         this.city = city;
     }
 
-    
-
-    public event() {
+    public Event() {
 
     }
 
@@ -200,7 +173,5 @@ public class event {
 
     public void setPlaceId(int placeId) {
         this.placeId = placeId;
-    }
-
-    
+    }   
 }

@@ -1,10 +1,8 @@
-
 package model;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -19,57 +17,72 @@ import org.json.JSONObject;
  * @author jefry
  */
 public class APIHandler {
-   private static String MAIN_URL = "https://api.content.tripadvisor.com/api/v1/location/search";
+
+    private static final String MAIN_URL = "https://api.content.tripadvisor.com/api/v1/location/search";
     private static final String LOCATION_URL = "https://api.content.tripadvisor.com/api/v1/";
-    private static final String API_KEY = "A65E329C442347F9B840D61B29879651";
+    private static final String API_KEY = "4BB0E403299542FEB3BF8DEB5EF58051";
     HttpURLConnection connection = null;
-    
-    public List<event>findEvents(String name, String location, String category) throws Exception{
+
+    public List<Event> findEvents(String name, String location, String category) throws Exception {
         String encodedLocation = URLEncoder.encode(location, "UTF-8");
         String encodedName = URLEncoder.encode(name, "UTF-8");
         String endPoint = String.format("?key=%s&searchQuery=%s&address=%s&category=%s&language=en", API_KEY, encodedName, encodedLocation, category);
         return lookForEvents(endPoint);
-    } 
-    
-    private List<event> lookForEvents (String endPoint) throws MalformedURLException, IOException{
-       List <event> events = new ArrayList<>();
-        URL url = new URL(MAIN_URL = endPoint);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-        connection.connect();
-        
-        InputStream istrm = connection.getInputStream();
-        Scanner responseBody = new Scanner(istrm, "UTF-8").useDelimiter("\\A");
-        
-        JSONObject jsonResponse = new JSONObject(responseBody);
-        JSONArray data = jsonResponse.getJSONArray("data");
-        
-        for (int i = 0; i < data.length(); i++) {
-            JSONObject obj = data.getJSONObject(i);
-            event Event = new event();
-            Event.setLocationId(obj.getInt("location_id"));
-            Event.setName(obj.getString("name"));
-            Event.setAddress(obj.getJSONObject("address_cbj").getString("address_string"));
-            if(obj.has("city") && obj.isNull("ciyi")){
-               Event.setCity(obj.getString("city"));
-            }else{
-                Event.setCity("No se encuentra la ciudad");
-            }
-            if(obj.has("postalCode")&& !obj.isNull("postalCode")){
-                Event.setPostalCode(obj.getInt("postalCode"));
-            }else{
-                Event.setPostalCode(0);
-            }
-            events.add(Event);
-        }
-       return events;    
     }
-    
+
+    private List<Event> lookForEvents(String endPoint) throws Exception {
+        List<Event> events = new ArrayList<>();
+        URL url = new URL(MAIN_URL + endPoint);
+        System.out.println(url);
+        try {
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect();
+
+            try (InputStream istrm = connection.getInputStream()) {
+
+                String responseBody = new Scanner(istrm, "UTF-8").useDelimiter("\\A").next();
+
+                JSONObject jsonResponse = new JSONObject(responseBody);
+                JSONArray data = jsonResponse.getJSONArray("data");
+
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject obj = data.getJSONObject(i);
+                    Event Event = new Event();
+                    Event.setLocationId(obj.getInt("location_id"));
+                    System.out.println(Event.getLocationId());
+                    Event.setName(obj.getString("name"));
+                    Event.setAddress(obj.getJSONObject("address_obj").getString("address_string"));
+                    if (obj.has("city") && obj.isNull("ciyi")) {
+                        Event.setCity(obj.getString("city"));
+                    } else {
+                        Event.setCity("No se encuentra la ciudad");
+                    }
+                    if (obj.has("postalCode") && !obj.isNull("postalCode")) {
+                        Event.setPostalCode(obj.getInt("postalCode"));
+                    } else {
+                        Event.setPostalCode(0);
+                    }
+                    events.add(Event);
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error buscando eventos " + e, "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+              
+            }
+        }
+       return events;
+    }
+
     public List<String> getImagesApi(int id) throws Exception {
         List<String> imageUrls = new ArrayList<>();
 
-        String endpoint = "location/" + id + "/photos?key=A65E329C442347F9B840D61B29879651&language=en";
+        String endpoint = "location/" + id + "/photos?key=4BB0E403299542FEB3BF8DEB5EF58051&language=en";
         URL url = new URL(LOCATION_URL + endpoint);
+        System.out.println(url);
 
         try {
             connection = (HttpURLConnection) url.openConnection();
@@ -99,12 +112,13 @@ public class APIHandler {
         }
         return imageUrls;
     }
-    
-    public event getDetailsApi(int id) throws Exception {
-        event event = new event();
+
+    public Event getDetailsApi(int id) throws Exception {
+        Event event = new Event();
         String endpoint = String.format("location/%s/details?key=%s&language=en&currency=USD", id, API_KEY);
         URL url = new URL(LOCATION_URL + endpoint);
-
+        System.out.println(url);
+        
         try {
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -127,4 +141,4 @@ public class APIHandler {
         }
         return event;
     }
-} 
+}

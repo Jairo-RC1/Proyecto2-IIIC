@@ -3,11 +3,11 @@ package view;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import controller.*;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.*;
+import controller.ctrlApiHandler;
 
 /**
  *
@@ -16,27 +16,16 @@ import model.*;
 public class mainView extends javax.swing.JFrame {
 
     ctrlUser ctu = new ctrlUser();
-    private mainViewController controller;
+    ctrlApiHandler ctah = new ctrlApiHandler();
 
     public mainView() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         FlatIntelliJLaf.setup();
-        this.controller = new mainViewController(this);
-        this.controller.loadEventData(); // Cargar datos de eventos al iniciar la vista
+  
     }
     
-     public String getSearchTerm() {
-        return txtSearch.getText();
-    }
-
-    public JButton getSearchButton() {
-        return searchButton;
-    }
-    public JLabel getEventNameLabel() {
-    return eventNameLabel; // Suponiendo que eventNameLabel es un JLabel en tu interfaz
-}
 
     public void setUserData(user currentUser) {
         ctu.loadUserDataIntoFields(txtIdNumber, txtName, txtLastName, txtBirthDate, txtEmail, txtPhoneNumber, txtPassword, currentUser);
@@ -102,10 +91,23 @@ public class mainView extends javax.swing.JFrame {
         btnRegis3 = new javax.swing.JLabel();
         lblSave3 = new javax.swing.JLabel();
         pnSerchEvent = new javax.swing.JPanel();
-        eventNameLabel = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        searchButton = new javax.swing.JButton();
+        jPFilters = new javax.swing.JPanel();
+        lblFilterByName = new javax.swing.JLabel();
+        txtFilterByName = new javax.swing.JTextField();
+        lblBeginDate = new javax.swing.JLabel();
+        txtBeginDate = new javax.swing.JTextField();
+        btnCalendarBegin = new javax.swing.JButton();
+        lblFinalDate = new javax.swing.JLabel();
+        txtFinalDate = new javax.swing.JTextField();
+        btnCalendarFinal = new javax.swing.JButton();
+        lblFilterByLocation = new javax.swing.JLabel();
+        txtFilterByLocation = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        btnFilter = new javax.swing.JButton();
+        lblFinalDate1 = new javax.swing.JLabel();
+        boxCategory = new javax.swing.JComboBox<>();
+        ScrollPane = new javax.swing.JScrollPane();
         barPane = new javax.swing.JPanel();
         lblIcon = new javax.swing.JLabel();
 
@@ -549,25 +551,135 @@ public class mainView extends javax.swing.JFrame {
         pnSerchEvent.setBackground(new java.awt.Color(255, 255, 255));
         pnSerchEvent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        eventNameLabel.setBackground(new java.awt.Color(0, 0, 0));
-        eventNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        eventNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        pnSerchEvent.add(eventNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 350, 160));
-        pnSerchEvent.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 170, 30));
+        jPFilters.setBackground(new java.awt.Color(255, 255, 255));
+        jPFilters.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones de Filtrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 12))); // NOI18N
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Busqueda:");
-        pnSerchEvent.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
+        lblFilterByName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblFilterByName.setText("Nombre del evento:");
 
-        searchButton.setText("Buscar");
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
+        txtFilterByName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        lblBeginDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblBeginDate.setText("Fecha de inicio:");
+
+        txtBeginDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        btnCalendarBegin.setText("...");
+
+        lblFinalDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblFinalDate.setText("Categoria:");
+
+        txtFinalDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        btnCalendarFinal.setText("...");
+
+        lblFilterByLocation.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblFilterByLocation.setText("Ubicación del evento:");
+
+        txtFilterByLocation.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        btnFilter.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnFilter.setText("FILTRAR");
+        btnFilter.setContentAreaFilled(false);
+        btnFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
+                btnFilterActionPerformed(evt);
             }
         });
-        pnSerchEvent.add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, 30));
+
+        lblFinalDate1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblFinalDate1.setText("Fecha final:");
+
+        boxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hotels", "attractions ", "restaurants", "geos" }));
+        boxCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCategoryActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPFiltersLayout = new javax.swing.GroupLayout(jPFilters);
+        jPFilters.setLayout(jPFiltersLayout);
+        jPFiltersLayout.setHorizontalGroup(
+            jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPFiltersLayout.createSequentialGroup()
+                .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPFiltersLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPFiltersLayout.createSequentialGroup()
+                                .addComponent(lblFilterByName, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFilterByName, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPFiltersLayout.createSequentialGroup()
+                                .addComponent(lblFilterByLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFilterByLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(lblFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(boxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPFiltersLayout.createSequentialGroup()
+                                .addComponent(lblBeginDate, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBeginDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCalendarBegin)
+                                .addGap(124, 124, 124)
+                                .addComponent(txtFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCalendarFinal)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPFiltersLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(42, 42, 42))
+            .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPFiltersLayout.createSequentialGroup()
+                    .addGap(348, 348, 348)
+                    .addComponent(lblFinalDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(549, Short.MAX_VALUE)))
+        );
+        jPFiltersLayout.setVerticalGroup(
+            jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPFiltersLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFilterByName)
+                    .addComponent(txtFilterByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFilterByLocation)
+                    .addComponent(txtFilterByLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFinalDate)
+                    .addComponent(boxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBeginDate)
+                    .addComponent(txtBeginDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCalendarBegin)
+                    .addComponent(txtFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCalendarFinal)
+                    .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
+            .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPFiltersLayout.createSequentialGroup()
+                    .addContainerGap(124, Short.MAX_VALUE)
+                    .addComponent(lblFinalDate1)
+                    .addGap(34, 34, 34)))
+        );
+
+        pnSerchEvent.add(jPFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 830, -1));
+
+        ScrollPane.setBackground(new java.awt.Color(255, 255, 255));
+        pnSerchEvent.add(ScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 780, 280));
 
         Events.add(pnSerchEvent, "card2");
 
@@ -1040,9 +1152,13 @@ public class mainView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeleteMouseClicked
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+    this.ctah.searchEvents(txtFilterByName, txtFilterByLocation, ScrollPane, boxCategory);
+    }//GEN-LAST:event_btnFilterActionPerformed
+
+    private void boxCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCategoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_searchButtonActionPerformed
+    }//GEN-LAST:event_boxCategoryActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
@@ -1051,29 +1167,40 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel ExitPane;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel ProfilePane;
+    private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JPanel SerchPane;
     private javax.swing.JPanel SideBar;
     private javax.swing.JPanel barPane;
+    private javax.swing.JComboBox<String> boxCategory;
+    private javax.swing.JButton btnCalendarBegin;
+    private javax.swing.JButton btnCalendarFinal;
     private javax.swing.JPanel btnDelete;
     private javax.swing.JPanel btnEdit;
+    private javax.swing.JButton btnFilter;
     private javax.swing.JLabel btnRegis;
     private javax.swing.JLabel btnRegis1;
     private javax.swing.JLabel btnRegis2;
     private javax.swing.JLabel btnRegis3;
     private javax.swing.JPanel btnSave;
     private javax.swing.JPanel btnSave2;
-    private javax.swing.JLabel eventNameLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JPanel jPFilters;
     private javax.swing.JPanel jPaneMain;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JLabel lblBeginDate;
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblBooking;
     private javax.swing.JLabel lblCalendar;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblFilterByLocation;
+    private javax.swing.JLabel lblFilterByName;
+    private javax.swing.JLabel lblFinalDate;
+    private javax.swing.JLabel lblFinalDate1;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblIdNumber;
     private javax.swing.JLabel lblLastName;
@@ -1096,17 +1223,19 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel pnBooking;
     private javax.swing.JPanel pnProfile;
     private javax.swing.JPanel pnSerchEvent;
-    private javax.swing.JButton searchButton;
     private javax.swing.JSeparator separator1;
     private javax.swing.JSeparator separator2;
+    private javax.swing.JTextField txtBeginDate;
     private javax.swing.JTextField txtBirthDate;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFilterByLocation;
+    private javax.swing.JTextField txtFilterByName;
+    private javax.swing.JTextField txtFinalDate;
     private javax.swing.JTextField txtIdNumber;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
-    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
 }

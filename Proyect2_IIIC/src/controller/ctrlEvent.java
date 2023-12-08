@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import model.event;
+import model.Event;
 
 /**
  *
@@ -33,8 +33,8 @@ public class ctrlEvent {
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
         table.setRowSorter(order);
         model.setRowCount(0);
-        List<event> events = eventDAO.readEvents();
-        for (event event : events) {
+        List<Event> events = eventDAO.readEvents();
+        for (Event event : events) {
             Object[] row = {event.getId(), event.getName(), event.getDescription(), event.getDate(),
                 event.getAddress(), event.getPostalCode(), event.getPrice(), event.getRoom(),
                 event.getPlaceId()};
@@ -47,7 +47,7 @@ public class ctrlEvent {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(utilDate.getText());
-            this.eventDAO.createEvent(new event(0, name.getText(), description.getText(), date, address.getText(),
+            this.eventDAO.createEvent(new Event(0, name.getText(), description.getText(), date, address.getText(),
                     Integer.parseInt(postalCode.getText()), city.getText(), Double.parseDouble(price.getText()),
                     Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento agregado con éxito");
@@ -63,7 +63,7 @@ public class ctrlEvent {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(utilDate.getText());
-            this.eventDAO.updateEvent(new event(this.id, name.getText(), description.getText(), date,
+            this.eventDAO.updateEvent(new Event(this.id, name.getText(), description.getText(), date,
                     address.getText(), Integer.parseInt(postalCode.getText()), city.getText(), Double.parseDouble(price.getText()),
                     Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento actualizado con éxito");

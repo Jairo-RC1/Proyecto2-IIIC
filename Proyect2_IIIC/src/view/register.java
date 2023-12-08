@@ -171,6 +171,11 @@ public class register extends javax.swing.JFrame {
         btnRegis.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnRegis.setForeground(new java.awt.Color(0, 0, 0));
         btnRegis.setText("REGISTRAR");
+        btnRegis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegisMouseClicked(evt);
+            }
+        });
         btnRegis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisActionPerformed(evt);
@@ -438,15 +443,16 @@ public class register extends javax.swing.JFrame {
     private void btnRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisActionPerformed
         try {
             this.ctu.addUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword);
-            login lg = new login();
-            lg.setVisible(true);
-            this.dispose();
         } catch (ParseException ex) {
             // Manejo de la excepción ParseException
             ex.printStackTrace(); // Aquí puedes imprimir o manejar la excepción según sea necesario
             JOptionPane.showMessageDialog(null, "Error al procesar la fecha. Formato incorrecto.");
         }
     }//GEN-LAST:event_btnRegisActionPerformed
+
+    private void btnRegisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegisMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

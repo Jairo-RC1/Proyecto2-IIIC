@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class eventDAO {
        // Method to save a new place in the database
-    public void createEvent(event event) {
+    public void createEvent(Event event) {
         DBConnectionJava db = new DBConnectionJava();
         try {
             String consultaSQL = "INSERT INTO events (name, description, date, address, postal_code, price, room, place_id) " +
@@ -37,9 +37,9 @@ public class eventDAO {
     }
 
     // Method to retrieve a list of all pleaces saved from the database
-    public List<event> readEvents() {
+    public List<Event> readEvents() {
         DBConnectionJava db = new DBConnectionJava();
-        List<event> events = new ArrayList<>();
+        List<Event> events = new ArrayList<>();
         try {
             String consultaSQL = "SELECT * FROM events";
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
@@ -55,7 +55,7 @@ public class eventDAO {
                 int room = resultSet.getInt("room");
                 int placeId = resultSet.getInt("place_id");
                 String city = resultSet.getString("city");
-                event event = new event(id, name, description, date, address, postalCode,city, price, room, placeId);
+                Event event = new Event(id, name, description, date, address, postalCode,city, price, room, placeId);
                 events.add(event);
             }
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class eventDAO {
     }
 
     // Method to update an existing place record in the database
-    public void updateEvent(event event) {
+    public void updateEvent(Event event) {
         DBConnectionJava db = new DBConnectionJava();
         try {
             String consultaSQL = "UPDATE events SET name=?, description=?, date=?, address=?, postal_code=?, price=?, room=?, place_id=? WHERE id=?";
