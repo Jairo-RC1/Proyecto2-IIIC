@@ -30,7 +30,7 @@ public class ctrlUser {
         TableRowSorter<TableModel> order = new TableRowSorter<TableModel>(model);
         table.setRowSorter(order);
         model.setRowCount(0);
-        List<user> users = dao.readUser();
+        List<user> users = dao.readUserTxt();
         for (user user : users) {
             Object[] row = {user.getId(), user.getIdNumber(), user.getName(), user.getLastName(), user.getBirthDate(),
                 user.getEmail(), user.getPhoneNumber(), user.getPassword()};
@@ -38,14 +38,14 @@ public class ctrlUser {
         }
     }
 
-    // Carga los datos del usuario en los campos de texto proporcionados
-    public void loadUserDataIntoFields(JTextField txtIdNumber, JTextField txtName, JTextField txtLastName,
+    public void loadUserDataIntoFields(JTextField txtId, JTextField txtIdNumber, JTextField txtName, JTextField txtLastName,
             JTextField txtBirthDate, JTextField txtEmail, JTextField txtPhoneNumber, JTextField txtPassword,
             user currentUser) {
 
         // Verificar si el usuario actual no es nulo
         if (currentUser != null) {
             // Establecer la información del usuario en los campos de texto
+            txtId.setText(String.valueOf(currentUser.getId()));
             txtIdNumber.setText(String.valueOf(currentUser.getIdNumber()));
             txtName.setText(currentUser.getName());
             txtLastName.setText(currentUser.getLastName());
@@ -119,7 +119,7 @@ public class ctrlUser {
         }
     }
 
-    public void updateUser(JTextField idNumber, JTextField name, JTextField lastName, JTextField email, JTextField phoneNumber, JTextField password) {
+    public void updateUser(JTextField idNumber, JTextField name, JTextField lastName, JTextField email, JTextField phoneNumber, JTextField txtBirthDate, JTextField password) {
         validation validator = new validation();
 
         // Obtener los valores de los campos de texto
@@ -129,6 +129,7 @@ public class ctrlUser {
         String emailText = email.getText();
         String phoneNumberText = phoneNumber.getText();
         String passwordText = password.getText();
+        String birthDateText = txtBirthDate.getText();
 
         // Validaciones para idNumber, name, lastName, email, phoneNumber
         if (!validator.validateID(idNumberText)) {
@@ -151,19 +152,28 @@ public class ctrlUser {
             return; // Detiene el proceso si no es válido
         }
 
-        // Obtener roleId a partir del nombre del rol seleccionado en el JComboBox
+        // Validar el formato de la fecha de nacimiento
+        if (!validator.validateDate(birthDateText)) {
+            JOptionPane.showMessageDialog(null, "Fecha de nacimiento no válida. Debe tener el formato aaaa-MM-dd.");
+            return;
+        }
 
         try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date flowDate = dateFormat.parse(birthDateText);
             // Crear el objeto User con los datos validados
-            user user = new user(Integer.parseInt(idNumberText), nameText, lastNameText, new Date(), emailText, Integer.parseInt(phoneNumberText), passwordText);
+            user user = new user(this.id, Integer.parseInt(idNumberText), nameText, lastNameText, flowDate, emailText, Integer.parseInt(phoneNumberText), passwordText);
 
             // Llamar al método de actualización en el DAO
             dao.updateUser(user);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error de formato en algún campo");
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Error en el formato de fecha.");
         }
     }
 
+    
     public void deleteUser() {
         dao.deleteUser(this.id);
     }
@@ -177,11 +187,6 @@ public class ctrlUser {
         phoneNumber.setText("");
         password.setText("");
 
-    }
-
-    public void loadRolesToUserComboBox(JComboBox<String> comboBox) {
-        ctrlRol ctrlRol = new ctrlRol();
-        ctrlRol.loadRolesToComboBox(comboBox);
     }
 
 }

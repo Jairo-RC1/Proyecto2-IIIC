@@ -8,13 +8,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.*;
 import controller.ctrlApiHandler;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-/**
- *
- * @author jefry
- */
 public class mainView extends javax.swing.JFrame {
 
+    private user currentUser;
     ctrlUser ctu = new ctrlUser();
     ctrlApiHandler ctah = new ctrlApiHandler();
 
@@ -23,12 +23,39 @@ public class mainView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         FlatIntelliJLaf.setup();
-  
+
     }
-    
+
+    private String formatDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(date);
+    }
 
     public void setUserData(user currentUser) {
-        ctu.loadUserDataIntoFields(txtIdNumber, txtName, txtLastName, txtBirthDate, txtEmail, txtPhoneNumber, txtPassword, currentUser);
+        this.currentUser = currentUser;
+        ctu.loadUserDataIntoFields(txtId, txtIdNumber, txtName, txtLastName, txtBirthDate, txtEmail, txtPhoneNumber, txtPassword, currentUser);
+    }
+
+    public void updateUser() {
+        int idNumber = currentUser.getIdNumber();
+        String name = currentUser.getName();
+        String lastName = currentUser.getLastName();
+        String email = currentUser.getEmail();
+        int phoneNumber = currentUser.getPhoneNumber();
+        Date birthDate = currentUser.getBirthDate();
+        String password = currentUser.getPassword();
+
+        // Establecer estos valores en los campos de texto
+        txtIdNumber.setText(String.valueOf(idNumber));
+        txtName.setText(name);
+        txtLastName.setText(lastName);
+        txtEmail.setText(email);
+        txtPhoneNumber.setText(String.valueOf(phoneNumber));
+        txtBirthDate.setText(formatDate(birthDate));
+        txtPassword.setText(password);
+        // Establecer otros campos
+
+        ctu.updateUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword);
     }
 
     @SuppressWarnings("unchecked")
@@ -90,6 +117,8 @@ public class mainView extends javax.swing.JFrame {
         btnSave = new javax.swing.JPanel();
         btnRegis3 = new javax.swing.JLabel();
         lblSave3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
         pnSerchEvent = new javax.swing.JPanel();
         jPFilters = new javax.swing.JPanel();
         lblFilterByName = new javax.swing.JLabel();
@@ -341,7 +370,7 @@ public class mainView extends javax.swing.JFrame {
                 txtPasswordActionPerformed(evt);
             }
         });
-        jPaneMain.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 180, 40));
+        jPaneMain.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 180, 40));
 
         txtIdNumber.setBackground(new java.awt.Color(255, 255, 255));
         txtIdNumber.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -357,7 +386,7 @@ public class mainView extends javax.swing.JFrame {
                 txtIdNumberActionPerformed(evt);
             }
         });
-        jPaneMain.add(txtIdNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 180, 40));
+        jPaneMain.add(txtIdNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 180, 40));
 
         txtName.setBackground(new java.awt.Color(255, 255, 255));
         txtName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -373,7 +402,7 @@ public class mainView extends javax.swing.JFrame {
                 txtNameActionPerformed(evt);
             }
         });
-        jPaneMain.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 180, 40));
+        jPaneMain.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 180, 40));
 
         txtLastName.setBackground(new java.awt.Color(255, 255, 255));
         txtLastName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -390,7 +419,7 @@ public class mainView extends javax.swing.JFrame {
         jPaneMain.add(lblBirthDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 40, 40));
 
         lblPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/password.png"))); // NOI18N
-        jPaneMain.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 40, 40));
+        jPaneMain.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 40, 40));
 
         lblPhoneNumber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/phone.png"))); // NOI18N
         jPaneMain.add(lblPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 40, 40));
@@ -399,13 +428,13 @@ public class mainView extends javax.swing.JFrame {
         jPaneMain.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 40, 40));
 
         lblIdNumber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/cedula.png"))); // NOI18N
-        jPaneMain.add(lblIdNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 40, 40));
+        jPaneMain.add(lblIdNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 40, 40));
 
         lblLastName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/user.png"))); // NOI18N
         jPaneMain.add(lblLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 40, 40));
 
         lblName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/user2.png"))); // NOI18N
-        jPaneMain.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 40, 40));
+        jPaneMain.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 40, 40));
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/logoAzulOscuro.jpeg"))); // NOI18N
         jPaneMain.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 410, -1, -1));
@@ -543,6 +572,20 @@ public class mainView extends javax.swing.JFrame {
         btnSave.add(lblSave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 40));
 
         jPaneMain.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 170, 60));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/identity-card.png"))); // NOI18N
+        jPaneMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, 60));
+
+        txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(255, 255, 255));
+        txtId.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtId.setForeground(new java.awt.Color(0, 0, 0));
+        txtId.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtIdMousePressed(evt);
+            }
+        });
+        jPaneMain.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 180, 40));
 
         pnProfile.add(jPaneMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 520));
 
@@ -843,6 +886,11 @@ public class mainView extends javax.swing.JFrame {
             txtBirthDate.setText("");
             txtBirthDate.setForeground(Color.BLACK);
         }
+        if (String.valueOf(txtId.getText()).isEmpty()) {
+            txtId.setText("ID");
+            txtId.setForeground(Color.BLACK);
+        }
+
         if (String.valueOf(txtName.getText()).isEmpty()) {
             txtName.setText("Nombre");
             txtName.setForeground(Color.BLACK);
@@ -873,6 +921,10 @@ public class mainView extends javax.swing.JFrame {
         if (txtPhoneNumber.getText().equals("Telefono")) {
             txtPhoneNumber.setText("");
             txtPhoneNumber.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtId.getText()).isEmpty()) {
+            txtId.setText("ID");
+            txtId.setForeground(Color.BLACK);
         }
         if (String.valueOf(txtName.getText()).isEmpty()) {
             txtName.setText("Nombre");
@@ -909,6 +961,10 @@ public class mainView extends javax.swing.JFrame {
             txtEmail.setText("");
             txtEmail.setForeground(Color.BLACK);
         }
+        if (String.valueOf(txtId.getText()).isEmpty()) {
+            txtId.setText("ID");
+            txtId.setForeground(Color.BLACK);
+        }
         if (String.valueOf(txtName.getText()).isEmpty()) {
             txtName.setText("Nombre");
             txtName.setForeground(Color.BLACK);
@@ -941,6 +997,10 @@ public class mainView extends javax.swing.JFrame {
             txtPassword.setText("");
             txtPassword.setForeground(Color.BLACK);
         }
+        if (String.valueOf(txtId.getText()).isEmpty()) {
+            txtId.setText("ID");
+            txtId.setForeground(Color.BLACK);
+        }
         if (String.valueOf(txtName.getText()).isEmpty()) {
             txtName.setText("Nombre");
             txtName.setForeground(Color.BLACK);
@@ -971,6 +1031,10 @@ public class mainView extends javax.swing.JFrame {
         if (txtIdNumber.getText().equals("Cedula")) {
             txtIdNumber.setText("");
             txtIdNumber.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtId.getText()).isEmpty()) {
+            txtId.setText("ID");
+            txtId.setForeground(Color.BLACK);
         }
         if (String.valueOf(txtName.getText()).isEmpty()) {
             txtName.setText("Nombre");
@@ -1003,6 +1067,10 @@ public class mainView extends javax.swing.JFrame {
             txtName.setText("");
             txtName.setForeground(Color.BLACK);
         }
+        if (String.valueOf(txtId.getText()).isEmpty()) {
+            txtId.setText("ID");
+            txtId.setForeground(Color.BLACK);
+        }
         if (String.valueOf(txtLastName.getText()).isEmpty()) {
             txtLastName.setText("Apellido");
             txtLastName.setForeground(Color.BLACK);
@@ -1033,6 +1101,10 @@ public class mainView extends javax.swing.JFrame {
         if (txtLastName.getText().equals("Apellido")) {
             txtLastName.setText("");
             txtLastName.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtId.getText()).isEmpty()) {
+            txtId.setText("ID");
+            txtId.setForeground(Color.BLACK);
         }
         if (String.valueOf(txtName.getText()).isEmpty()) {
             txtName.setText("Nombre");
@@ -1145,7 +1217,38 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        try {
+            if (currentUser != null) {
+                // Actualizar el usuario con los datos de los campos de texto
+                currentUser.setIdNumber(Integer.parseInt(txtIdNumber.getText()));
+                currentUser.setName(txtName.getText());
+                currentUser.setLastName(txtLastName.getText());
+                currentUser.setEmail(txtEmail.getText());
+                currentUser.setPhoneNumber(Integer.parseInt(txtPhoneNumber.getText()));
+                // Actualizar otros campos del usuario
 
+                // Obtener y convertir la fecha de nacimiento
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date birthDate = dateFormat.parse(txtBirthDate.getText());
+                currentUser.setBirthDate(birthDate);
+
+                currentUser.setPassword(txtPassword.getText());
+
+                // Llamar a updateUser en la vista para actualizar en la base de datos
+                this.updateUser();
+            } else {
+                // Manejar la situación en la que currentUser es nulo
+                System.out.println("El usuario no está cargado correctamente");
+            }
+        } catch (NumberFormatException ex) {
+            // Manejar errores de formato o conversión para números
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al actualizar el usuario. Formato de número incorrecto.");
+        } catch (ParseException ex) {
+            // Manejar errores de formato de fecha
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al actualizar el usuario. Formato de fecha incorrecto.");
+        }
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
@@ -1153,12 +1256,47 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
-    this.ctah.searchEvents(txtFilterByName, txtFilterByLocation, ScrollPane, boxCategory);
+        this.ctah.searchEvents(txtFilterByName, txtFilterByLocation, ScrollPane, boxCategory);
     }//GEN-LAST:event_btnFilterActionPerformed
 
     private void boxCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCategoryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boxCategoryActionPerformed
+
+    private void txtIdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdMousePressed
+        if (txtId.getText().equals("ID")) {
+            txtId.setText("");
+            txtId.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtLastName.getText()).isEmpty()) {
+            txtLastName.setText("Apellidos");
+            txtLastName.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtName.getText()).isEmpty()) {
+            txtName.setText("Nombre");
+            txtName.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
+            txtIdNumber.setText("Cedula");
+            txtIdNumber.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtEmail.getText()).isEmpty()) {
+            txtEmail.setText("Correo electronico");
+            txtEmail.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
+            txtPhoneNumber.setText("Telefono");
+            txtPhoneNumber.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
+            txtBirthDate.setText("Fecha de nacimiento");
+            txtBirthDate.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtPassword.getText()).isEmpty()) {
+            txtPassword.setText("Contraseña");
+            txtPassword.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtIdMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
@@ -1183,6 +1321,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel btnRegis3;
     private javax.swing.JPanel btnSave;
     private javax.swing.JPanel btnSave2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPFilters;
     private javax.swing.JPanel jPaneMain;
@@ -1231,6 +1370,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JTextField txtFilterByLocation;
     private javax.swing.JTextField txtFilterByName;
     private javax.swing.JTextField txtFinalDate;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdNumber;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtName;

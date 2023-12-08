@@ -40,32 +40,6 @@ public class userDAO {
         }
     }
 
-    public List<user> readUser() {
-        DBConnectionJava db = new DBConnectionJava();
-        List<user> users = new ArrayList<>();
-        String sql = "SELECT * FROM users";
-
-        try {
-            PreparedStatement ps = db.getConnection().prepareStatement(sql);
-            ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                int idNumber = resultSet.getInt("id_number");
-                String name = resultSet.getString("name");
-                String lastName = resultSet.getString("last_name");
-                Date birthDate = resultSet.getDate("birth_date");
-                String email = resultSet.getString("email");
-                int phoneNumber = resultSet.getInt("phone_number");
-                String password = resultSet.getString("password");
-                users.add(new user(id, idNumber, name, lastName, birthDate, email, phoneNumber, password));
-            }
-        } catch (SQLException e) {
-            System.err.println("Error: " + e.getMessage());
-        } finally {
-            db.disconnect();
-        }
-        return users;
-    }
 
     public List<user> readUserTxt() {
         DBConnectionJava db = new DBConnectionJava();

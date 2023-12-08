@@ -208,7 +208,6 @@ public class login extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Credenciales incorrectas. Por favor, inténtelo de nuevo.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btnEnterMainMouseClicked
 
     private void btnRegisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseClicked
