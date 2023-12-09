@@ -130,21 +130,24 @@ public class mainView extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         pnSerchEvent = new javax.swing.JPanel();
         jPFilters = new javax.swing.JPanel();
-        lblFilterByName = new javax.swing.JLabel();
-        txtFilterByName = new javax.swing.JTextField();
         lblBeginDate = new javax.swing.JLabel();
         txtBeginDate = new javax.swing.JTextField();
         btnCalendarBegin = new javax.swing.JButton();
-        lblFinalDate = new javax.swing.JLabel();
         txtFinalDate = new javax.swing.JTextField();
         btnCalendarFinal = new javax.swing.JButton();
-        lblFilterByLocation = new javax.swing.JLabel();
-        txtFilterByLocation = new javax.swing.JTextField();
-        jSeparator5 = new javax.swing.JSeparator();
-        jSeparator6 = new javax.swing.JSeparator();
         btnFilter = new javax.swing.JButton();
         lblFinalDate1 = new javax.swing.JLabel();
+        pnEvents = new javax.swing.JPanel();
+        txtEventName = new javax.swing.JTextField();
+        lblEventImages = new javax.swing.JLabel();
+        lblFilterBackground = new javax.swing.JLabel();
+        pnLocation = new javax.swing.JPanel();
+        txtLocationName = new javax.swing.JTextField();
+        lblEventImages1 = new javax.swing.JLabel();
+        pnCategory = new javax.swing.JPanel();
         boxCategory = new javax.swing.JComboBox<>();
+        lblCategoryImage = new javax.swing.JLabel();
+        lblBackgroundFilter = new javax.swing.JLabel();
         ScrollPane = new javax.swing.JScrollPane();
         barPane = new javax.swing.JPanel();
         lblIcon = new javax.swing.JLabel();
@@ -604,134 +607,123 @@ public class mainView extends javax.swing.JFrame {
         pnSerchEvent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPFilters.setBackground(new java.awt.Color(255, 255, 255));
-        jPFilters.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones de Filtrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 12))); // NOI18N
-
-        lblFilterByName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblFilterByName.setText("Nombre del evento:");
-
-        txtFilterByName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jPFilters.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBeginDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         lblBeginDate.setText("Fecha de inicio:");
+        jPFilters.add(lblBeginDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 101, -1));
 
+        txtBeginDate.setBackground(new java.awt.Color(255, 255, 255));
         txtBeginDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtBeginDate.setForeground(new java.awt.Color(0, 0, 0));
+        jPFilters.add(txtBeginDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 140, -1));
 
         btnCalendarBegin.setText("...");
-
-        lblFinalDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblFinalDate.setText("Categoria:");
+        jPFilters.add(btnCalendarBegin, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, -1, -1));
 
         txtFinalDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jPFilters.add(txtFinalDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 140, -1));
 
         btnCalendarFinal.setText("...");
+        jPFilters.add(btnCalendarFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, -1, -1));
 
-        lblFilterByLocation.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblFilterByLocation.setText("Ubicación del evento:");
-
-        txtFilterByLocation.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-
+        btnFilter.setBackground(new java.awt.Color(204, 255, 255));
         btnFilter.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        btnFilter.setText("FILTRAR");
+        btnFilter.setForeground(new java.awt.Color(0, 0, 0));
+        btnFilter.setText("Buscar");
         btnFilter.setContentAreaFilled(false);
+        btnFilter.setOpaque(true);
         btnFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFilterActionPerformed(evt);
             }
         });
+        jPFilters.add(btnFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 172, 40));
 
         lblFinalDate1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         lblFinalDate1.setText("Fecha final:");
+        jPFilters.add(lblFinalDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 89, -1));
 
-        boxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hotels", "attractions ", "restaurants", "geos" }));
+        pnEvents.setBackground(new java.awt.Color(255, 255, 255));
+        pnEvents.setOpaque(false);
+        pnEvents.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtEventName.setBackground(new java.awt.Color(204, 255, 255));
+        txtEventName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtEventName.setForeground(new java.awt.Color(0, 0, 0));
+        txtEventName.setText("Eventos");
+        txtEventName.setBorder(null);
+        txtEventName.setOpaque(true);
+        txtEventName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtEventNameMousePressed(evt);
+            }
+        });
+        txtEventName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEventNameActionPerformed(evt);
+            }
+        });
+        pnEvents.add(txtEventName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 160, 40));
+
+        lblEventImages.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/events.png"))); // NOI18N
+        pnEvents.add(lblEventImages, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+        lblEventImages.getAccessibleContext().setAccessibleDescription("");
+
+        pnEvents.add(lblFilterBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 820, 230));
+
+        jPFilters.add(pnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 40));
+
+        pnLocation.setBackground(new java.awt.Color(255, 255, 255));
+        pnLocation.setOpaque(false);
+        pnLocation.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtLocationName.setBackground(new java.awt.Color(204, 255, 255));
+        txtLocationName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtLocationName.setForeground(new java.awt.Color(0, 0, 0));
+        txtLocationName.setText("Ubicacion");
+        txtLocationName.setBorder(null);
+        txtLocationName.setOpaque(true);
+        txtLocationName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtLocationNameMousePressed(evt);
+            }
+        });
+        pnLocation.add(txtLocationName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 170, 40));
+
+        lblEventImages1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/location.png"))); // NOI18N
+        pnLocation.add(lblEventImages1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPFilters.add(pnLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 220, 40));
+
+        pnCategory.setBackground(new java.awt.Color(255, 255, 255));
+        pnCategory.setOpaque(false);
+        pnCategory.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        boxCategory.setBackground(new java.awt.Color(204, 255, 255));
+        boxCategory.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        boxCategory.setForeground(new java.awt.Color(0, 0, 0));
+        boxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoria", "hotels", "attractions", "restaurants", "geos" }));
+        boxCategory.setOpaque(true);
         boxCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxCategoryActionPerformed(evt);
             }
         });
+        pnCategory.add(boxCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
 
-        javax.swing.GroupLayout jPFiltersLayout = new javax.swing.GroupLayout(jPFilters);
-        jPFilters.setLayout(jPFiltersLayout);
-        jPFiltersLayout.setHorizontalGroup(
-            jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPFiltersLayout.createSequentialGroup()
-                .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPFiltersLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPFiltersLayout.createSequentialGroup()
-                                .addComponent(lblFilterByName, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFilterByName, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPFiltersLayout.createSequentialGroup()
-                                .addComponent(lblFilterByLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFilterByLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(lblFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(boxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPFiltersLayout.createSequentialGroup()
-                                .addComponent(lblBeginDate, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtBeginDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCalendarBegin)
-                                .addGap(124, 124, 124)
-                                .addComponent(txtFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCalendarFinal)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPFiltersLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(42, 42, 42))
-            .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPFiltersLayout.createSequentialGroup()
-                    .addGap(348, 348, 348)
-                    .addComponent(lblFinalDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(549, Short.MAX_VALUE)))
-        );
-        jPFiltersLayout.setVerticalGroup(
-            jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPFiltersLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFilterByName)
-                    .addComponent(txtFilterByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFilterByLocation)
-                    .addComponent(txtFilterByLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFinalDate)
-                    .addComponent(boxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBeginDate)
-                    .addComponent(txtBeginDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCalendarBegin)
-                    .addComponent(txtFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCalendarFinal)
-                    .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
-            .addGroup(jPFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPFiltersLayout.createSequentialGroup()
-                    .addContainerGap(124, Short.MAX_VALUE)
-                    .addComponent(lblFinalDate1)
-                    .addGap(34, 34, 34)))
-        );
+        lblCategoryImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/category.png"))); // NOI18N
+        pnCategory.add(lblCategoryImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
 
-        pnSerchEvent.add(jPFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 830, -1));
+        jPFilters.add(pnCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 190, 40));
+
+        lblBackgroundFilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/fondoTravel1.jpg"))); // NOI18N
+        jPFilters.add(lblBackgroundFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 820, 230));
+
+        pnSerchEvent.add(jPFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 230));
 
         ScrollPane.setBackground(new java.awt.Color(255, 255, 255));
-        pnSerchEvent.add(ScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 780, 280));
+        pnSerchEvent.add(ScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 820, 290));
 
         Events.add(pnSerchEvent, "card2");
 
@@ -1238,14 +1230,6 @@ public class mainView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeleteMouseClicked
 
-    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
-        this.ctah.searchEvents(txtFilterByName, txtFilterByLocation, ScrollPane, boxCategory);
-    }//GEN-LAST:event_btnFilterActionPerformed
-
-    private void boxCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boxCategoryActionPerformed
-
     private void txtIdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdMousePressed
         if (txtId.getText().equals("ID")) {
             txtId.setText("");
@@ -1281,6 +1265,40 @@ public class mainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtIdMousePressed
 
+    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+        this.ctah.searchEvents(txtEventName, txtLocationName, ScrollPane, boxCategory);
+    }//GEN-LAST:event_btnFilterActionPerformed
+
+    private void txtEventNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEventNameMousePressed
+        if (txtEventName.getText().equals("Eventos")) {
+            txtEventName.setText("");
+            txtEventName.setForeground(Color.BLACK);
+        }
+        if (txtLocationName.getText().isEmpty()) {
+            txtLocationName.setText("Ubicacion");
+            txtLocationName.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtEventNameMousePressed
+
+    private void txtEventNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEventNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEventNameActionPerformed
+
+    private void txtLocationNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLocationNameMousePressed
+        if (txtLocationName.getText().equals("Ubicacion")) {
+            txtLocationName.setText("");
+            txtLocationName.setForeground(Color.BLACK);
+        }
+        if (txtEventName.getText().isEmpty()) {
+            txtEventName.setText("Eventos");
+            txtEventName.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtLocationNameMousePressed
+
+    private void boxCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxCategoryActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
     private javax.swing.JPanel DashBoard;
@@ -1312,16 +1330,16 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JLabel lblBackgroundFilter;
     private javax.swing.JLabel lblBeginDate;
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblBooking;
     private javax.swing.JLabel lblCalendar;
+    private javax.swing.JLabel lblCategoryImage;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblFilterByLocation;
-    private javax.swing.JLabel lblFilterByName;
-    private javax.swing.JLabel lblFinalDate;
+    private javax.swing.JLabel lblEventImages;
+    private javax.swing.JLabel lblEventImages1;
+    private javax.swing.JLabel lblFilterBackground;
     private javax.swing.JLabel lblFinalDate1;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblIdNumber;
@@ -1343,6 +1361,9 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblUser;
     private javax.swing.JLabel lblUser1;
     private javax.swing.JPanel pnBooking;
+    private javax.swing.JPanel pnCategory;
+    private javax.swing.JPanel pnEvents;
+    private javax.swing.JPanel pnLocation;
     private javax.swing.JPanel pnProfile;
     private javax.swing.JPanel pnSerchEvent;
     private javax.swing.JSeparator separator1;
@@ -1350,12 +1371,12 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JTextField txtBeginDate;
     private javax.swing.JTextField txtBirthDate;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFilterByLocation;
-    private javax.swing.JTextField txtFilterByName;
+    private javax.swing.JTextField txtEventName;
     private javax.swing.JTextField txtFinalDate;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdNumber;
     private javax.swing.JTextField txtLastName;
+    private javax.swing.JTextField txtLocationName;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;

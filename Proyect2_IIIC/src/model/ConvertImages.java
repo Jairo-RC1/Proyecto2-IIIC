@@ -1,4 +1,3 @@
-
 package model;
 
 import org.apache.batik.transcoder.TranscoderException;
