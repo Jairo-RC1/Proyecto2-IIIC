@@ -11,6 +11,7 @@ import controller.ctrlApiHandler;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JTextField;
 import org.json.JSONObject;
 
 public class mainView extends javax.swing.JFrame {
@@ -18,6 +19,7 @@ public class mainView extends javax.swing.JFrame {
     private user currentUser;
     ctrlUser ctu = new ctrlUser();
     ctrlApiHandler ctah = new ctrlApiHandler();
+
 
     public mainView() {
         initComponents();
@@ -131,13 +133,6 @@ public class mainView extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         pnSerchEvent = new javax.swing.JPanel();
         jPFilters = new javax.swing.JPanel();
-        lblBeginDate = new javax.swing.JLabel();
-        txtBeginDate = new javax.swing.JTextField();
-        btnCalendarBegin = new javax.swing.JButton();
-        txtFinalDate = new javax.swing.JTextField();
-        btnCalendarFinal = new javax.swing.JButton();
-        btnFilter = new javax.swing.JButton();
-        lblFinalDate1 = new javax.swing.JLabel();
         pnEvents = new javax.swing.JPanel();
         txtEventName = new javax.swing.JTextField();
         lblEventImages = new javax.swing.JLabel();
@@ -148,7 +143,17 @@ public class mainView extends javax.swing.JFrame {
         pnCategory = new javax.swing.JPanel();
         boxCategory = new javax.swing.JComboBox<>();
         lblCategoryImage = new javax.swing.JLabel();
-        btnInfoWeather = new javax.swing.JButton();
+        pnExitDate = new javax.swing.JPanel();
+        dateExit = new com.toedter.calendar.JDateChooser();
+        lblExitDate = new javax.swing.JLabel();
+        pnEnterDate = new javax.swing.JPanel();
+        dateEnter = new com.toedter.calendar.JDateChooser();
+        lblEnterDate = new javax.swing.JLabel();
+        btnEnter = new javax.swing.JPanel();
+        lblSerchPlace = new javax.swing.JLabel();
+        btnWeatherInfo = new javax.swing.JPanel();
+        lbWeatherInfo = new javax.swing.JLabel();
+        lblWeatherImage = new javax.swing.JLabel();
         lblBackgroundFilter = new javax.swing.JLabel();
         ScrollPane = new javax.swing.JScrollPane();
         barPane = new javax.swing.JPanel();
@@ -594,9 +599,15 @@ public class mainView extends javax.swing.JFrame {
         txtId.setBackground(new java.awt.Color(255, 255, 255));
         txtId.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtId.setForeground(new java.awt.Color(0, 0, 0));
+        txtId.setText("ID");
         txtId.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtIdMousePressed(evt);
+            }
+        });
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
             }
         });
         jPaneMain.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 180, 40));
@@ -611,46 +622,12 @@ public class mainView extends javax.swing.JFrame {
         jPFilters.setBackground(new java.awt.Color(255, 255, 255));
         jPFilters.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBeginDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblBeginDate.setText("Fecha de inicio:");
-        jPFilters.add(lblBeginDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 101, -1));
-
-        txtBeginDate.setBackground(new java.awt.Color(255, 255, 255));
-        txtBeginDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtBeginDate.setForeground(new java.awt.Color(0, 0, 0));
-        jPFilters.add(txtBeginDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 140, -1));
-
-        btnCalendarBegin.setText("...");
-        jPFilters.add(btnCalendarBegin, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, -1, -1));
-
-        txtFinalDate.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPFilters.add(txtFinalDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 140, -1));
-
-        btnCalendarFinal.setText("...");
-        jPFilters.add(btnCalendarFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, -1, -1));
-
-        btnFilter.setBackground(new java.awt.Color(204, 255, 255));
-        btnFilter.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        btnFilter.setForeground(new java.awt.Color(0, 0, 0));
-        btnFilter.setText("Buscar");
-        btnFilter.setContentAreaFilled(false);
-        btnFilter.setOpaque(true);
-        btnFilter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFilterActionPerformed(evt);
-            }
-        });
-        jPFilters.add(btnFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 172, 40));
-
-        lblFinalDate1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblFinalDate1.setText("Fecha final:");
-        jPFilters.add(lblFinalDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 89, -1));
-
         pnEvents.setBackground(new java.awt.Color(255, 255, 255));
+        pnEvents.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4));
         pnEvents.setOpaque(false);
         pnEvents.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtEventName.setBackground(new java.awt.Color(204, 255, 255));
+        txtEventName.setBackground(new java.awt.Color(255, 255, 255));
         txtEventName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtEventName.setForeground(new java.awt.Color(0, 0, 0));
         txtEventName.setText("Eventos");
@@ -666,21 +643,22 @@ public class mainView extends javax.swing.JFrame {
                 txtEventNameActionPerformed(evt);
             }
         });
-        pnEvents.add(txtEventName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 160, 40));
+        pnEvents.add(txtEventName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 150, 30));
 
-        lblEventImages.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/events.png"))); // NOI18N
-        pnEvents.add(lblEventImages, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+        lblEventImages.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/cama.png"))); // NOI18N
+        pnEvents.add(lblEventImages, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
         lblEventImages.getAccessibleContext().setAccessibleDescription("");
 
         pnEvents.add(lblFilterBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 820, 230));
 
-        jPFilters.add(pnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 40));
+        jPFilters.add(pnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 50));
 
         pnLocation.setBackground(new java.awt.Color(255, 255, 255));
+        pnLocation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4));
         pnLocation.setOpaque(false);
         pnLocation.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtLocationName.setBackground(new java.awt.Color(204, 255, 255));
+        txtLocationName.setBackground(new java.awt.Color(255, 255, 255));
         txtLocationName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtLocationName.setForeground(new java.awt.Color(0, 0, 0));
         txtLocationName.setText("Ubicacion");
@@ -691,18 +669,19 @@ public class mainView extends javax.swing.JFrame {
                 txtLocationNameMousePressed(evt);
             }
         });
-        pnLocation.add(txtLocationName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 170, 40));
+        pnLocation.add(txtLocationName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 150, 30));
 
         lblEventImages1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/location.png"))); // NOI18N
-        pnLocation.add(lblEventImages1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        pnLocation.add(lblEventImages1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPFilters.add(pnLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 220, 40));
+        jPFilters.add(pnLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 210, 50));
 
         pnCategory.setBackground(new java.awt.Color(255, 255, 255));
+        pnCategory.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4));
         pnCategory.setOpaque(false);
         pnCategory.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        boxCategory.setBackground(new java.awt.Color(204, 255, 255));
+        boxCategory.setBackground(new java.awt.Color(255, 255, 255));
         boxCategory.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         boxCategory.setForeground(new java.awt.Color(0, 0, 0));
         boxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoria", "hotels", "attractions", "restaurants", "geos" }));
@@ -712,23 +691,101 @@ public class mainView extends javax.swing.JFrame {
                 boxCategoryActionPerformed(evt);
             }
         });
-        pnCategory.add(boxCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
+        pnCategory.add(boxCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 160, 30));
 
         lblCategoryImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/category.png"))); // NOI18N
-        pnCategory.add(lblCategoryImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+        pnCategory.add(lblCategoryImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPFilters.add(pnCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 190, 40));
+        jPFilters.add(pnCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 210, 50));
 
-        btnInfoWeather.setText("Información del clima");
-        btnInfoWeather.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInfoWeatherActionPerformed(evt);
+        pnExitDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4), "Fecha de salida", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+        pnExitDate.setOpaque(false);
+        pnExitDate.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnExitDate.add(dateExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 150, 30));
+
+        lblExitDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/avionSaliendo.png"))); // NOI18N
+        pnExitDate.add(lblExitDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 30, 30));
+
+        jPFilters.add(pnExitDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 220, 65));
+
+        pnEnterDate.setBackground(new java.awt.Color(255, 255, 255));
+        pnEnterDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4), "Fecha de entrada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+        pnEnterDate.setOpaque(false);
+        pnEnterDate.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dateEnter.setBackground(new java.awt.Color(255, 255, 255));
+        pnEnterDate.add(dateEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+
+        lblEnterDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/avionEntrando.png"))); // NOI18N
+        pnEnterDate.add(lblEnterDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
+
+        jPFilters.add(pnEnterDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 210, 65));
+
+        btnEnter.setBackground(new java.awt.Color(255, 255, 255));
+        btnEnter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEnterMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEnterMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEnterMouseExited(evt);
             }
         });
-        jPFilters.add(btnInfoWeather, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, -1, -1));
+
+        lblSerchPlace.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblSerchPlace.setForeground(new java.awt.Color(0, 0, 0));
+        lblSerchPlace.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSerchPlace.setText("BUSCAR");
+
+        javax.swing.GroupLayout btnEnterLayout = new javax.swing.GroupLayout(btnEnter);
+        btnEnter.setLayout(btnEnterLayout);
+        btnEnterLayout.setHorizontalGroup(
+            btnEnterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnEnterLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(lblSerchPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        btnEnterLayout.setVerticalGroup(
+            btnEnterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnEnterLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSerchPlace, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPFilters.add(btnEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 170, 40));
+
+        btnWeatherInfo.setBackground(new java.awt.Color(255, 255, 255));
+        btnWeatherInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnWeatherInfoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnWeatherInfoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnWeatherInfoMouseExited(evt);
+            }
+        });
+        btnWeatherInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbWeatherInfo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lbWeatherInfo.setForeground(new java.awt.Color(0, 0, 0));
+        lbWeatherInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbWeatherInfo.setText("Informacion del clima");
+        btnWeatherInfo.add(lbWeatherInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 160, 35));
+
+        lblWeatherImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/clima.png"))); // NOI18N
+        btnWeatherInfo.add(lblWeatherImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 35, 35));
+
+        jPFilters.add(btnWeatherInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 220, 70));
 
         lblBackgroundFilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/fondoTravel1.jpg"))); // NOI18N
-        jPFilters.add(lblBackgroundFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 820, 230));
+        lblBackgroundFilter.setOpaque(true);
+        jPFilters.add(lblBackgroundFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 230));
 
         pnSerchEvent.add(jPFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 230));
 
@@ -792,6 +849,54 @@ public class mainView extends javax.swing.JFrame {
     private void resetPanelColor(JPanel panel) {
         panel.setBackground(new java.awt.Color(163, 226, 243));
     }
+    
+    private void handleTextFieldMousePressed(JTextField textField, String defaultText) {
+    if (textField.getText().equals(defaultText)) {
+        textField.setText("");
+        textField.setForeground(Color.BLACK);
+    }
+
+    if (String.valueOf(txtId.getText()).isEmpty()) {
+        txtId.setText("ID");
+        txtId.setForeground(Color.BLACK);
+    }
+
+    if (String.valueOf(txtName.getText()).isEmpty()) {
+        txtName.setText("Nombre");
+        txtName.setForeground(Color.BLACK);
+    }
+
+    if (String.valueOf(txtLastName.getText()).isEmpty()) {
+        txtLastName.setText("Apellido");
+        txtLastName.setForeground(Color.BLACK);
+    }
+
+    if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
+        txtIdNumber.setText("Cedula");
+        txtIdNumber.setForeground(Color.BLACK);
+    }
+
+    if (String.valueOf(txtEmail.getText()).isEmpty()) {
+        txtEmail.setText("Correo electronico");
+        txtEmail.setForeground(Color.BLACK);
+    }
+
+    if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
+        txtPhoneNumber.setText("Telefono");
+        txtPhoneNumber.setForeground(Color.BLACK);
+    }
+
+    if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
+        txtBirthDate.setText("Fecha de nacimiento");
+        txtBirthDate.setForeground(Color.BLACK);
+    }
+
+    if (String.valueOf(txtPassword.getText()).isEmpty()) {
+        txtPassword.setText("Contraseña");
+        txtPassword.setForeground(Color.BLACK);
+    }
+}
+
 
     int x = 250;
     private void lblOptions1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOptions1MouseClicked
@@ -893,254 +998,35 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitPaneMouseExited
 
     private void txtBirthDateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBirthDateMousePressed
-        if (txtBirthDate.getText().equals("Fecha de nacimiento")) {
-            txtBirthDate.setText("");
-            txtBirthDate.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtId.getText()).isEmpty()) {
-            txtId.setText("ID");
-            txtId.setForeground(Color.BLACK);
-        }
-
-        if (String.valueOf(txtName.getText()).isEmpty()) {
-            txtName.setText("Nombre");
-            txtName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtLastName.getText()).isEmpty()) {
-            txtLastName.setText("Apellido");
-            txtLastName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
-            txtIdNumber.setText("Cedula");
-            txtIdNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtEmail.getText()).isEmpty()) {
-            txtEmail.setText("Correo electronico");
-            txtEmail.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
-            txtPhoneNumber.setText("Telefono");
-            txtPhoneNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPassword.getText()).isEmpty()) {
-            txtPassword.setText("Contraseña");
-            txtPassword.setForeground(Color.BLACK);
-        }
+        handleTextFieldMousePressed(txtBirthDate, "Fecha de nacimiento");
     }//GEN-LAST:event_txtBirthDateMousePressed
 
     private void txtPhoneNumberMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPhoneNumberMousePressed
-        if (txtPhoneNumber.getText().equals("Telefono")) {
-            txtPhoneNumber.setText("");
-            txtPhoneNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtId.getText()).isEmpty()) {
-            txtId.setText("ID");
-            txtId.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtName.getText()).isEmpty()) {
-            txtName.setText("Nombre");
-            txtName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtLastName.getText()).isEmpty()) {
-            txtLastName.setText("Apellido");
-            txtLastName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
-            txtIdNumber.setText("Cedula");
-            txtIdNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtEmail.getText()).isEmpty()) {
-            txtEmail.setText("Correo electronico");
-            txtEmail.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
-            txtBirthDate.setText("Fecha de nacimiento");
-            txtBirthDate.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPassword.getText()).isEmpty()) {
-            txtPassword.setText("Contraseña");
-            txtPassword.setForeground(Color.BLACK);
-        }
+        handleTextFieldMousePressed(txtPhoneNumber, "Telefono");
     }//GEN-LAST:event_txtPhoneNumberMousePressed
 
     private void txtPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneNumberActionPerformed
-
+        
     }//GEN-LAST:event_txtPhoneNumberActionPerformed
 
     private void txtEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailMousePressed
-        if (txtEmail.getText().equals("Correo electronico")) {
-            txtEmail.setText("");
-            txtEmail.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtId.getText()).isEmpty()) {
-            txtId.setText("ID");
-            txtId.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtName.getText()).isEmpty()) {
-            txtName.setText("Nombre");
-            txtName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtLastName.getText()).isEmpty()) {
-            txtLastName.setText("Apellido");
-            txtLastName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
-            txtIdNumber.setText("Cedula");
-            txtIdNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
-            txtPhoneNumber.setText("Telefono");
-            txtPhoneNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
-            txtBirthDate.setText("Fecha de nacimiento");
-            txtBirthDate.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPassword.getText()).isEmpty()) {
-            txtPassword.setText("Contraseña");
-            txtPassword.setForeground(Color.BLACK);
-        }
-
+        handleTextFieldMousePressed(txtEmail, "Correo electronico");
     }//GEN-LAST:event_txtEmailMousePressed
 
     private void txtPasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMousePressed
-        if (String.valueOf(txtPassword.getText()).equals("Contraseña")) {
-            txtPassword.setText("");
-            txtPassword.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtId.getText()).isEmpty()) {
-            txtId.setText("ID");
-            txtId.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtName.getText()).isEmpty()) {
-            txtName.setText("Nombre");
-            txtName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtLastName.getText()).isEmpty()) {
-            txtLastName.setText("Apellido");
-            txtLastName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
-            txtIdNumber.setText("Cedula");
-            txtIdNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtEmail.getText()).isEmpty()) {
-            txtEmail.setText("Correo electronico");
-            txtEmail.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
-            txtPhoneNumber.setText("Telefono");
-            txtPhoneNumber.setForeground(Color.BLACK);
-        }
-        if (txtBirthDate.getText().isEmpty()) {
-            txtBirthDate.setText("Fecha de nacimiento");
-            txtBirthDate.setForeground(Color.BLACK);
-        }
+        handleTextFieldMousePressed(txtPassword, "Contraseña");
     }//GEN-LAST:event_txtPasswordMousePressed
 
     private void txtIdNumberMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdNumberMousePressed
-        if (txtIdNumber.getText().equals("Cedula")) {
-            txtIdNumber.setText("");
-            txtIdNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtId.getText()).isEmpty()) {
-            txtId.setText("ID");
-            txtId.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtName.getText()).isEmpty()) {
-            txtName.setText("Nombre");
-            txtName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtLastName.getText()).isEmpty()) {
-            txtLastName.setText("Apellido");
-            txtLastName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtEmail.getText()).isEmpty()) {
-            txtEmail.setText("Correo electronico");
-            txtEmail.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
-            txtPhoneNumber.setText("Telefono");
-            txtPhoneNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
-            txtBirthDate.setText("Fecha de nacimiento");
-            txtBirthDate.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPassword.getText()).isEmpty()) {
-            txtPassword.setText("Contraseña");
-            txtPassword.setForeground(Color.BLACK);
-        }
+        handleTextFieldMousePressed(txtIdNumber, "Cedula");
     }//GEN-LAST:event_txtIdNumberMousePressed
 
     private void txtNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameMousePressed
-        if (txtName.getText().equals("Nombre")) {
-            txtName.setText("");
-            txtName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtId.getText()).isEmpty()) {
-            txtId.setText("ID");
-            txtId.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtLastName.getText()).isEmpty()) {
-            txtLastName.setText("Apellido");
-            txtLastName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
-            txtIdNumber.setText("Cedula");
-            txtIdNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtEmail.getText()).isEmpty()) {
-            txtEmail.setText("Correo electronico");
-            txtEmail.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
-            txtPhoneNumber.setText("Telefono");
-            txtPhoneNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
-            txtBirthDate.setText("Fecha de nacimiento");
-            txtBirthDate.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPassword.getText()).isEmpty()) {
-            txtPassword.setText("Contraseña");
-            txtPassword.setForeground(Color.BLACK);
-        }
+        handleTextFieldMousePressed(txtName, "Nombre");
     }//GEN-LAST:event_txtNameMousePressed
 
     private void txtLastNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLastNameMousePressed
-        if (txtLastName.getText().equals("Apellido")) {
-            txtLastName.setText("");
-            txtLastName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtId.getText()).isEmpty()) {
-            txtId.setText("ID");
-            txtId.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtName.getText()).isEmpty()) {
-            txtName.setText("Nombre");
-            txtName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
-            txtIdNumber.setText("Cedula");
-            txtIdNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtEmail.getText()).isEmpty()) {
-            txtEmail.setText("Correo electronico");
-            txtEmail.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
-            txtPhoneNumber.setText("Telefono");
-            txtPhoneNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
-            txtBirthDate.setText("Fecha de nacimiento");
-            txtBirthDate.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPassword.getText()).isEmpty()) {
-            txtPassword.setText("Contraseña");
-            txtPassword.setForeground(Color.BLACK);
-        }
+        handleTextFieldMousePressed(txtLastName, "Apellido");
     }//GEN-LAST:event_txtLastNameMousePressed
 
     private void btnRegisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseEntered
@@ -1241,43 +1127,8 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void txtIdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdMousePressed
-        if (txtId.getText().equals("ID")) {
-            txtId.setText("");
-            txtId.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtLastName.getText()).isEmpty()) {
-            txtLastName.setText("Apellidos");
-            txtLastName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtName.getText()).isEmpty()) {
-            txtName.setText("Nombre");
-            txtName.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
-            txtIdNumber.setText("Cedula");
-            txtIdNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtEmail.getText()).isEmpty()) {
-            txtEmail.setText("Correo electronico");
-            txtEmail.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
-            txtPhoneNumber.setText("Telefono");
-            txtPhoneNumber.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
-            txtBirthDate.setText("Fecha de nacimiento");
-            txtBirthDate.setForeground(Color.BLACK);
-        }
-        if (String.valueOf(txtPassword.getText()).isEmpty()) {
-            txtPassword.setText("Contraseña");
-            txtPassword.setForeground(Color.BLACK);
-        }
+        handleTextFieldMousePressed(txtId, "ID");
     }//GEN-LAST:event_txtIdMousePressed
-
-    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
-        this.ctah.searchEvents(txtEventName, txtLocationName, ScrollPane, boxCategory);
-    }//GEN-LAST:event_btnFilterActionPerformed
 
     private void txtEventNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEventNameMousePressed
         if (txtEventName.getText().equals("Eventos")) {
@@ -1309,7 +1160,23 @@ public class mainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_boxCategoryActionPerformed
 
-    private void btnInfoWeatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoWeatherActionPerformed
+    private void btnEnterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseEntered
+        btnEnter.setBackground(new java.awt.Color(163, 226, 243));
+    }//GEN-LAST:event_btnEnterMouseEntered
+
+    private void btnEnterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseExited
+       btnEnter.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_btnEnterMouseExited
+
+    private void btnEnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseClicked
+        this.ctah.searchEvents(txtEventName, txtLocationName, ScrollPane, boxCategory);
+    }//GEN-LAST:event_btnEnterMouseClicked
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+
+    private void btnWeatherInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWeatherInfoMouseClicked
         String locationName = txtLocationName.getText();
 
         JSONObject weatherJSON = OpenWeatherMapAPI.callWeatherAPI(locationName);
@@ -1327,7 +1194,15 @@ public class mainView extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Error al obtener información del clima.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnInfoWeatherActionPerformed
+    }//GEN-LAST:event_btnWeatherInfoMouseClicked
+
+    private void btnWeatherInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWeatherInfoMouseEntered
+        btnWeatherInfo.setBackground(new java.awt.Color(163, 226, 243));
+    }//GEN-LAST:event_btnWeatherInfoMouseEntered
+
+    private void btnWeatherInfoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWeatherInfoMouseExited
+        btnWeatherInfo.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_btnWeatherInfoMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
@@ -1341,18 +1216,18 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel SideBar;
     private javax.swing.JPanel barPane;
     private javax.swing.JComboBox<String> boxCategory;
-    private javax.swing.JButton btnCalendarBegin;
-    private javax.swing.JButton btnCalendarFinal;
     private javax.swing.JPanel btnDelete;
     private javax.swing.JPanel btnEdit;
-    private javax.swing.JButton btnFilter;
-    private javax.swing.JButton btnInfoWeather;
+    private javax.swing.JPanel btnEnter;
     private javax.swing.JLabel btnRegis;
     private javax.swing.JLabel btnRegis1;
     private javax.swing.JLabel btnRegis2;
     private javax.swing.JLabel btnRegis3;
     private javax.swing.JPanel btnSave;
     private javax.swing.JPanel btnSave2;
+    private javax.swing.JPanel btnWeatherInfo;
+    private com.toedter.calendar.JDateChooser dateEnter;
+    private com.toedter.calendar.JDateChooser dateExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPFilters;
@@ -1361,17 +1236,18 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel lbWeatherInfo;
     private javax.swing.JLabel lblBackgroundFilter;
-    private javax.swing.JLabel lblBeginDate;
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblBooking;
     private javax.swing.JLabel lblCalendar;
     private javax.swing.JLabel lblCategoryImage;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEnterDate;
     private javax.swing.JLabel lblEventImages;
     private javax.swing.JLabel lblEventImages1;
+    private javax.swing.JLabel lblExitDate;
     private javax.swing.JLabel lblFilterBackground;
-    private javax.swing.JLabel lblFinalDate1;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblIdNumber;
     private javax.swing.JLabel lblLastName;
@@ -1389,21 +1265,23 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblSave3;
     private javax.swing.JLabel lblSerch;
     private javax.swing.JLabel lblSerchEvent;
+    private javax.swing.JLabel lblSerchPlace;
     private javax.swing.JLabel lblUser;
     private javax.swing.JLabel lblUser1;
+    private javax.swing.JLabel lblWeatherImage;
     private javax.swing.JPanel pnBooking;
     private javax.swing.JPanel pnCategory;
+    private javax.swing.JPanel pnEnterDate;
     private javax.swing.JPanel pnEvents;
+    private javax.swing.JPanel pnExitDate;
     private javax.swing.JPanel pnLocation;
     private javax.swing.JPanel pnProfile;
     private javax.swing.JPanel pnSerchEvent;
     private javax.swing.JSeparator separator1;
     private javax.swing.JSeparator separator2;
-    private javax.swing.JTextField txtBeginDate;
     private javax.swing.JTextField txtBirthDate;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEventName;
-    private javax.swing.JTextField txtFinalDate;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdNumber;
     private javax.swing.JTextField txtLastName;

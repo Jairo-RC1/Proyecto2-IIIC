@@ -20,7 +20,7 @@ public class APIHandler {
 
     private static final String MAIN_URL = "https://api.content.tripadvisor.com/api/v1/location/search";
     private static final String LOCATION_URL = "https://api.content.tripadvisor.com/api/v1/";
-    private static final String API_KEY = "4BB0E403299542FEB3BF8DEB5EF58051";
+    private static final String API_KEY = "A65E329C442347F9B840D61B29879651";
     HttpURLConnection connection = null;
 
     public List<Event> findEvents(String name, String location, String category) throws Exception {
@@ -80,7 +80,7 @@ public class APIHandler {
     public List<String> getImagesApi(int id) throws Exception {
         List<String> imageUrls = new ArrayList<>();
 
-        String endpoint = "location/" + id + "/photos?key=4BB0E403299542FEB3BF8DEB5EF58051&language=en";
+        String endpoint = "location/" + id + "/photos?key=A65E329C442347F9B840D61B29879651&language=en";
         URL url = new URL(LOCATION_URL + endpoint);
         System.out.println(url);
 
