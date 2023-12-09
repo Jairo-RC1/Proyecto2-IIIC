@@ -11,6 +11,7 @@ import controller.ctrlApiHandler;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.json.JSONObject;
 
 public class mainView extends javax.swing.JFrame {
 
@@ -147,6 +148,7 @@ public class mainView extends javax.swing.JFrame {
         pnCategory = new javax.swing.JPanel();
         boxCategory = new javax.swing.JComboBox<>();
         lblCategoryImage = new javax.swing.JLabel();
+        btnInfoWeather = new javax.swing.JButton();
         lblBackgroundFilter = new javax.swing.JLabel();
         ScrollPane = new javax.swing.JScrollPane();
         barPane = new javax.swing.JPanel();
@@ -716,6 +718,14 @@ public class mainView extends javax.swing.JFrame {
         pnCategory.add(lblCategoryImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
 
         jPFilters.add(pnCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 190, 40));
+
+        btnInfoWeather.setText("Información del clima");
+        btnInfoWeather.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInfoWeatherActionPerformed(evt);
+            }
+        });
+        jPFilters.add(btnInfoWeather, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, -1, -1));
 
         lblBackgroundFilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/fondoTravel1.jpg"))); // NOI18N
         jPFilters.add(lblBackgroundFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 820, 230));
@@ -1299,6 +1309,26 @@ public class mainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_boxCategoryActionPerformed
 
+    private void btnInfoWeatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoWeatherActionPerformed
+        String locationName = txtLocationName.getText();
+
+        JSONObject weatherJSON = OpenWeatherMapAPI.callWeatherAPI(locationName);
+
+        if (weatherJSON != null) {
+            String jsonString = weatherJSON.toString(); // Convertir JSONObject a String
+
+            WeatherInfo weatherInfo = OpenWeatherMapAPI.parseWeatherJSON(jsonString, locationName);
+
+            if (weatherInfo != null) {
+                OpenWeatherMapAPI.displayWeatherInfo(weatherInfo);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al obtener información del clima.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al obtener información del clima.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnInfoWeatherActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
     private javax.swing.JPanel DashBoard;
@@ -1316,6 +1346,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel btnDelete;
     private javax.swing.JPanel btnEdit;
     private javax.swing.JButton btnFilter;
+    private javax.swing.JButton btnInfoWeather;
     private javax.swing.JLabel btnRegis;
     private javax.swing.JLabel btnRegis1;
     private javax.swing.JLabel btnRegis2;

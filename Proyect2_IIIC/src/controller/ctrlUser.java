@@ -166,60 +166,7 @@ public class ctrlUser {
 
         return true;
     }
-
-    /*public void updateUser(JTextField idNumber, JTextField name, JTextField lastName, JTextField email, JTextField phoneNumber, JTextField txtBirthDate, JTextField password) {
-        validation validator = new validation();
-
-        // Obtener los valores de los campos de texto
-        String nameText = name.getText();
-        String lastNameText = lastName.getText();
-        String idNumberText = idNumber.getText();
-        String emailText = email.getText();
-        String phoneNumberText = phoneNumber.getText();
-        String passwordText = password.getText();
-        String birthDateText = txtBirthDate.getText();
-
-        // Validaciones para idNumber, name, lastName, email, phoneNumber
-        if (!validator.validateID(idNumberText)) {
-            JOptionPane.showMessageDialog(null, "Número de cédula no válido. Debe seguir el formato correcto.");
-            return; // Detiene el proceso si no es válido
-        }
-
-        if (!(validator.validateABCWithSpaces(nameText) && validator.validateABCWithSpaces(lastNameText))) {
-            JOptionPane.showMessageDialog(null, "Nombre o Apellido no válido");
-            return; // Detiene el proceso si no son válidos
-        }
-
-        if (!validator.validateMail(emailText)) {
-            JOptionPane.showMessageDialog(null, "Correo electrónico no válido. Debe tener un formato válido.");
-            return; // Detiene el proceso si no es válido
-        }
-
-        if (!validator.validatePhone(phoneNumberText)) {
-            JOptionPane.showMessageDialog(null, "Número de teléfono no válido. Debe contener solo números.");
-            return; // Detiene el proceso si no es válido
-        }
-
-        // Validar el formato de la fecha de nacimiento
-        if (!validator.validateDate(birthDateText)) {
-            JOptionPane.showMessageDialog(null, "Fecha de nacimiento no válida. Debe tener el formato aaaa-MM-dd.");
-            return;
-        }
-
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date flowDate = dateFormat.parse(birthDateText);
-            // Crear el objeto User con los datos validados
-            user user = new user(this.id, Integer.parseInt(idNumberText), nameText, lastNameText, flowDate, emailText, Integer.parseInt(phoneNumberText), passwordText);
-
-            // Llamar al método de actualización en el DAO
-            dao.updateUser(user);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error de formato en algún campo");
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Error en el formato de fecha.");
-        }
-    }*/
+    
     public void deleteUser() {
         dao.deleteUser(this.id);
     }
