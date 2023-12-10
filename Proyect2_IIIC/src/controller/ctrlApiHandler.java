@@ -1,4 +1,3 @@
-
 package controller;
 
 import java.util.ArrayList;
@@ -13,14 +12,12 @@ import model.APIHandler;
 import model.event;
 import model.place;
 import view.ShowAPI;
+import view.mainView;
 
-/**
- *
- * @author jefry
- */
 public class ctrlApiHandler {
+
     private APIHandler api = new APIHandler();
-    private place place = new place(); 
+    private place place = new place();
     private List<event> events;
 
     public ctrlApiHandler() {
@@ -28,22 +25,22 @@ public class ctrlApiHandler {
         this.events = new ArrayList<>();
     }
 
-    public void searchEvents(JTextField name, JTextField ubiField, JScrollPane scroll, JComboBox type) {
+    public void searchEvents(JTextField name, JTextField ubiField, JScrollPane scroll, JComboBox type, mainView user) {
         try {
             events = api.findEvents(name.getText(), ubiField.getText(), type.getSelectedItem().toString());
-            displayEvents(scroll);
+            displayEvents(scroll, user);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error buscando eventos: " + e.getMessage());
         }
     }
 
-    public void displayEvents(JScrollPane scrollPane) {
+    public void displayEvents(JScrollPane scrollPane, mainView user) {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         for (event event : events) {
             try {
-                ShowAPI eventPanel = new ShowAPI(event, api);
+                ShowAPI eventPanel = new ShowAPI(event, api,user);
                 mainPanel.add(eventPanel);
             } catch (Exception e) {
                 System.out.println("Error mostrando el evento: " + e.getMessage());

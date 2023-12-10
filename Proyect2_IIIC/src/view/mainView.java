@@ -10,6 +10,8 @@ import model.*;
 import controller.ctrlApiHandler;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.JTextField;
 import org.json.JSONObject;
@@ -18,17 +20,23 @@ public class mainView extends javax.swing.JFrame {
 
     private user currentUser;
     ctrlUser ctu = new ctrlUser();
+    ctrlReservation ctr = new ctrlReservation();
     ctrlApiHandler ctah = new ctrlApiHandler();
-
+    placeDAO placeDAO = new placeDAO();
+    eventDAO eventDAO = new eventDAO();
+    private ShowAPI showAPI;
 
     public mainView() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         FlatIntelliJLaf.setup();
+        this.currentUser = currentUser;
     }
-    
-    
+
+    public void setShowAPI(ShowAPI showAPI) {
+        this.showAPI = showAPI;
+    }
 
     public Date parseDate(String dateString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -40,12 +48,41 @@ public class mainView extends javax.swing.JFrame {
         }
         return parsedDate;
     }
-    
-    
 
     public void setUserData(user currentUser) {
         this.currentUser = currentUser;
         ctu.loadUserDataIntoFields(txtId, txtIdNumber, txtName, txtLastName, txtBirthDate, txtEmail, txtPhoneNumber, txtPassword, currentUser);
+    }
+
+    public void actualizarFecha(int idEvent) {
+        // Get the current date and time
+        LocalDateTime fechaActual = LocalDateTime.now();
+
+        // Format the date as a string in the desired format
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String fechaFormateada = fechaActual.format(formato);
+        txtDateReservation.setText(fechaFormateada);
+        txtCodeReservation.setText(String.valueOf(idEvent));
+        txtUserReservation.setText(currentUser.getName());
+    }
+
+    /*public void getJpReservations() {
+        tabPanels.setSelectedIndex(1);
+    }*/
+    public void setEventDetails(event event) {
+        try {
+            eventDAO.createEvent(event);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al insertar el evento en la base de datos: " + e.toString());
+        }
+    }
+
+    public void setPlaceDetails(place place) {
+        try {
+            placeDAO.createPlace(place);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al insertar el lugar en la base de datos: " + e.toString());
+        }
     }
 
     public void updateUser() {
@@ -103,6 +140,17 @@ public class mainView extends javax.swing.JFrame {
         lblOptions1 = new javax.swing.JLabel();
         Events = new javax.swing.JPanel();
         pnBooking = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtCodeReservation = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtUserReservation = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtDateReservation = new javax.swing.JTextField();
+        btnConfirm = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblReservation = new javax.swing.JTable();
         pnProfile = new javax.swing.JPanel();
         jPaneMain = new javax.swing.JPanel();
         txtBirthDate = new javax.swing.JTextField();
@@ -155,7 +203,7 @@ public class mainView extends javax.swing.JFrame {
         lbWeatherInfo = new javax.swing.JLabel();
         lblWeatherImage = new javax.swing.JLabel();
         pnQuantity = new javax.swing.JPanel();
-        spQuantityPeolple = new javax.swing.JSpinner();
+        spQuantityPeopel = new javax.swing.JSpinner();
         lblQuantityImage = new javax.swing.JLabel();
         lblBackgroundFilter = new javax.swing.JLabel();
         ScrollPane = new javax.swing.JScrollPane();
@@ -331,6 +379,61 @@ public class mainView extends javax.swing.JFrame {
 
         pnBooking.setBackground(new java.awt.Color(255, 255, 255));
         pnBooking.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Reservación");
+        pnBooking.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Fecha de Reservación:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
+
+        txtCodeReservation.setEditable(false);
+        jPanel1.add(txtCodeReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 150, 30));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText(" Usuario:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        txtUserReservation.setEditable(false);
+        jPanel1.add(txtUserReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 150, 30));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Cod Evento:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        txtDateReservation.setEditable(false);
+        jPanel1.add(txtDateReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 180, 30));
+
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, -1, 40));
+
+        pnBooking.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 760, 140));
+
+        tblReservation.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Usuario", "Fecha", "Cantidad", "Evento"
+            }
+        ));
+        jScrollPane1.setViewportView(tblReservation);
+
+        pnBooking.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 770, 280));
+
         Events.add(pnBooking, "card3");
 
         pnProfile.setBackground(new java.awt.Color(255, 255, 255));
@@ -712,7 +815,7 @@ public class mainView extends javax.swing.JFrame {
         lblEnterDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/dateStar.png"))); // NOI18N
         pnDate.add(lblEnterDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
 
-        pnLookFor.add(pnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 210, 65));
+        pnLookFor.add(pnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 210, 65));
 
         btnEnter.setBackground(new java.awt.Color(255, 255, 255));
         btnEnter.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -781,9 +884,9 @@ public class mainView extends javax.swing.JFrame {
         pnQuantity.setOpaque(false);
         pnQuantity.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        spQuantityPeolple.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        spQuantityPeolple.setPreferredSize(new java.awt.Dimension(100, 30));
-        pnQuantity.add(spQuantityPeolple, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 19, 110, -1));
+        spQuantityPeopel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        spQuantityPeopel.setPreferredSize(new java.awt.Dimension(100, 30));
+        pnQuantity.add(spQuantityPeopel, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 19, 110, -1));
 
         lblQuantityImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/grupoPeople.png"))); // NOI18N
         pnQuantity.add(lblQuantityImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, 30));
@@ -856,54 +959,53 @@ public class mainView extends javax.swing.JFrame {
     private void resetPanelColor(JPanel panel) {
         panel.setBackground(new java.awt.Color(163, 226, 243));
     }
-    
+
     private void handleTextFieldMousePressed(JTextField textField, String defaultText) {
-    if (textField.getText().equals(defaultText)) {
-        textField.setText("");
-        textField.setForeground(Color.BLACK);
-    }
+        if (textField.getText().equals(defaultText)) {
+            textField.setText("");
+            textField.setForeground(Color.BLACK);
+        }
 
-    if (String.valueOf(txtId.getText()).isEmpty()) {
-        txtId.setText("ID");
-        txtId.setForeground(Color.BLACK);
-    }
+        if (String.valueOf(txtId.getText()).isEmpty()) {
+            txtId.setText("ID");
+            txtId.setForeground(Color.BLACK);
+        }
 
-    if (String.valueOf(txtName.getText()).isEmpty()) {
-        txtName.setText("Nombre");
-        txtName.setForeground(Color.BLACK);
-    }
+        if (String.valueOf(txtName.getText()).isEmpty()) {
+            txtName.setText("Nombre");
+            txtName.setForeground(Color.BLACK);
+        }
 
-    if (String.valueOf(txtLastName.getText()).isEmpty()) {
-        txtLastName.setText("Apellido");
-        txtLastName.setForeground(Color.BLACK);
-    }
+        if (String.valueOf(txtLastName.getText()).isEmpty()) {
+            txtLastName.setText("Apellido");
+            txtLastName.setForeground(Color.BLACK);
+        }
 
-    if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
-        txtIdNumber.setText("Cedula");
-        txtIdNumber.setForeground(Color.BLACK);
-    }
+        if (String.valueOf(txtIdNumber.getText()).isEmpty()) {
+            txtIdNumber.setText("Cedula");
+            txtIdNumber.setForeground(Color.BLACK);
+        }
 
-    if (String.valueOf(txtEmail.getText()).isEmpty()) {
-        txtEmail.setText("Correo electronico");
-        txtEmail.setForeground(Color.BLACK);
-    }
+        if (String.valueOf(txtEmail.getText()).isEmpty()) {
+            txtEmail.setText("Correo electronico");
+            txtEmail.setForeground(Color.BLACK);
+        }
 
-    if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
-        txtPhoneNumber.setText("Telefono");
-        txtPhoneNumber.setForeground(Color.BLACK);
-    }
+        if (String.valueOf(txtPhoneNumber.getText()).isEmpty()) {
+            txtPhoneNumber.setText("Telefono");
+            txtPhoneNumber.setForeground(Color.BLACK);
+        }
 
-    if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
-        txtBirthDate.setText("Fecha de nacimiento");
-        txtBirthDate.setForeground(Color.BLACK);
-    }
+        if (String.valueOf(txtBirthDate.getText()).isEmpty()) {
+            txtBirthDate.setText("Fecha de nacimiento");
+            txtBirthDate.setForeground(Color.BLACK);
+        }
 
-    if (String.valueOf(txtPassword.getText()).isEmpty()) {
-        txtPassword.setText("Contraseña");
-        txtPassword.setForeground(Color.BLACK);
+        if (String.valueOf(txtPassword.getText()).isEmpty()) {
+            txtPassword.setText("Contraseña");
+            txtPassword.setForeground(Color.BLACK);
+        }
     }
-}
-
 
     int x = 250;
     private void lblOptions1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOptions1MouseClicked
@@ -1013,7 +1115,7 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPhoneNumberMousePressed
 
     private void txtPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneNumberActionPerformed
-        
+
     }//GEN-LAST:event_txtPhoneNumberActionPerformed
 
     private void txtEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailMousePressed
@@ -1172,11 +1274,11 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnterMouseEntered
 
     private void btnEnterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseExited
-       btnEnter.setBackground(new java.awt.Color(255,255,255));
+        btnEnter.setBackground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_btnEnterMouseExited
 
     private void btnEnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseClicked
-        this.ctah.searchEvents(txtEventName, txtLocationName, ScrollPane, boxCategory);
+        this.ctah.searchEvents(txtEventName, txtLocationName, ScrollPane, boxCategory, this);
     }//GEN-LAST:event_btnEnterMouseClicked
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
@@ -1208,8 +1310,27 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnWeatherInfoMouseEntered
 
     private void btnWeatherInfoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWeatherInfoMouseExited
-        btnWeatherInfo.setBackground(new java.awt.Color(255,255,255));
+        btnWeatherInfo.setBackground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_btnWeatherInfoMouseExited
+
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        event selectedEvent = showAPI.getSelectedEvent();
+        place selectedPlace = showAPI.getSelectedPlace();
+        int option = JOptionPane.showConfirmDialog(this, "¿Deseas reservar el evento '" + selectedEvent.getName() + "'?", "Confirmar Reserva", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            // Set event and venue details in the database
+            setPlaceDetails(selectedPlace);
+            int generatedPlaceId = placeDAO.getIDPlaces(selectedPlace.getName());
+            selectedEvent.setPlaceId(generatedPlaceId);
+
+            setEventDetails(selectedEvent);
+            int generatedEventId = eventDAO.getIDEvents(selectedEvent.getName());
+
+            Integer quantity = (Integer) spQuantityPeopel.getValue();
+            ctr.createReservation(txtUserReservation, txtDateReservation, quantity, generatedEventId);
+        } else {
+        }
+    }//GEN-LAST:event_btnConfirmActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
@@ -1223,6 +1344,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel SideBar;
     private javax.swing.JPanel barPane;
     private javax.swing.JComboBox<String> boxCategory;
+    private javax.swing.JButton btnConfirm;
     private javax.swing.JPanel btnDelete;
     private javax.swing.JPanel btnEdit;
     private javax.swing.JPanel btnEnter;
@@ -1235,8 +1357,14 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel btnWeatherInfo;
     private com.toedter.calendar.JDateChooser dateEnter;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPaneMain;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -1285,8 +1413,11 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel pnSerchEvent;
     private javax.swing.JSeparator separator1;
     private javax.swing.JSeparator separator2;
-    private javax.swing.JSpinner spQuantityPeolple;
+    private javax.swing.JSpinner spQuantityPeopel;
+    private javax.swing.JTable tblReservation;
     private javax.swing.JTextField txtBirthDate;
+    private javax.swing.JTextField txtCodeReservation;
+    private javax.swing.JTextField txtDateReservation;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEventName;
     private javax.swing.JTextField txtId;
@@ -1296,6 +1427,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtUserReservation;
     // End of variables declaration//GEN-END:variables
 
 }

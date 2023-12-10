@@ -39,7 +39,7 @@ public class event {
         this.placeId = placeId;
     }
 
-    public event(String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
+    public event(String name, String description, Date date, String address, String city,int postalCode,  double price, int room, int placeId) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -49,7 +49,9 @@ public class event {
         this.price = price;
         this.room = room;
         this.placeId = placeId;
-    }   
+    }
+
+     
 
     public String getCity() {
         return city;

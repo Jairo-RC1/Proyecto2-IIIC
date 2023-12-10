@@ -9,14 +9,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.place;
-import model.pleaceDAO;
+import model.placeDAO;
 
 /**
  *
  * @author jefry
  */
 public class ctrlPlace {
-    pleaceDAO dao = new pleaceDAO();
+    placeDAO dao = new placeDAO();
     int id;
 
     public void loadDataPlace(JTable table) {
@@ -25,7 +25,7 @@ public class ctrlPlace {
         TableRowSorter<TableModel> order = new TableRowSorter<TableModel>(model);
         table.setRowSorter(order);
         model.setRowCount(0);
-        List<place> place = dao.readPleaces();
+        List<place> place = dao.readPlaces();
         for (place places : place) {
             Object[] row = {places.getId(), places.getName(), places.getAddress(), places.getCity(), places.getPostalCode(), places.getLatitude(), places.getLongitude(), places.getTripAdvisorLink()};
             model.addRow(row);
@@ -34,7 +34,7 @@ public class ctrlPlace {
 
     public void addPlace(JTextField name, JTextField address, JTextField city, JTextField postalCode, JTextField latitude, JTextField longitude, JTextField tripAdvisorLink) {
         try {
-            this.dao.createPleace(new place(Integer.parseInt(postalCode.getText()), name.getText(), address.getText(), city.getText(),latitude.getText(), longitude.getText(), tripAdvisorLink.getText()));
+            this.dao.createPlace(new place(Integer.parseInt(postalCode.getText()), name.getText(), address.getText(), city.getText(),latitude.getText(), longitude.getText(), tripAdvisorLink.getText()));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al agregar el lugar: " + e.toString());

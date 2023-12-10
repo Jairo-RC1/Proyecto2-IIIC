@@ -17,10 +17,7 @@ import model.reservation;
 import model.reservationDAO;
 import view.ShowAPI;
 
-/**
- *
- * @author jefry
- */
+
 
 public class ctrlReservation {
 
@@ -43,7 +40,7 @@ public class ctrlReservation {
         }
     }
 
-    public void addReservation(JTextField userName, JTextField date, int quantity, int eventId) {
+    public void createReservation(JTextField userName, JTextField date, int quantity, int eventId) {
         if (!validateName(userName)) {
             return;
         }
@@ -75,7 +72,7 @@ public class ctrlReservation {
     }
     // Delete the role with the specified ID from the data source
 
-    public void deleteRol() {
+    public void deleteReservation() {
         this.dao.deleteReservation(this.id);
     }
     // Set the text content of each JTextField to an empty string

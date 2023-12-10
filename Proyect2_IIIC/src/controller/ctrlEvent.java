@@ -15,10 +15,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.event;
 
-/**
- *
- * @author JRS
- */
 public class ctrlEvent {
 
     private eventDAO eventDAO;
@@ -43,19 +39,20 @@ public class ctrlEvent {
     }
 
     public void addEvent(JTextField name, JTextField description, JTextField utilDate, JTextField address,
-            JTextField postalCode, JTextField city, JTextField price, JTextField room, JTextField placeId) {
+            JTextField city, JTextField postalCode, JTextField price, JTextField room, JTextField placeId) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(utilDate.getText());
-            this.eventDAO.createEvent(new event(0, name.getText(), description.getText(), date, address.getText(),city.getText(),
-                    Integer.parseInt(postalCode.getText()),  Double.parseDouble(price.getText()),
+            this.eventDAO.createEvent(new event( name.getText(), description.getText(), date, address.getText(), city.getText(),
+                    Integer.parseInt(postalCode.getText()), Double.parseDouble(price.getText()),
                     Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento agregado con éxito");
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error en el formato de datos: " + e.toString());
         } catch (ParseException ex) {
-            Logger.getLogger(ctrlEvent.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error de formato en la fecha, el formato correcto es año-mes-día (yyyy-MM-dd): " + ex.toString());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al agregar el evento: " + e.toString());
         }
+         this.clearFields(name, description, utilDate, address, city, postalCode, price, room, placeId);
     }
 
     public void updateEvent(JTextField name, JTextField description, JTextField utilDate, JTextField address,
@@ -64,7 +61,7 @@ public class ctrlEvent {
         try {
             Date date = dateFormat.parse(utilDate.getText());
             this.eventDAO.updateEvent(new event(this.id, name.getText(), description.getText(), date,
-                    address.getText(), city.getText(), Integer.parseInt(postalCode.getText()),  Double.parseDouble(price.getText()),
+                    address.getText(), city.getText(), Integer.parseInt(postalCode.getText()), Double.parseDouble(price.getText()),
                     Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento actualizado con éxito");
         } catch (NumberFormatException e) {
@@ -72,6 +69,7 @@ public class ctrlEvent {
         } catch (ParseException ex) {
             Logger.getLogger(ctrlEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.clearFields(name, description, utilDate, address, city, postalCode, price, room, placeId);
     }
 
     public void deleteEvent() {
@@ -100,12 +98,13 @@ public class ctrlEvent {
         }
     }
 
-    public void clearFields(JTextField name, JTextField description, JTextField date, JTextField address,
-            JTextField postalCode, JTextField price, JTextField room, JTextField placeId) {
+    public void clearFields(JTextField name, JTextField description, JTextField date, JTextField address, 
+            JTextField city, JTextField postalCode, JTextField price, JTextField room, JTextField placeId) {
         name.setText("");
         description.setText("");
         date.setText("");
         address.setText("");
+        city.setText("");
         postalCode.setText("");
         price.setText("");
         room.setText("");

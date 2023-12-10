@@ -166,9 +166,29 @@ public class ctrlUser {
 
         return true;
     }
-    
+
     public void deleteUser() {
         dao.deleteUser(this.id);
+    }
+
+    public void selectedRow(JTable table, JTextField IDNumber, JTextField name, JTextField lastName, JTextField birthDate, JTextField email, JTextField phoneNumber, JTextField password) {
+        try {
+            int row = table.getSelectedRow();
+            if (row >= 0) {
+                this.id = Integer.parseInt(table.getValueAt(row, 0).toString());
+                IDNumber.setText(table.getValueAt(row, 1).toString());
+                name.setText(table.getValueAt(row, 2).toString());
+                lastName.setText(table.getValueAt(row, 3).toString());
+                birthDate.setText(table.getValueAt(row, 4).toString());
+                email.setText(table.getValueAt(row, 5).toString());
+                phoneNumber.setText(table.getValueAt(row, 6).toString());
+                password.setText(table.getValueAt(row, 7).toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
+        }
     }
 
     public void clearFields(JTextField name, JTextField idNumber, JTextField lastName, JTextField email, JTextField birthDate, JTextField phoneNumber, JTextField password) {

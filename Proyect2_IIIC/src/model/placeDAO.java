@@ -11,24 +11,25 @@ import javax.swing.JOptionPane;
  *
  * @author jefry
  */
-public class pleaceDAO {
+public class placeDAO {
 
-    public pleaceDAO() {
+    public placeDAO() {
 
     }
 
     // Method to save a new place in the database
-    public void createPleace(place pleace) {
+    public void createPlace(place place) {
         DBConnectionJava db = new DBConnectionJava();
-        String consultaSQL = "INSERT INTO pleaces (name, address, city, postal_code, latitude, longitude, tripAdvisor_link) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String consultaSQL = "INSERT INTO places (name, address, city, postal_code, latitude, longitude, tripAdvisor_link) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setString(1, pleace.getName());
-            ps.setString(2, pleace.getAddress());
-            ps.setInt(3, pleace.getPostalCode());
-            ps.setString(4, pleace.getLatitude());
-            ps.setString(5, pleace.getLongitude());
-            ps.setString(6, pleace.getTripAdvisorLink());
+            ps.setString(1, place.getName());
+            ps.setString(2, place.getAddress());
+            ps.setString(3, place.getCity());
+            ps.setInt(4, place.getPostalCode());
+            ps.setString(5, place.getLatitude());
+            ps.setString(6, place.getLongitude());
+            ps.setString(7, place.getTripAdvisorLink());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Se ha registrado su lugor de destino");
         } catch (SQLException e) {
@@ -39,7 +40,7 @@ public class pleaceDAO {
     }
 
 // Method to retrieve a list of all pleaces saved from the database
-    public List<place> readPleaces() {
+    public List<place> readPlaces() {
         DBConnectionJava db = new DBConnectionJava();
         List<place> pleaces = new ArrayList<>();
         String sql = "SELECT * FROM places";
@@ -70,7 +71,7 @@ public class pleaceDAO {
     public void updatePlace(place place) {
         DBConnectionJava db = new DBConnectionJava();
 
-        String consultaSQL = "UPDATE pleaces SET id=?, postalCode=?, name=?, address=?, city=?, latitude=?, longitude=? tripAdvisor_link=? WHERE id=?";
+        String consultaSQL = "UPDATE places SET name=?, address=?, city=?, postal_code=?, latitude=?, longitude=?, tripAdvisor_link=? WHERE id=?";
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
