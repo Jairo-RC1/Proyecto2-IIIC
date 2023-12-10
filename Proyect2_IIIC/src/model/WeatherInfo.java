@@ -1,42 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 /**
  *
  * @author jairo
  */
+// WeatherInfo class represents information about weather conditions at a specific location.
 public class WeatherInfo {
 
-    private String locationName;
-    private double latitude;
-    private double longitude;
-    private String weatherDescription;
-    private String temperature;
-    private String humidity;
-    private String feelsLike;
-    private int cloudiness;
-    private String windSpeed;
+    // Private fields to store various weather-related data.
+    private String locationName;        // Name of the location
+    private double latitude;            // Latitude of the location
+    private double longitude;           // Longitude of the location
+    private String weatherDescription;  // Description of the weather conditions
+    private String temperature;         // Temperature at the location
+    private String humidity;            // Humidity level at the location
+    private String feelsLike;           // "Feels like" temperature
+    private int cloudiness;             // Cloudiness percentage
+    private String windSpeed;           // Wind speed at the location
 
     public WeatherInfo(String locationName, double latitude, double longitude, String weatherDescription, String temperature, String humidity, String feelsLike, int cloudiness, String windSpeed) {
-        this.locationName = locationName;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.weatherDescription = weatherDescription;
-        this.temperature = temperature;
-        this.humidity = humidity;
-        this.feelsLike = feelsLike;
-        this.cloudiness = cloudiness;
-        this.windSpeed = windSpeed;
+
+        // Assigning the provided values to the corresponding attributes of the WeatherInfo object.
+        this.locationName = locationName; // String representing the name of the location.
+        this.latitude = latitude;//Double representing the latitude of the location.
+        this.longitude = longitude;//Double representing the longitude of the location.
+        this.weatherDescription = weatherDescription;//String describing the current weather conditions.
+        this.temperature = temperature;//String representing the temperature at the location.
+        this.humidity = humidity;//String representing the humidity level at the location.
+        this.feelsLike = feelsLike;//String representing the perceived temperature at the location.
+        this.cloudiness = cloudiness;//Integer representing the cloudiness percentage at the location.
+        this.windSpeed = windSpeed;//String representing the wind speed at the location.
     }
 
-    
-
+    // Default constructor for WeatherInfo class.
     public WeatherInfo() {
     }
 
+    // Getter and setter methods for locationName field.
     public String getLocationName() {
         return locationName;
     }
@@ -45,6 +45,7 @@ public class WeatherInfo {
         this.locationName = locationName;
     }
 
+    // Getter and setter methods for latitude field.
     public double getLatitude() {
         return latitude;
     }
@@ -53,6 +54,7 @@ public class WeatherInfo {
         this.latitude = latitude;
     }
 
+    // Getter and setter methods for longitude field.
     public double getLongitude() {
         return longitude;
     }
@@ -61,6 +63,7 @@ public class WeatherInfo {
         this.longitude = longitude;
     }
 
+    // Getter and setter methods for weatherDescription field.
     public String getWeatherDescription() {
         return weatherDescription;
     }
@@ -69,6 +72,7 @@ public class WeatherInfo {
         this.weatherDescription = weatherDescription;
     }
 
+    // Getter and setter methods for temperature field.
     public String getTemperature() {
         return temperature;
     }
@@ -77,6 +81,7 @@ public class WeatherInfo {
         this.temperature = temperature;
     }
 
+    // Getter and setter methods for humidity field.
     public String getHumidity() {
         return humidity;
     }
@@ -85,6 +90,7 @@ public class WeatherInfo {
         this.humidity = humidity;
     }
 
+    // Getter and setter methods for feelsLike field.
     public String getFeelsLike() {
         return feelsLike;
     }
@@ -93,6 +99,7 @@ public class WeatherInfo {
         this.feelsLike = feelsLike;
     }
 
+    // Getter and setter methods for cloudiness field.
     public int getCloudiness() {
         return cloudiness;
     }
@@ -101,6 +108,7 @@ public class WeatherInfo {
         this.cloudiness = cloudiness;
     }
 
+    // Getter and setter methods for windSpeed field.
     public String getWindSpeed() {
         return windSpeed;
     }
@@ -108,8 +116,4 @@ public class WeatherInfo {
     public void setWindSpeed(String windSpeed) {
         this.windSpeed = windSpeed;
     }
-    
-
-    
-
 }
