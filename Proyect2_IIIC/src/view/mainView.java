@@ -140,17 +140,23 @@ public class mainView extends javax.swing.JFrame {
         lblOptions1 = new javax.swing.JLabel();
         Events = new javax.swing.JPanel();
         pnBooking = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        txtCodeReservation = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lblTitleBooking = new javax.swing.JLabel();
+        pnFinishBooking = new javax.swing.JPanel();
+        pnUserBooking = new javax.swing.JPanel();
         txtUserReservation = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        lblUserImageBooking = new javax.swing.JLabel();
+        pnDateBooking = new javax.swing.JPanel();
         txtDateReservation = new javax.swing.JTextField();
-        btnConfirm = new javax.swing.JButton();
+        lblDateImageBooking = new javax.swing.JLabel();
+        pnCodEventBooking = new javax.swing.JPanel();
+        txtCodeReservation = new javax.swing.JTextField();
+        lblCodImageBooking = new javax.swing.JLabel();
+        btnFinishBooking = new javax.swing.JPanel();
+        lblfinsih = new javax.swing.JLabel();
+        lblCheckBooking = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblReservation = new javax.swing.JTable();
+        lblBackgroundBooking = new javax.swing.JLabel();
         pnProfile = new javax.swing.JPanel();
         jPaneMain = new javax.swing.JPanel();
         txtBirthDate = new javax.swing.JTextField();
@@ -194,9 +200,6 @@ public class mainView extends javax.swing.JFrame {
         pnCategory = new javax.swing.JPanel();
         boxCategory = new javax.swing.JComboBox<>();
         lblCategoryImage = new javax.swing.JLabel();
-        pnDate = new javax.swing.JPanel();
-        dateEnter = new com.toedter.calendar.JDateChooser();
-        lblEnterDate = new javax.swing.JLabel();
         btnEnter = new javax.swing.JPanel();
         lblSerchPlace = new javax.swing.JLabel();
         btnWeatherInfo = new javax.swing.JPanel();
@@ -380,47 +383,85 @@ public class mainView extends javax.swing.JFrame {
         pnBooking.setBackground(new java.awt.Color(255, 255, 255));
         pnBooking.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Reservación");
-        pnBooking.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
+        lblTitleBooking.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lblTitleBooking.setForeground(new java.awt.Color(0, 0, 0));
+        lblTitleBooking.setText("Reservación");
+        pnBooking.add(lblTitleBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnFinishBooking.setBackground(new java.awt.Color(255, 255, 255));
+        pnFinishBooking.setOpaque(false);
+        pnFinishBooking.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Fecha de Reservación:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
-
-        txtCodeReservation.setEditable(false);
-        jPanel1.add(txtCodeReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 150, 30));
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText(" Usuario:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        pnUserBooking.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4), "Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        pnUserBooking.setOpaque(false);
+        pnUserBooking.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtUserReservation.setEditable(false);
-        jPanel1.add(txtUserReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 150, 30));
+        txtUserReservation.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtUserReservation.setForeground(new java.awt.Color(0, 0, 0));
+        txtUserReservation.setOpaque(true);
+        pnUserBooking.add(txtUserReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 130, 30));
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Cod Evento:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        lblUserImageBooking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/user2 - Copy.png"))); // NOI18N
+        pnUserBooking.add(lblUserImageBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
+
+        pnFinishBooking.add(pnUserBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 190, 70));
+
+        pnDateBooking.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4), "Fecha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        pnDateBooking.setOpaque(false);
+        pnDateBooking.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtDateReservation.setEditable(false);
-        jPanel1.add(txtDateReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 180, 30));
+        txtDateReservation.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtDateReservation.setForeground(new java.awt.Color(0, 0, 0));
+        pnDateBooking.add(txtDateReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 130, 30));
 
-        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmActionPerformed(evt);
+        lblDateImageBooking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/calendar - Copy.png"))); // NOI18N
+        pnDateBooking.add(lblDateImageBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
+
+        pnFinishBooking.add(pnDateBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 190, 70));
+
+        pnCodEventBooking.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4), "Cod_Evento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        pnCodEventBooking.setOpaque(false);
+        pnCodEventBooking.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtCodeReservation.setEditable(false);
+        txtCodeReservation.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtCodeReservation.setForeground(new java.awt.Color(0, 0, 0));
+        pnCodEventBooking.add(txtCodeReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 120, 30));
+
+        lblCodImageBooking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/codigoQR.png"))); // NOI18N
+        pnCodEventBooking.add(lblCodImageBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
+
+        pnFinishBooking.add(pnCodEventBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 190, 70));
+
+        btnFinishBooking.setBackground(new java.awt.Color(255, 255, 255));
+        btnFinishBooking.setForeground(new java.awt.Color(255, 255, 255));
+        btnFinishBooking.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFinishBookingMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnFinishBookingMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFinishBookingMouseExited(evt);
             }
         });
-        jPanel1.add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, -1, 40));
+        btnFinishBooking.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnBooking.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 760, 140));
+        lblfinsih.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblfinsih.setForeground(new java.awt.Color(0, 0, 0));
+        lblfinsih.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblfinsih.setText("Finalizar");
+        btnFinishBooking.add(lblfinsih, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 120, 30));
+
+        lblCheckBooking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/check.png"))); // NOI18N
+        btnFinishBooking.add(lblCheckBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 30, 30));
+
+        pnFinishBooking.add(btnFinishBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 180, 50));
+
+        pnBooking.add(pnFinishBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 820, 180));
 
         tblReservation.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -432,7 +473,10 @@ public class mainView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblReservation);
 
-        pnBooking.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 770, 280));
+        pnBooking.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 770, 240));
+
+        lblBackgroundBooking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/celeste-blanco.jpg"))); // NOI18N
+        pnBooking.add(lblBackgroundBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 520));
 
         Events.add(pnBooking, "card3");
 
@@ -804,19 +848,6 @@ public class mainView extends javax.swing.JFrame {
 
         pnLookFor.add(pnCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 210, 50));
 
-        pnDate.setBackground(new java.awt.Color(255, 255, 255));
-        pnDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4), "Fecha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(39, 71, 96))); // NOI18N
-        pnDate.setOpaque(false);
-        pnDate.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        dateEnter.setBackground(new java.awt.Color(255, 255, 255));
-        pnDate.add(dateEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
-
-        lblEnterDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/dateStar.png"))); // NOI18N
-        pnDate.add(lblEnterDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
-
-        pnLookFor.add(pnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 210, 65));
-
         btnEnter.setBackground(new java.awt.Color(255, 255, 255));
         btnEnter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -891,7 +922,7 @@ public class mainView extends javax.swing.JFrame {
         lblQuantityImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/grupoPeople.png"))); // NOI18N
         pnQuantity.add(lblQuantityImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, 30));
 
-        pnLookFor.add(pnQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 210, 65));
+        pnLookFor.add(pnQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 210, 65));
 
         lblBackgroundFilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/fondoTravel1.jpg"))); // NOI18N
         lblBackgroundFilter.setOpaque(true);
@@ -1313,7 +1344,7 @@ public class mainView extends javax.swing.JFrame {
         btnWeatherInfo.setBackground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_btnWeatherInfoMouseExited
 
-    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+    private void btnFinishBookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinishBookingMouseClicked
         event selectedEvent = showAPI.getSelectedEvent();
         place selectedPlace = showAPI.getSelectedPlace();
         int option = JOptionPane.showConfirmDialog(this, "¿Deseas reservar el evento '" + selectedEvent.getName() + "'?", "Confirmar Reserva", JOptionPane.YES_NO_OPTION);
@@ -1330,7 +1361,15 @@ public class mainView extends javax.swing.JFrame {
             ctr.createReservation(txtUserReservation, txtDateReservation, quantity, generatedEventId);
         } else {
         }
-    }//GEN-LAST:event_btnConfirmActionPerformed
+    }//GEN-LAST:event_btnFinishBookingMouseClicked
+
+    private void btnFinishBookingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinishBookingMouseEntered
+        btnFinishBooking.setBackground(new java.awt.Color(163, 226, 243));
+    }//GEN-LAST:event_btnFinishBookingMouseEntered
+
+    private void btnFinishBookingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinishBookingMouseExited
+        btnFinishBooking.setBackground(new java.awt.Color(255, 255, 255));
+    }//GEN-LAST:event_btnFinishBookingMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
@@ -1344,10 +1383,10 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel SideBar;
     private javax.swing.JPanel barPane;
     private javax.swing.JComboBox<String> boxCategory;
-    private javax.swing.JButton btnConfirm;
     private javax.swing.JPanel btnDelete;
     private javax.swing.JPanel btnEdit;
     private javax.swing.JPanel btnEnter;
+    private javax.swing.JPanel btnFinishBooking;
     private javax.swing.JLabel btnRegis;
     private javax.swing.JLabel btnRegis1;
     private javax.swing.JLabel btnRegis2;
@@ -1355,28 +1394,25 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel btnSave;
     private javax.swing.JPanel btnSave2;
     private javax.swing.JPanel btnWeatherInfo;
-    private com.toedter.calendar.JDateChooser dateEnter;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPaneMain;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lbWeatherInfo;
+    private javax.swing.JLabel lblBackgroundBooking;
     private javax.swing.JLabel lblBackgroundFilter;
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblBooking;
     private javax.swing.JLabel lblCalendar;
     private javax.swing.JLabel lblCategoryImage;
+    private javax.swing.JLabel lblCheckBooking;
+    private javax.swing.JLabel lblCodImageBooking;
+    private javax.swing.JLabel lblDateImageBooking;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblEnterDate;
     private javax.swing.JLabel lblEventImages;
     private javax.swing.JLabel lblEventImages1;
     private javax.swing.JLabel lblFilterBackground;
@@ -1399,18 +1435,24 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblSerch;
     private javax.swing.JLabel lblSerchEvent;
     private javax.swing.JLabel lblSerchPlace;
+    private javax.swing.JLabel lblTitleBooking;
     private javax.swing.JLabel lblUser;
     private javax.swing.JLabel lblUser1;
+    private javax.swing.JLabel lblUserImageBooking;
     private javax.swing.JLabel lblWeatherImage;
+    private javax.swing.JLabel lblfinsih;
     private javax.swing.JPanel pnBooking;
     private javax.swing.JPanel pnCategory;
-    private javax.swing.JPanel pnDate;
+    private javax.swing.JPanel pnCodEventBooking;
+    private javax.swing.JPanel pnDateBooking;
     private javax.swing.JPanel pnEvents;
+    private javax.swing.JPanel pnFinishBooking;
     private javax.swing.JPanel pnLocation;
     private javax.swing.JPanel pnLookFor;
     private javax.swing.JPanel pnProfile;
     private javax.swing.JPanel pnQuantity;
     private javax.swing.JPanel pnSerchEvent;
+    private javax.swing.JPanel pnUserBooking;
     private javax.swing.JSeparator separator1;
     private javax.swing.JSeparator separator2;
     private javax.swing.JSpinner spQuantityPeopel;
