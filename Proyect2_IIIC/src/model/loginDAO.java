@@ -1,27 +1,24 @@
 package model;
 
-
-import java.util.List;
+import java.util.List;// Provides the List interface to store result sets.
 
 public class loginDAO {
 
-    userDAO dao = new userDAO();
+    userDAO dao = new userDAO(); // Creating an instance of the userDAO class for user data access
 
-   
-
-    // Método para autenticar y obtener los datos del usuario
+    // Method to authenticate and retrieve user data
     public user authenticateUser(String username, String password) {
-        user currentUser = null;
-        List<user> users = dao.readUserTxt(); // Llamada al método que obtiene los usuarios
+        user currentUser = null; // Initializing a variable to store the authenticated user
+        List<user> users = dao.readUserTxt(); // Calling the method to obtain the list of users from the userDAO
 
-        // Buscar al usuario por nombre de usuario y contraseña
+        // Searching for the user by username and password in the list of users
         for (user u : users) {
             if (u.getName().equals(username) && u.getPassword().equals(password)) {
-                currentUser = u;
-                break;
+                currentUser = u; // Assigning the found user to the currentUser variable
+                break; // Exiting the loop once the user is found
             }
         }
 
-        return currentUser;
+        return currentUser; // Returning the authenticated user (or null if not found)
     }
 }
