@@ -26,7 +26,7 @@ public class event {
     private String calificationUrlImages;
     private int locationId;
 
-    public event(int id, String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
+    public event(int id, String name, String description, Date date, String address, String city, int postalCode, double price, int room, int placeId) {
         this.id = id;
         this.name = name;
         this.description = description;

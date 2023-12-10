@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author jefry
  */
 public class reservationDAO {
-   public void create(reservation reservation) {
+   public void createReservation(reservation reservation) {
 
         DBConnectionJava db = new DBConnectionJava();
         String consultaSQL = "INSERT INTO reservations (user_name, date, quantity, event_id) VALUES (?, ?, ?, ?)";
@@ -58,7 +58,7 @@ public class reservationDAO {
         return reservation;
     }
    
-   public void update(reservation Reservation) {
+   public void updateReservation(reservation Reservation) {
 
         DBConnectionJava db = new DBConnectionJava();
         String consultaSQL = "UPDATE reservations SET user_name=?, date=?, quantity=?, event_id=? WHERE id=?";

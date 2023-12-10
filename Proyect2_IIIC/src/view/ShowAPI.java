@@ -191,7 +191,7 @@ public class ShowAPI extends javax.swing.JPanel {
         panel.setBackground(new java.awt.Color(253,223,150));
     }
     private void btnReserveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReserveMouseClicked
-       int selectedEventId = event.getLocationId();
+       /*int selectedEventId = event.getLocationId();
         String eventName = event.getName();
 
         // Show a confirmation dialog
@@ -202,7 +202,7 @@ public class ShowAPI extends javax.swing.JPanel {
             parent.getJpReservations();
             parent.actualizarFecha(selectedEventId);
         } else {
-        } 
+        } */
     }//GEN-LAST:event_btnReserveMouseClicked
 
     private void btnReserveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReserveMouseEntered

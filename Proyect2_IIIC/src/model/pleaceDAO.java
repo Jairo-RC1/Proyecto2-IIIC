@@ -1,4 +1,3 @@
-
 package model;
 
 import java.sql.PreparedStatement;
@@ -8,13 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author jefry
  */
 public class pleaceDAO {
-    
+
     public pleaceDAO() {
 
     }
@@ -76,7 +74,7 @@ public class pleaceDAO {
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, place.getPostalCode() );
+            ps.setInt(1, place.getPostalCode());
             ps.setString(2, place.getName());
             ps.setString(3, place.getAddress());
             ps.setString(4, place.getCity());
@@ -94,7 +92,7 @@ public class pleaceDAO {
     }
 
 // Method to delete a place record from the database by ID
-    public void deletePlace (int id) {
+    public void deletePlace(int id) {
         DBConnectionJava db = new DBConnectionJava();
 
         String consultaSQL = "DELETE FROM places WHERE id=?";
@@ -109,5 +107,43 @@ public class pleaceDAO {
         } finally {
             db.disconnect();
         }
+    }
+
+    public int getIDPlaces(String name) {
+        int ID = 0;
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT id FROM places WHERE name = ?";
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                ID = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return ID;
+    }
+
+    public String getNamePlaces(int id) {
+        String name = "";
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT name FROM places WHERE id = ?";
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                name = resultSet.getString("name");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return name;
     }
 }

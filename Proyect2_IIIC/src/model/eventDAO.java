@@ -4,7 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,102 +14,111 @@ import java.util.List;
  */
 public class eventDAO {
     // Method to save a new place in the database
-
     public void createEvent(event event) {
         DBConnectionJava db = new DBConnectionJava();
+        String consultaSQL = "INSERT INTO events (name, description, date, address, city, postal_code, price, room, place_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            String consultaSQL = "INSERT INTO events (name, description, date, address, postal_code, price, room, place_id) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, event.getName());
             ps.setString(2, event.getDescription());
-            ps.setDate(3, new java.sql.Date(event.getDate().getTime()));
+            if (event.getDate() != null) {
+                ps.setDate(3, new java.sql.Date(event.getDate().getTime()));
+            } else {
+                ps.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+            }
             ps.setString(4, event.getAddress());
-            ps.setInt(5, event.getPostalCode());
-            ps.setDouble(6, event.getPrice());
-            ps.setInt(7, event.getRoom());
-            ps.setInt(8, event.getPlaceId());
-            ps.executeUpdate();
-            System.out.println("Evento creado con éxito.");
+            ps.setString(5, event.getCity());
+            ps.setInt(6, event.getPostalCode());
+            ps.setDouble(7, event.getPrice());
+            ps.setInt(8, event.getRoom());
+            ps.setInt(9, event.getPlaceId());
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Se insertó correctamente el evento");
         } catch (SQLException e) {
-            System.err.println("Error al crear el evento: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "No Se insertó correctamente el evento, error: " + e.toString());
         } finally {
             db.disconnect();
         }
     }
 
-    // Method to retrieve a list of all pleaces saved from the database
-    public List<event> readEvents() {
+    public List<event> readEvent() {
         DBConnectionJava db = new DBConnectionJava();
-        List<event> events = new ArrayList<>();
+        List<event> event = new ArrayList<>();
+        String sql = "SELECT * FROM events";
+
         try {
-            String consultaSQL = "SELECT * FROM events";
-            PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
-                java.util.Date date = resultSet.getDate("date");
+                Date date = resultSet.getDate("date");
                 String address = resultSet.getString("address");
-                int postalCode = resultSet.getInt("postal_code");
-                double price = resultSet.getDouble("price");
-                int room = resultSet.getInt("room");
-                int placeId = resultSet.getInt("place_id");
                 String city = resultSet.getString("city");
-                event event = new event(id, name, description, date, address, postalCode, city, price, room, placeId);
-                events.add(event);
+                int postal_code = Integer.parseInt(resultSet.getString("postal_code"));
+                double price = Double.parseDouble(resultSet.getString("price"));
+                int room = Integer.parseInt(resultSet.getString("room"));
+                int place_id = Integer.parseInt(resultSet.getString("district_id"));
+                event.add(new event(id, name, description, date, address, city, postal_code, price, room, place_id));
             }
         } catch (SQLException e) {
-            System.err.println("Error al leer los eventos: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         } finally {
             db.disconnect();
         }
-        return events;
+        return event;
     }
 
-    // Method to update an existing place record in the database
     public void updateEvent(event event) {
+
         DBConnectionJava db = new DBConnectionJava();
+
+        String consultaSQL = "UPDATE events SET name=?, description=?, date=?, address=?, city=?, postal_code=?, price=?, room=?, place_id=? WHERE id=?";
+
         try {
-            String consultaSQL = "UPDATE events SET name=?, description=?, date=?, address=?, postal_code=?, price=?, room=?, place_id=? WHERE id=?";
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, event.getName());
             ps.setString(2, event.getDescription());
             ps.setDate(3, new java.sql.Date(event.getDate().getTime()));
             ps.setString(4, event.getAddress());
-            ps.setInt(5, event.getPostalCode());
-            ps.setDouble(6, event.getPrice());
-            ps.setInt(7, event.getRoom());
-            ps.setInt(8, event.getPlaceId());
-            ps.setInt(9, event.getId());
-            ps.executeUpdate();
-            System.out.println("Evento actualizado con éxito.");
+            ps.setString(5, event.getCity());
+            ps.setInt(6, event.getPostalCode());
+            ps.setDouble(7, event.getPrice());
+            ps.setInt(8, event.getRoom());
+            ps.setInt(9, event.getPlaceId());
+            ps.setInt(10, event.getId());
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Modificación Exitosa");
+
         } catch (SQLException e) {
-            System.err.println("Error al actualizar el evento: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se modificó, error:" + e.toString());
         } finally {
             db.disconnect();
         }
     }
 
-    // Method to delete a place record from the database by ID
     public void deleteEvent(int id) {
+
         DBConnectionJava db = new DBConnectionJava();
+
+        String consultaSQL = "DELETE FROM events WHERE id=?";
+
         try {
-            String consultaSQL = "DELETE FROM events WHERE id=?";
-            PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            System.out.println("Evento eliminado con éxito.");
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement(consultaSQL);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            JOptionPane.showMessageDialog(null, "Se eliminó correctamente el evento");
+
         } catch (SQLException e) {
-            System.err.println("Error al eliminar el evento: " + e.getMessage());
+
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar, error: " + e.toString());
         } finally {
             db.disconnect();
         }
-
     }
 
-    public int getEventsId(String name) {
+    public int getIDEvents(String name) {
         int ID = 0;
         DBConnectionJava db = new DBConnectionJava();
         String sql = "SELECT id FROM events WHERE name = ?";
@@ -145,4 +156,3 @@ public class eventDAO {
         return name;
     }
 }
-

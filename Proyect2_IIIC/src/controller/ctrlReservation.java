@@ -50,7 +50,7 @@ public class ctrlReservation {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date reservationDate = dateFormat.parse(date.getText());
-            this.dao.create(new reservation(userName.getText(), reservationDate, quantity, eventId));
+            this.dao.createReservation(new reservation(userName.getText(), reservationDate, quantity, eventId));
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en la fecha, el formato correcto es año-mes-día (yyyy-MM-dd): " + ex.toString());
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class ctrlReservation {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date reservationDate = dateFormat.parse(date.getText());
-            this.dao.update(new reservation(this.id, userName.getText(), reservationDate, quantity, eventId));
+            this.dao.updateReservation(new reservation(this.id, userName.getText(), reservationDate, quantity, eventId));
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato, el indicado es año-mes-día : ");
         }

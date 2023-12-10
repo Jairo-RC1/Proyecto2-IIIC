@@ -33,7 +33,7 @@ public class ctrlEvent {
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
         table.setRowSorter(order);
         model.setRowCount(0);
-        List<event> events = eventDAO.readEvents();
+        List<event> events = eventDAO.readEvent();
         for (event event : events) {
             Object[] row = {event.getId(), event.getName(), event.getDescription(), event.getDate(),
                 event.getAddress(), event.getPostalCode(), event.getPrice(), event.getRoom(),
@@ -47,8 +47,8 @@ public class ctrlEvent {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(utilDate.getText());
-            this.eventDAO.createEvent(new event(0, name.getText(), description.getText(), date, address.getText(),
-                    Integer.parseInt(postalCode.getText()), city.getText(), Double.parseDouble(price.getText()),
+            this.eventDAO.createEvent(new event(0, name.getText(), description.getText(), date, address.getText(),city.getText(),
+                    Integer.parseInt(postalCode.getText()),  Double.parseDouble(price.getText()),
                     Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento agregado con éxito");
         } catch (NumberFormatException e) {
@@ -64,7 +64,7 @@ public class ctrlEvent {
         try {
             Date date = dateFormat.parse(utilDate.getText());
             this.eventDAO.updateEvent(new event(this.id, name.getText(), description.getText(), date,
-                    address.getText(), Integer.parseInt(postalCode.getText()), city.getText(), Double.parseDouble(price.getText()),
+                    address.getText(), city.getText(), Integer.parseInt(postalCode.getText()),  Double.parseDouble(price.getText()),
                     Integer.parseInt(room.getText()), Integer.parseInt(placeId.getText())));
             JOptionPane.showMessageDialog(null, "Evento actualizado con éxito");
         } catch (NumberFormatException e) {
