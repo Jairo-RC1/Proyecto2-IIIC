@@ -26,8 +26,9 @@ public class mainView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         FlatIntelliJLaf.setup();
-
     }
+    
+    
 
     public Date parseDate(String dateString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -39,6 +40,8 @@ public class mainView extends javax.swing.JFrame {
         }
         return parsedDate;
     }
+    
+    
 
     public void setUserData(user currentUser) {
         this.currentUser = currentUser;
@@ -132,7 +135,7 @@ public class mainView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         pnSerchEvent = new javax.swing.JPanel();
-        jPFilters = new javax.swing.JPanel();
+        pnLookFor = new javax.swing.JPanel();
         pnEvents = new javax.swing.JPanel();
         txtEventName = new javax.swing.JTextField();
         lblEventImages = new javax.swing.JLabel();
@@ -143,10 +146,7 @@ public class mainView extends javax.swing.JFrame {
         pnCategory = new javax.swing.JPanel();
         boxCategory = new javax.swing.JComboBox<>();
         lblCategoryImage = new javax.swing.JLabel();
-        pnExitDate = new javax.swing.JPanel();
-        dateExit = new com.toedter.calendar.JDateChooser();
-        lblExitDate = new javax.swing.JLabel();
-        pnEnterDate = new javax.swing.JPanel();
+        pnDate = new javax.swing.JPanel();
         dateEnter = new com.toedter.calendar.JDateChooser();
         lblEnterDate = new javax.swing.JLabel();
         btnEnter = new javax.swing.JPanel();
@@ -154,6 +154,9 @@ public class mainView extends javax.swing.JFrame {
         btnWeatherInfo = new javax.swing.JPanel();
         lbWeatherInfo = new javax.swing.JLabel();
         lblWeatherImage = new javax.swing.JLabel();
+        pnQuantity = new javax.swing.JPanel();
+        spQuantityPeolple = new javax.swing.JSpinner();
+        lblQuantityImage = new javax.swing.JLabel();
         lblBackgroundFilter = new javax.swing.JLabel();
         ScrollPane = new javax.swing.JScrollPane();
         barPane = new javax.swing.JPanel();
@@ -619,8 +622,8 @@ public class mainView extends javax.swing.JFrame {
         pnSerchEvent.setBackground(new java.awt.Color(255, 255, 255));
         pnSerchEvent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPFilters.setBackground(new java.awt.Color(255, 255, 255));
-        jPFilters.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnLookFor.setBackground(new java.awt.Color(255, 255, 255));
+        pnLookFor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnEvents.setBackground(new java.awt.Color(255, 255, 255));
         pnEvents.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4));
@@ -651,7 +654,7 @@ public class mainView extends javax.swing.JFrame {
 
         pnEvents.add(lblFilterBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 820, 230));
 
-        jPFilters.add(pnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 50));
+        pnLookFor.add(pnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 50));
 
         pnLocation.setBackground(new java.awt.Color(255, 255, 255));
         pnLocation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4));
@@ -674,7 +677,7 @@ public class mainView extends javax.swing.JFrame {
         lblEventImages1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/location.png"))); // NOI18N
         pnLocation.add(lblEventImages1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPFilters.add(pnLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 210, 50));
+        pnLookFor.add(pnLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 210, 50));
 
         pnCategory.setBackground(new java.awt.Color(255, 255, 255));
         pnCategory.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4));
@@ -696,30 +699,20 @@ public class mainView extends javax.swing.JFrame {
         lblCategoryImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/category.png"))); // NOI18N
         pnCategory.add(lblCategoryImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPFilters.add(pnCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 210, 50));
+        pnLookFor.add(pnCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 210, 50));
 
-        pnExitDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4), "Fecha de salida", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
-        pnExitDate.setOpaque(false);
-        pnExitDate.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnExitDate.add(dateExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 150, 30));
-
-        lblExitDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/avionSaliendo.png"))); // NOI18N
-        pnExitDate.add(lblExitDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 30, 30));
-
-        jPFilters.add(pnExitDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 220, 65));
-
-        pnEnterDate.setBackground(new java.awt.Color(255, 255, 255));
-        pnEnterDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4), "Fecha de entrada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
-        pnEnterDate.setOpaque(false);
-        pnEnterDate.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnDate.setBackground(new java.awt.Color(255, 255, 255));
+        pnDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4), "Fecha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(39, 71, 96))); // NOI18N
+        pnDate.setOpaque(false);
+        pnDate.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dateEnter.setBackground(new java.awt.Color(255, 255, 255));
-        pnEnterDate.add(dateEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+        pnDate.add(dateEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
 
-        lblEnterDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/avionEntrando.png"))); // NOI18N
-        pnEnterDate.add(lblEnterDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
+        lblEnterDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/dateStar.png"))); // NOI18N
+        pnDate.add(lblEnterDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 30, 30));
 
-        jPFilters.add(pnEnterDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 210, 65));
+        pnLookFor.add(pnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 210, 65));
 
         btnEnter.setBackground(new java.awt.Color(255, 255, 255));
         btnEnter.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -756,7 +749,7 @@ public class mainView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPFilters.add(btnEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 170, 40));
+        pnLookFor.add(btnEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 170, 40));
 
         btnWeatherInfo.setBackground(new java.awt.Color(255, 255, 255));
         btnWeatherInfo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -781,13 +774,27 @@ public class mainView extends javax.swing.JFrame {
         lblWeatherImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/clima.png"))); // NOI18N
         btnWeatherInfo.add(lblWeatherImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 35, 35));
 
-        jPFilters.add(btnWeatherInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 220, 70));
+        pnLookFor.add(btnWeatherInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 220, 70));
+
+        pnQuantity.setBackground(new java.awt.Color(255, 255, 255));
+        pnQuantity.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 71, 96), 4), "Cantidad de Personas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(39, 71, 96))); // NOI18N
+        pnQuantity.setOpaque(false);
+        pnQuantity.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        spQuantityPeolple.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        spQuantityPeolple.setPreferredSize(new java.awt.Dimension(100, 30));
+        pnQuantity.add(spQuantityPeolple, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 19, 110, -1));
+
+        lblQuantityImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/grupoPeople.png"))); // NOI18N
+        pnQuantity.add(lblQuantityImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, 30));
+
+        pnLookFor.add(pnQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 210, 65));
 
         lblBackgroundFilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/fondoTravel1.jpg"))); // NOI18N
         lblBackgroundFilter.setOpaque(true);
-        jPFilters.add(lblBackgroundFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 230));
+        pnLookFor.add(lblBackgroundFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 230));
 
-        pnSerchEvent.add(jPFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 230));
+        pnSerchEvent.add(pnLookFor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 230));
 
         ScrollPane.setBackground(new java.awt.Color(255, 255, 255));
         pnSerchEvent.add(ScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 820, 290));
@@ -1227,10 +1234,8 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel btnSave2;
     private javax.swing.JPanel btnWeatherInfo;
     private com.toedter.calendar.JDateChooser dateEnter;
-    private com.toedter.calendar.JDateChooser dateExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JPanel jPFilters;
     private javax.swing.JPanel jPaneMain;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -1246,7 +1251,6 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblEnterDate;
     private javax.swing.JLabel lblEventImages;
     private javax.swing.JLabel lblEventImages1;
-    private javax.swing.JLabel lblExitDate;
     private javax.swing.JLabel lblFilterBackground;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblIdNumber;
@@ -1259,6 +1263,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JLabel lblProfile;
     private javax.swing.JLabel lblProfile1;
+    private javax.swing.JLabel lblQuantityImage;
     private javax.swing.JLabel lblSave;
     private javax.swing.JLabel lblSave1;
     private javax.swing.JLabel lblSave2;
@@ -1271,14 +1276,16 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblWeatherImage;
     private javax.swing.JPanel pnBooking;
     private javax.swing.JPanel pnCategory;
-    private javax.swing.JPanel pnEnterDate;
+    private javax.swing.JPanel pnDate;
     private javax.swing.JPanel pnEvents;
-    private javax.swing.JPanel pnExitDate;
     private javax.swing.JPanel pnLocation;
+    private javax.swing.JPanel pnLookFor;
     private javax.swing.JPanel pnProfile;
+    private javax.swing.JPanel pnQuantity;
     private javax.swing.JPanel pnSerchEvent;
     private javax.swing.JSeparator separator1;
     private javax.swing.JSeparator separator2;
+    private javax.swing.JSpinner spQuantityPeolple;
     private javax.swing.JTextField txtBirthDate;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEventName;

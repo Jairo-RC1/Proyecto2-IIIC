@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author JRS
  */
-public class Event {
+public class event {
 
     private int id;
     private String name;
@@ -26,7 +26,7 @@ public class Event {
     private String calificationUrlImages;
     private int locationId;
 
-    public Event(int id, String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
+    public event(int id, String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -39,7 +39,7 @@ public class Event {
         this.placeId = placeId;
     }
 
-    public Event(String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
+    public event(String name, String description, Date date, String address, int postalCode, String city, double price, int room, int placeId) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -59,7 +59,7 @@ public class Event {
         this.city = city;
     }
 
-    public Event() {
+    public event() {
 
     }
 

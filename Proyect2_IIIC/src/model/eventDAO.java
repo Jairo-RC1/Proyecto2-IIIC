@@ -1,4 +1,3 @@
-
 package model;
 
 import java.sql.PreparedStatement;
@@ -12,12 +11,13 @@ import java.util.List;
  * @author JRS
  */
 public class eventDAO {
-       // Method to save a new place in the database
-    public void createEvent(Event event) {
+    // Method to save a new place in the database
+
+    public void createEvent(event event) {
         DBConnectionJava db = new DBConnectionJava();
         try {
-            String consultaSQL = "INSERT INTO events (name, description, date, address, postal_code, price, room, place_id) " +
-                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String consultaSQL = "INSERT INTO events (name, description, date, address, postal_code, price, room, place_id) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, event.getName());
             ps.setString(2, event.getDescription());
@@ -37,9 +37,9 @@ public class eventDAO {
     }
 
     // Method to retrieve a list of all pleaces saved from the database
-    public List<Event> readEvents() {
+    public List<event> readEvents() {
         DBConnectionJava db = new DBConnectionJava();
-        List<Event> events = new ArrayList<>();
+        List<event> events = new ArrayList<>();
         try {
             String consultaSQL = "SELECT * FROM events";
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
@@ -55,7 +55,7 @@ public class eventDAO {
                 int room = resultSet.getInt("room");
                 int placeId = resultSet.getInt("place_id");
                 String city = resultSet.getString("city");
-                Event event = new Event(id, name, description, date, address, postalCode,city, price, room, placeId);
+                event event = new event(id, name, description, date, address, postalCode, city, price, room, placeId);
                 events.add(event);
             }
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class eventDAO {
     }
 
     // Method to update an existing place record in the database
-    public void updateEvent(Event event) {
+    public void updateEvent(event event) {
         DBConnectionJava db = new DBConnectionJava();
         try {
             String consultaSQL = "UPDATE events SET name=?, description=?, date=?, address=?, postal_code=?, price=?, room=?, place_id=? WHERE id=?";
@@ -90,7 +90,7 @@ public class eventDAO {
         }
     }
 
-   // Method to delete a place record from the database by ID
+    // Method to delete a place record from the database by ID
     public void deleteEvent(int id) {
         DBConnectionJava db = new DBConnectionJava();
         try {
@@ -104,5 +104,45 @@ public class eventDAO {
         } finally {
             db.disconnect();
         }
+
+    }
+
+    public int getEventsId(String name) {
+        int ID = 0;
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT id FROM events WHERE name = ?";
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                ID = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return ID;
+    }
+
+    public String getEventsName(int id) {
+        String name = "";
+        DBConnectionJava db = new DBConnectionJava();
+        String sql = "SELECT name FROM events WHERE id = ?";
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                name = resultSet.getString("name");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return name;
     }
 }
+

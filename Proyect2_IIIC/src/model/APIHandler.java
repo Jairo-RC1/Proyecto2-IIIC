@@ -23,15 +23,15 @@ public class APIHandler {
     private static final String API_KEY = "A65E329C442347F9B840D61B29879651";
     HttpURLConnection connection = null;
 
-    public List<Event> findEvents(String name, String location, String category) throws Exception {
+    public List<event> findEvents(String name, String location, String category) throws Exception {
         String encodedLocation = URLEncoder.encode(location, "UTF-8");
         String encodedName = URLEncoder.encode(name, "UTF-8");
         String endPoint = String.format("?key=%s&searchQuery=%s&address=%s&category=%s&language=en", API_KEY, encodedName, encodedLocation, category);
         return lookForEvents(endPoint);
     }
 
-    private List<Event> lookForEvents(String endPoint) throws Exception {
-        List<Event> events = new ArrayList<>();
+    private List<event> lookForEvents(String endPoint) throws Exception {
+        List<event> events = new ArrayList<>();
         URL url = new URL(MAIN_URL + endPoint);
         System.out.println(url);
         try {
@@ -48,7 +48,7 @@ public class APIHandler {
 
                 for (int i = 0; i < data.length(); i++) {
                     JSONObject obj = data.getJSONObject(i);
-                    Event Event = new Event();
+                    event Event = new event();
                     Event.setLocationId(obj.getInt("location_id"));
                     System.out.println(Event.getLocationId());
                     Event.setName(obj.getString("name"));
@@ -113,8 +113,8 @@ public class APIHandler {
         return imageUrls;
     }
 
-    public Event getDetailsApi(int id) throws Exception {
-        Event event = new Event();
+    public event getDetailsApi(int id) throws Exception {
+        event event = new event();
         String endpoint = String.format("location/%s/details?key=%s&language=en&currency=USD", id, API_KEY);
         URL url = new URL(LOCATION_URL + endpoint);
         System.out.println(url);

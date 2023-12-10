@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import model.APIHandler;
-import model.Event;
+import model.event;
 import model.place;
 import view.ShowAPI;
 
@@ -21,7 +21,7 @@ import view.ShowAPI;
 public class ctrlApiHandler {
     private APIHandler api = new APIHandler();
     private place place = new place(); 
-    private List<Event> events;
+    private List<event> events;
 
     public ctrlApiHandler() {
         this.api = api;
@@ -41,7 +41,7 @@ public class ctrlApiHandler {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        for (Event event : events) {
+        for (event event : events) {
             try {
                 ShowAPI eventPanel = new ShowAPI(event, api);
                 mainPanel.add(eventPanel);

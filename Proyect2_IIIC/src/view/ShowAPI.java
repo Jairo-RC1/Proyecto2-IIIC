@@ -1,46 +1,53 @@
 package view;
-
-import java.awt.Desktop;
-import java.net.URI;
 import java.net.URL;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import model.Event;
+import javax.swing.JPanel;
+import model.event;
 import model.APIHandler;
-import model.place;
 import model.ApiPlace;
 import model.ConvertImages;
+import model.place;
 
 public class ShowAPI extends javax.swing.JPanel {
 
-    private Event event;
+    private event event;
     private APIHandler apiE = new APIHandler();
     private List<String> imageUrls;
+        private ApiPlace apiP = new ApiPlace();
+    private mainView parent;
+    private int currentIndex;
 
-    public ShowAPI(Event event, APIHandler api) {
+    public ShowAPI(event event, APIHandler api) {
         initComponents();
         this.event = event;
         this.imageUrls = imageUrls;
+        this.parent = parent;
+        this.currentIndex = 0;
+        this.event = event;
         lblName.setText(event.getName());
         lblAddress.setText("Direccion: " + event.getAddress());
 
         try {
             updateEventDetails();
+            updateEventDetails();
         } catch (Exception e) {
             System.out.println("Error cargando detalles: " + e.getMessage());
         }
     }
+    
+    
 
     private void updateEventDetails() throws Exception {
-        Event details = apiE.getDetailsApi(event.getLocationId());
+        event details = apiE.getDetailsApi(event.getLocationId());
         event.setCantReviews(details.getCantReviews());
         lblReviews.setText("Basado en: " + event.getCantReviews() + " opiniones");
         event.setCalificationUrlImages(details.getCalificationUrlImages());
 
         // Update description if available
         if ("Descripcion no disponible".equals(details.getDescription()) || details.getDescription().isEmpty()) {
-            btnDetails.setEnabled(false);
+           btnDescription.setEnabled(false);
         } else {
             event.setDescription(details.getDescription());
         }
@@ -76,159 +83,168 @@ public class ShowAPI extends javax.swing.JPanel {
         lblImage = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblAddress = new javax.swing.JLabel();
-        btnDetails = new javax.swing.JButton();
-        btnWeb = new javax.swing.JButton();
         lblRatingImage = new javax.swing.JLabel();
         lblReviews = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnReserve = new javax.swing.JPanel();
+        lblReserve = new javax.swing.JLabel();
+        lblReserveImage = new javax.swing.JLabel();
+        btnDescription = new javax.swing.JPanel();
+        lblDescription = new javax.swing.JLabel();
+        lblDescriptionImage = new javax.swing.JLabel();
+        lbladdressImage = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 255)));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/cedula.png"))); // NOI18N
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/java.png"))); // NOI18N
+        add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 165, 150));
 
         lblName.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         lblName.setText("Nombre");
+        add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, 38));
 
         lblAddress.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         lblAddress.setText("Direccion");
+        add(lblAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 380, 40));
 
-        btnDetails.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnDetails.setText("Descripcion");
-        btnDetails.setContentAreaFilled(false);
-        btnDetails.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetailsActionPerformed(evt);
-            }
-        });
-
-        btnWeb.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnWeb.setText("Web");
-        btnWeb.setContentAreaFilled(false);
-        btnWeb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWebActionPerformed(evt);
-            }
-        });
-
-        lblRatingImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/email.png"))); // NOI18N
+        lblRatingImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/java.png"))); // NOI18N
+        add(lblRatingImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 130, 40));
 
         lblReviews.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         lblReviews.setText("Sin Opiniones");
+        add(lblReviews, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 140, 20));
 
-        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButton1.setText("Reservar");
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        btnReserve.setBackground(new java.awt.Color(253, 223, 150));
+        btnReserve.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReserveMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReserveMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReserveMouseExited(evt);
             }
         });
+        btnReserve.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel1.setText("Precio");
+        lblReserve.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblReserve.setForeground(new java.awt.Color(0, 0, 0));
+        lblReserve.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblReserve.setText("Reservar");
+        btnReserve.add(lblReserve, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 70, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnWeb))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDetails)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblRatingImage, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(lblReviews))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblName)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(12, 12, 12)))
-                        .addGap(205, 205, 205))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblRatingImage)
-                                    .addComponent(lblReviews))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnWeb)
-                                    .addComponent(jButton1)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDetails)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+        lblReserveImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/Reservar.png"))); // NOI18N
+        btnReserve.add(lblReserveImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, 40));
+
+        add(btnReserve, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 120, 40));
+
+        btnDescription.setBackground(new java.awt.Color(253, 223, 150));
+        btnDescription.setForeground(new java.awt.Color(0, 204, 204));
+        btnDescription.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDescriptionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDescriptionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDescriptionMouseExited(evt);
+            }
+        });
+        btnDescription.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblDescription.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblDescription.setForeground(new java.awt.Color(0, 0, 0));
+        lblDescription.setText("Descripcion");
+        btnDescription.add(lblDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, -1));
+
+        lblDescriptionImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/Descripcion.png"))); // NOI18N
+        btnDescription.add(lblDescriptionImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 40));
+
+        add(btnDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 120, 40));
+
+        lbladdressImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/direccion.png"))); // NOI18N
+        add(lbladdressImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 40, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
+    
+    public event getSelectedEvent() {
+        return event;
+    }
+
+    public place getSelectedPlace() {
         try {
-            Event details = apiE.getDetailsApi(event.getLocationId());
+            int selectedEventId = event.getLocationId();
+            return apiP.getPlaceDetails(selectedEventId);
+        } catch (Exception e) {
+            System.out.println("Error obteniendo detalles del lugar: " + e.getMessage());
+            return null;
+        }
+    }
+    private void panelColor(JPanel panel) {
+        panel.setBackground(new java.awt.Color(197, 134, 54));
+    }
+
+    private void resetPanelColor(JPanel panel) {
+        panel.setBackground(new java.awt.Color(253,223,150));
+    }
+    private void btnReserveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReserveMouseClicked
+       int selectedEventId = event.getLocationId();
+        String eventName = event.getName();
+
+        // Show a confirmation dialog
+        int option = JOptionPane.showConfirmDialog(this, "¿Serás dirigido a la pagina de reservas del evento '" + eventName + "'?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        // Check the user response
+        if (option == JOptionPane.YES_OPTION) {
+            parent.setEventPanel(this);
+            parent.getJpReservations();
+            parent.actualizarFecha(selectedEventId);
+        } else {
+        } 
+    }//GEN-LAST:event_btnReserveMouseClicked
+
+    private void btnReserveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReserveMouseEntered
+        panelColor(btnReserve);
+    }//GEN-LAST:event_btnReserveMouseEntered
+
+    private void btnReserveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReserveMouseExited
+        resetPanelColor(btnReserve);
+    }//GEN-LAST:event_btnReserveMouseExited
+
+    private void btnDescriptionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescriptionMouseEntered
+        panelColor(btnDescription);
+    }//GEN-LAST:event_btnDescriptionMouseEntered
+
+    private void btnDescriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescriptionMouseClicked
+        try {
+            event details = apiE.getDetailsApi(event.getLocationId());
             String formattedDescription = details.getDescription().replace("\\n", "\n");
             placeDescription detailsDialog = new placeDescription( null, true, "Detalles del Evento", formattedDescription);
             detailsDialog.setVisible(true);
         } catch (Exception e) {
             System.out.println("Error fetching event details: " + e.getMessage());
         }
-    }//GEN-LAST:event_btnDetailsActionPerformed
+    }//GEN-LAST:event_btnDescriptionMouseClicked
 
-    private void btnWebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWebActionPerformed
-        /*try {
-            String tripAdvisorLink = apiP.getPlaceDetails(Event.getLocationId()).getTripAdvisorLink();
-            if (tripAdvisorLink != null && !tripAdvisorLink.isEmpty()) {
-                Desktop.getDesktop().browse(new URI(tripAdvisorLink));
-            } else {
-                JOptionPane.showMessageDialog(this, "No hay enlace de TripAdvisor disponible.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            System.out.println("Error opening TripAdvisor link: " + e.getMessage());
-        }*/
-    }//GEN-LAST:event_btnWebActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnDescriptionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescriptionMouseExited
+        resetPanelColor(btnDescription);
+    }//GEN-LAST:event_btnDescriptionMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDetails;
-    private javax.swing.JButton btnWeb;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel btnDescription;
+    private javax.swing.JPanel btnReserve;
     private javax.swing.JLabel lblAddress;
+    private javax.swing.JLabel lblDescription;
+    private javax.swing.JLabel lblDescriptionImage;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRatingImage;
+    private javax.swing.JLabel lblReserve;
+    private javax.swing.JLabel lblReserveImage;
     private javax.swing.JLabel lblReviews;
+    private javax.swing.JLabel lbladdressImage;
     // End of variables declaration//GEN-END:variables
 }
