@@ -44,7 +44,7 @@ public class mainView extends javax.swing.JFrame {
         try {
             parsedDate = dateFormat.parse(dateString);
         } catch (ParseException e) {
-            e.printStackTrace(); // Manejo del error en la conversión
+            e.printStackTrace(); 
         }
         return parsedDate;
     }
@@ -66,9 +66,9 @@ public class mainView extends javax.swing.JFrame {
         txtUserReservation.setText(currentUser.getName());
     }
 
-    /*public void getJpReservations() {
-        tabPanels.setSelectedIndex(1);
-    }*/
+    public void getpnBooking() {
+        pnBooking.setVisible(true);
+    }
     public void setEventDetails(event event) {
         try {
             eventDAO.createEvent(event);

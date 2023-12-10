@@ -194,15 +194,15 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnterMainMouseExited
 
     private void btnEnterMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMainMouseClicked
-        String username = txtUser.getText();
+        String email = txtUser.getText();
         String password = new String(Password.getPassword());
 
         loginDAO login = new loginDAO();
-        currentUser = login.authenticateUser(username, password);
+        currentUser = login.authenticateUser(email, password);
 
         if (currentUser != null) {
             view.mainView MainView = new view.mainView();
-            MainView.setUserData(currentUser); // Enviar los datos del usuario a mainView
+            MainView.setUserData(currentUser); 
             MainView.setVisible(true);
             this.dispose();
         } else {

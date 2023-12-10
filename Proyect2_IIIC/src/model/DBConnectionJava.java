@@ -11,7 +11,7 @@ public class DBConnectionJava {
     static String bd = "eventsystem";
     static String port = "3306";
     static String login = "root";
-    static String password = "salas3107";
+    static String password = "Jairo8553";
     static String url = "jdbc:mariadb://localhost:" + port + "/" + bd;
 
     // Database connection object

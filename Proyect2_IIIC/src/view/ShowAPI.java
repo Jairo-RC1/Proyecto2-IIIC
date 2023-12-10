@@ -194,11 +194,11 @@ public class ShowAPI extends javax.swing.JPanel {
         String eventName = event.getName();
 
         // Show a confirmation dialog
-        int option = JOptionPane.showConfirmDialog(this, "¿Serás dirigido a la pagina de reservas del evento '" + eventName + "'?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(this, "Serás dirigido a la pagina de reservas del evento: '" + eventName, "Confirmar", JOptionPane.YES_NO_OPTION);
         // Check the user response
         if (option == JOptionPane.YES_OPTION) {
             parent.setShowAPI(this);
-            //parent.getJpReservations();
+            parent.getpnBooking();
             parent.actualizarFecha(selectedEventId);
         } else {
         } 
