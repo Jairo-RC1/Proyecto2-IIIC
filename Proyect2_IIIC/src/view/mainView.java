@@ -189,12 +189,6 @@ public class mainView extends javax.swing.JFrame {
         btnSave2 = new javax.swing.JPanel();
         btnRegis2 = new javax.swing.JLabel();
         lblSave2 = new javax.swing.JLabel();
-        btnDelete = new javax.swing.JPanel();
-        btnRegis1 = new javax.swing.JLabel();
-        lblSave1 = new javax.swing.JLabel();
-        btnSave = new javax.swing.JPanel();
-        btnRegis3 = new javax.swing.JLabel();
-        lblSave3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         pnSerchEvent = new javax.swing.JPanel();
@@ -691,83 +685,6 @@ public class mainView extends javax.swing.JFrame {
 
         jPaneMain.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 170, 60));
 
-        btnDelete.setBackground(new java.awt.Color(163, 226, 243));
-        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDeleteMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDeleteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDeleteMouseExited(evt);
-            }
-        });
-        btnDelete.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnRegis1.setBackground(new java.awt.Color(163, 226, 243));
-        btnRegis1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        btnRegis1.setForeground(new java.awt.Color(0, 0, 0));
-        btnRegis1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnRegis1.setText("Eliminar");
-        btnRegis1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegis1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegis1MouseExited(evt);
-            }
-        });
-        btnDelete.add(btnRegis1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 100, 40));
-
-        lblSave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete1.png"))); // NOI18N
-        btnDelete.add(lblSave1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 40));
-
-        jPaneMain.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, 170, 60));
-
-        btnSave.setBackground(new java.awt.Color(163, 226, 243));
-        btnSave.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                btnSaveAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSaveMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSaveMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSaveMouseExited(evt);
-            }
-        });
-        btnSave.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnRegis3.setBackground(new java.awt.Color(163, 226, 243));
-        btnRegis3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        btnRegis3.setForeground(new java.awt.Color(0, 0, 0));
-        btnRegis3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnRegis3.setText("Guardar");
-        btnRegis3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegis3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegis3MouseExited(evt);
-            }
-        });
-        btnSave.add(btnRegis3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 100, 40));
-
-        lblSave3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/save.png"))); // NOI18N
-        btnSave.add(lblSave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 40));
-
-        jPaneMain.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 170, 60));
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/identity-card.png"))); // NOI18N
         jPaneMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, 60));
 
@@ -1203,14 +1120,6 @@ public class mainView extends javax.swing.JFrame {
         resetLabelColor(btnRegis);
     }//GEN-LAST:event_btnRegisMouseExited
 
-    private void btnRegis1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegis1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegis1MouseEntered
-
-    private void btnRegis1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegis1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegis1MouseExited
-
     private void btnRegis2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegis2MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegis2MouseEntered
@@ -1218,14 +1127,6 @@ public class mainView extends javax.swing.JFrame {
     private void btnRegis2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegis2MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegis2MouseExited
-
-    private void btnRegis3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegis3MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegis3MouseEntered
-
-    private void btnRegis3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegis3MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegis3MouseExited
 
     private void BookingPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookingPaneMouseClicked
         pnSerchEvent.setVisible(false);
@@ -1235,14 +1136,6 @@ public class mainView extends javax.swing.JFrame {
         BookingPane.setBackground(new java.awt.Color(132, 206, 250));
     }//GEN-LAST:event_BookingPaneMouseClicked
 
-    private void btnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseEntered
-        panelColor(btnSave);
-    }//GEN-LAST:event_btnSaveMouseEntered
-
-    private void btnSaveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseExited
-        resetPanelColor(btnSave);
-    }//GEN-LAST:event_btnSaveMouseExited
-
     private void btnEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseEntered
         panelColor(btnEdit);
     }//GEN-LAST:event_btnEditMouseEntered
@@ -1250,14 +1143,6 @@ public class mainView extends javax.swing.JFrame {
     private void btnEditMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseExited
         resetPanelColor(btnEdit);
     }//GEN-LAST:event_btnEditMouseExited
-
-    private void btnDeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseEntered
-        panelColor(btnDelete);
-    }//GEN-LAST:event_btnDeleteMouseEntered
-
-    private void btnDeleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseExited
-        resetPanelColor(btnDelete);
-    }//GEN-LAST:event_btnDeleteMouseExited
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
@@ -1271,14 +1156,6 @@ public class mainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
-    private void btnSaveAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnSaveAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveAncestorAdded
-
-    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-
-    }//GEN-LAST:event_btnSaveMouseClicked
-
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
         if (currentUser != null) {
             updateUser(); 
@@ -1286,10 +1163,6 @@ public class mainView extends javax.swing.JFrame {
             System.out.println("El usuario no está cargado correctamente");
         }
     }//GEN-LAST:event_btnEditMouseClicked
-
-    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-
-    }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void txtIdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdMousePressed
         handleTextFieldMousePressed(txtId, "ID");
@@ -1420,16 +1293,12 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel SideBar;
     private javax.swing.JPanel barPane;
     private javax.swing.JComboBox<String> boxCategory;
-    private javax.swing.JPanel btnDelete;
     private javax.swing.JButton btnDeleteEvent;
     private javax.swing.JPanel btnEdit;
     private javax.swing.JPanel btnEnter;
     private javax.swing.JPanel btnFinishBooking;
     private javax.swing.JLabel btnRegis;
-    private javax.swing.JLabel btnRegis1;
     private javax.swing.JLabel btnRegis2;
-    private javax.swing.JLabel btnRegis3;
-    private javax.swing.JPanel btnSave;
     private javax.swing.JPanel btnSave2;
     private javax.swing.JPanel btnWeatherInfo;
     private javax.swing.JLabel jLabel1;
@@ -1468,9 +1337,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblProfile1;
     private javax.swing.JLabel lblQuantityImage;
     private javax.swing.JLabel lblSave;
-    private javax.swing.JLabel lblSave1;
     private javax.swing.JLabel lblSave2;
-    private javax.swing.JLabel lblSave3;
     private javax.swing.JLabel lblSerch;
     private javax.swing.JLabel lblSerchEvent;
     private javax.swing.JLabel lblSerchPlace;

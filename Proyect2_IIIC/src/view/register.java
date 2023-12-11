@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import controller.*;
 import java.text.ParseException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class register extends javax.swing.JFrame {
 
@@ -32,7 +33,6 @@ public class register extends javax.swing.JFrame {
         txtIdNumber = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
-        btnExit = new javax.swing.JLabel();
         lblBirthDate = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         lblPhoneNumber = new javax.swing.JLabel();
@@ -41,9 +41,13 @@ public class register extends javax.swing.JFrame {
         lblLastName = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
-        btnRegis = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblAdminUser = new javax.swing.JLabel();
         cbxRoles = new javax.swing.JComboBox<>();
+        btnRegis = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JPanel();
+        lblExitImage = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,20 +137,6 @@ public class register extends javax.swing.JFrame {
         });
         jPaneMain.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 180, 40));
 
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/exit.png"))); // NOI18N
-        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnExitMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnExitMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnExitMouseExited(evt);
-            }
-        });
-        jPaneMain.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 48, 48));
-
         lblBirthDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/calendar.png"))); // NOI18N
         jPaneMain.add(lblBirthDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 40, 40));
 
@@ -171,28 +161,58 @@ public class register extends javax.swing.JFrame {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/logoAzulOscuro.jpeg"))); // NOI18N
         jPaneMain.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 130, 130));
 
-        btnRegis.setBackground(new java.awt.Color(255, 255, 255));
-        btnRegis.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnRegis.setForeground(new java.awt.Color(0, 0, 0));
-        btnRegis.setText("REGISTRAR");
-        btnRegis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegisMouseClicked(evt);
-            }
-        });
-        btnRegis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisActionPerformed(evt);
-            }
-        });
-        jPaneMain.add(btnRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 150, 50));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/usuario.png"))); // NOI18N
-        jPaneMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, 40));
+        lblAdminUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/usuario.png"))); // NOI18N
+        jPaneMain.add(lblAdminUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, 40));
 
         cbxRoles.setBackground(new java.awt.Color(255, 255, 255));
         cbxRoles.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jPaneMain.add(cbxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 206, 210, 40));
+
+        btnRegis.setBackground(new java.awt.Color(255, 255, 255));
+        btnRegis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegisMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegisMouseExited(evt);
+            }
+        });
+        btnRegis.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Registrar");
+        btnRegis.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 150, 20));
+
+        jPaneMain.add(btnRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 150, 40));
+
+        btnExit.setBackground(new java.awt.Color(255, 255, 255));
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnExitMouseExited(evt);
+            }
+        });
+        btnExit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblExitImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/exit.png"))); // NOI18N
+        btnExit.add(lblExitImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Salir");
+        btnExit.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 6, 50, 20));
+
+        jPaneMain.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,12 +228,12 @@ public class register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void labelColor(JLabel label) {
-        label.setBackground(new java.awt.Color(163, 226, 243));
+    private void panelColor(JPanel panel) {
+        panel.setBackground(new java.awt.Color(163,226,243));
     }
 
-    private void resetLabelColor(JLabel label) {
-        label.setBackground(new java.awt.Color(255, 255, 255));
+    private void resetPanelColor(JPanel panel) {
+        panel.setBackground(new java.awt.Color(255,255,255));
     }
     private void txtPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneNumberActionPerformed
 
@@ -437,21 +457,7 @@ public class register extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPasswordMousePressed
 
-    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
-        login lg = new login();
-        lg.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnExitMouseClicked
-
-    private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
-        labelColor(btnExit);
-    }//GEN-LAST:event_btnExitMouseEntered
-
-    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
-        resetLabelColor(btnExit);
-    }//GEN-LAST:event_btnExitMouseExited
-
-    private void btnRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisActionPerformed
+    private void btnRegisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseClicked
         try {
             this.ctu.addUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword,cbxRoles);
         } catch (ParseException ex) {
@@ -459,21 +465,42 @@ public class register extends javax.swing.JFrame {
             ex.printStackTrace(); // Aquí puedes imprimir o manejar la excepción según sea necesario
             JOptionPane.showMessageDialog(null, "Error al procesar la fecha. Formato incorrecto.");
         }
-    }//GEN-LAST:event_btnRegisActionPerformed
-
-    private void btnRegisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegisMouseClicked
+
+    private void btnRegisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseEntered
+        panelColor(btnRegis);
+    }//GEN-LAST:event_btnRegisMouseEntered
+
+    private void btnRegisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisMouseExited
+        resetPanelColor(btnRegis);
+    }//GEN-LAST:event_btnRegisMouseExited
+
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+        login lg = new login();
+        lg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnExitMouseClicked
+
+    private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
+        panelColor(btnExit);
+    }//GEN-LAST:event_btnExitMouseEntered
+
+    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
+       resetPanelColor(btnExit);
+    }//GEN-LAST:event_btnExitMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnExit;
-    private javax.swing.JButton btnRegis;
+    private javax.swing.JPanel btnExit;
+    private javax.swing.JPanel btnRegis;
     private javax.swing.JComboBox<String> cbxRoles;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPaneMain;
+    private javax.swing.JLabel lblAdminUser;
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblExitImage;
     private javax.swing.JLabel lblIdNumber;
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblLogo;

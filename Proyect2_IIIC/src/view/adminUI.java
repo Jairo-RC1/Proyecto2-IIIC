@@ -5,6 +5,7 @@
 package view;
 
 import controller.*;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.*;
 
@@ -30,30 +31,65 @@ public class adminUI extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblBookingAdmin = new javax.swing.JLabel();
+        btnDeleteReservations = new javax.swing.JPanel();
+        lblEventImage1 = new javax.swing.JLabel();
+        lblDeletePlace1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblReservations = new javax.swing.JTable();
-        btnDeleteReservation = new javax.swing.JButton();
+        lblBookingBackground = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblEvents = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        btnDeleteEvent = new javax.swing.JButton();
+        lblEventsAdmin = new javax.swing.JLabel();
+        btnDeleteEvent = new javax.swing.JPanel();
+        lblEventImage = new javax.swing.JLabel();
+        lblDeleteEvent = new javax.swing.JLabel();
+        lblEventsBackground = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblPlaceAdmin = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPlaces = new javax.swing.JTable();
-        btnDeletePlace = new javax.swing.JButton();
+        btnDeletePlace = new javax.swing.JPanel();
+        lblImagePlace = new javax.swing.JLabel();
+        lblDeletePlace = new javax.swing.JLabel();
+        lblPlaceBackground = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel1.setText("Administrador de Reservaciones");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
+        lblBookingAdmin.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lblBookingAdmin.setForeground(new java.awt.Color(0, 0, 0));
+        lblBookingAdmin.setText("Administrador de Reservaciones");
+        jPanel1.add(lblBookingAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+
+        btnDeleteReservations.setBackground(new java.awt.Color(255, 255, 255));
+        btnDeleteReservations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteReservationsMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDeleteReservationsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDeleteReservationsMouseExited(evt);
+            }
+        });
+        btnDeleteReservations.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblEventImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete.png"))); // NOI18N
+        btnDeleteReservations.add(lblEventImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+
+        lblDeletePlace1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblDeletePlace1.setForeground(new java.awt.Color(0, 0, 0));
+        lblDeletePlace1.setText("Eliminar");
+        btnDeleteReservations.add(lblDeletePlace1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 90, 20));
+
+        jPanel1.add(btnDeleteReservations, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 150, 40));
 
         tblReservations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,15 +111,8 @@ public class adminUI extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 960, 280));
 
-        btnDeleteReservation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete.png"))); // NOI18N
-        btnDeleteReservation.setBorderPainted(false);
-        btnDeleteReservation.setContentAreaFilled(false);
-        btnDeleteReservation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteReservationActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnDeleteReservation, new org.netbeans.lib.awtextra.AbsoluteConstraints(834, 100, 60, 80));
+        lblBookingBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/reservation.jpg"))); // NOI18N
+        jPanel1.add(lblBookingBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 480));
 
         jTabbedPane1.addTab("Reservas", jPanel1);
 
@@ -109,28 +138,48 @@ public class adminUI extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 960, 280));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel3.setText("Administrador de Eventos");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, -1, -1));
+        lblEventsAdmin.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lblEventsAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        lblEventsAdmin.setText("Administrador de Eventos");
+        jPanel2.add(lblEventsAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, -1, -1));
 
-        btnDeleteEvent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete.png"))); // NOI18N
-        btnDeleteEvent.setBorderPainted(false);
-        btnDeleteEvent.setContentAreaFilled(false);
-        btnDeleteEvent.setFocusable(false);
-        btnDeleteEvent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteEventActionPerformed(evt);
+        btnDeleteEvent.setBackground(new java.awt.Color(255, 255, 255));
+        btnDeleteEvent.setForeground(new java.awt.Color(255, 0, 0));
+        btnDeleteEvent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteEventMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDeleteEventMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDeleteEventMouseExited(evt);
             }
         });
-        jPanel2.add(btnDeleteEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(834, 100, 60, 80));
+        btnDeleteEvent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblEventImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete.png"))); // NOI18N
+        btnDeleteEvent.add(lblEventImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+
+        lblDeleteEvent.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblDeleteEvent.setForeground(new java.awt.Color(0, 0, 0));
+        lblDeleteEvent.setText("Eliminar");
+        btnDeleteEvent.add(lblDeleteEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 90, 20));
+
+        jPanel2.add(btnDeleteEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 160, 40));
+
+        lblEventsBackground.setForeground(new java.awt.Color(255, 0, 0));
+        lblEventsBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/Events.jpg"))); // NOI18N
+        jPanel2.add(lblEventsBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 480));
 
         jTabbedPane1.addTab("Eventos", jPanel2);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setText("Administrador de Destinos");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
+        lblPlaceAdmin.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lblPlaceAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        lblPlaceAdmin.setText("Administrador de Destinos");
+        jPanel3.add(lblPlaceAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
 
         tblPlaces.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -152,21 +201,36 @@ public class adminUI extends javax.swing.JFrame {
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 960, 280));
 
-        btnDeletePlace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete.png"))); // NOI18N
-        btnDeletePlace.setBorderPainted(false);
-        btnDeletePlace.setContentAreaFilled(false);
-        btnDeletePlace.setFocusPainted(false);
-        btnDeletePlace.setFocusable(false);
-        btnDeletePlace.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletePlaceActionPerformed(evt);
+        btnDeletePlace.setBackground(new java.awt.Color(255, 255, 255));
+        btnDeletePlace.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeletePlaceMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDeletePlaceMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDeletePlaceMouseExited(evt);
             }
         });
-        jPanel3.add(btnDeletePlace, new org.netbeans.lib.awtextra.AbsoluteConstraints(834, 100, 60, 80));
+        btnDeletePlace.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblImagePlace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete.png"))); // NOI18N
+        btnDeletePlace.add(lblImagePlace, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+
+        lblDeletePlace.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblDeletePlace.setForeground(new java.awt.Color(0, 0, 0));
+        lblDeletePlace.setText("Eliminar");
+        btnDeletePlace.add(lblDeletePlace, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 90, 20));
+
+        jPanel3.add(btnDeletePlace, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 140, 160, 40));
+
+        lblPlaceBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/place.jpg"))); // NOI18N
+        jPanel3.add(lblPlaceBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 480));
 
         jTabbedPane1.addTab("Destinos", jPanel3);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 960, -1));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 960, -1));
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/exit.png"))); // NOI18N
         btnExit.setBorderPainted(false);
@@ -177,30 +241,26 @@ public class adminUI extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 50, 60));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDeleteReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteReservationActionPerformed
-        this.ctlr.deleteReservationByID(reservationID, tblReservations);
-    }//GEN-LAST:event_btnDeleteReservationActionPerformed
+    
+    private void panelColor(JPanel panel) {
+        panel.setBackground(new java.awt.Color(255,0,0));
+    }
 
+    private void resetPanelColor(JPanel panel) {
+        panel.setBackground(new java.awt.Color(255,255,255));
+    }
     private void tblReservationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReservationsMouseClicked
         reservationID = this.ctlr.getReservationIDFromTable(tblReservations, evt);
     }//GEN-LAST:event_tblReservationsMouseClicked
 
-    private void btnDeleteEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEventActionPerformed
-        this.cte.deleteReservationByID(reservationID, tblEvents);
-    }//GEN-LAST:event_btnDeleteEventActionPerformed
-
     private void tblEventsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEventsMouseClicked
         reservationID = this.cte.getReservationIDFromTable(tblEvents, evt);
     }//GEN-LAST:event_tblEventsMouseClicked
-
-    private void btnDeletePlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePlaceActionPerformed
-        this.ctp.deleteReservationByID(reservationID, tblPlaces);
-    }//GEN-LAST:event_btnDeletePlaceActionPerformed
 
     private void tblPlacesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPlacesMouseClicked
         reservationID = this.ctp.getReservationIDFromTable(tblPlaces, evt);
@@ -212,15 +272,48 @@ public class adminUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void btnDeleteEventMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteEventMouseClicked
+        this.cte.deleteReservationByID(reservationID, tblEvents);
+    }//GEN-LAST:event_btnDeleteEventMouseClicked
+
+    private void btnDeleteEventMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteEventMouseEntered
+        panelColor(btnDeleteEvent);
+    }//GEN-LAST:event_btnDeleteEventMouseEntered
+
+    private void btnDeleteEventMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteEventMouseExited
+        resetPanelColor(btnDeleteEvent);
+    }//GEN-LAST:event_btnDeleteEventMouseExited
+
+    private void btnDeletePlaceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePlaceMouseClicked
+        this.ctp.deleteReservationByID(reservationID, tblPlaces);
+    }//GEN-LAST:event_btnDeletePlaceMouseClicked
+
+    private void btnDeletePlaceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePlaceMouseEntered
+        panelColor(btnDeletePlace);
+    }//GEN-LAST:event_btnDeletePlaceMouseEntered
+
+    private void btnDeletePlaceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePlaceMouseExited
+        resetPanelColor(btnDeletePlace);
+    }//GEN-LAST:event_btnDeletePlaceMouseExited
+
+    private void btnDeleteReservationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteReservationsMouseClicked
+        this.ctlr.deleteReservationByID(reservationID, tblReservations);
+    }//GEN-LAST:event_btnDeleteReservationsMouseClicked
+
+    private void btnDeleteReservationsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteReservationsMouseEntered
+       panelColor(btnDeleteReservations);
+    }//GEN-LAST:event_btnDeleteReservationsMouseEntered
+
+    private void btnDeleteReservationsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteReservationsMouseExited
+        resetPanelColor(btnDeleteReservations);
+    }//GEN-LAST:event_btnDeleteReservationsMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDeleteEvent;
-    private javax.swing.JButton btnDeletePlace;
-    private javax.swing.JButton btnDeleteReservation;
+    private javax.swing.JPanel btnDeleteEvent;
+    private javax.swing.JPanel btnDeletePlace;
+    private javax.swing.JPanel btnDeleteReservations;
     private javax.swing.JButton btnExit;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -228,6 +321,18 @@ public class adminUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblBookingAdmin;
+    private javax.swing.JLabel lblBookingBackground;
+    private javax.swing.JLabel lblDeleteEvent;
+    private javax.swing.JLabel lblDeletePlace;
+    private javax.swing.JLabel lblDeletePlace1;
+    private javax.swing.JLabel lblEventImage;
+    private javax.swing.JLabel lblEventImage1;
+    private javax.swing.JLabel lblEventsAdmin;
+    private javax.swing.JLabel lblEventsBackground;
+    private javax.swing.JLabel lblImagePlace;
+    private javax.swing.JLabel lblPlaceAdmin;
+    private javax.swing.JLabel lblPlaceBackground;
     private javax.swing.JTable tblEvents;
     private javax.swing.JTable tblPlaces;
     private javax.swing.JTable tblReservations;
