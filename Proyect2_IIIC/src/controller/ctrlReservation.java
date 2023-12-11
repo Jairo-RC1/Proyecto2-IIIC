@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,8 +18,6 @@ import model.reservation;
 import model.reservationDAO;
 import view.ShowAPI;
 
-
-
 public class ctrlReservation {
 
     validation vali = new validation();
@@ -27,8 +26,6 @@ public class ctrlReservation {
     int id;
 
     public void loadDataReservation(JTable table) {
-        // Get the table model and set up a TableRowSorter for sorting functionality
-
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<TableModel>(model);
         table.setRowSorter(order);
@@ -36,6 +33,27 @@ public class ctrlReservation {
         List<reservation> reservation = dao.readReservation();
         for (reservation reservations : reservation) {
             Object[] row = {reservations.getId(), reservations.getUserName(), reservations.getDate(), reservations.getQuantity(), this.event.getEventsName(reservations.getIdEvent())};
+            model.addRow(row);
+        }
+    }
+
+    public void loadDataReservationForUser(JTable table, String username) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<TableModel> order = new TableRowSorter<>(model);
+        table.setRowSorter(order);
+        model.setRowCount(0);
+
+        // Aquí, asumiendo que tienes un DAO que lee las reservas para un usuario específico
+        List<reservation> reservationsForUser = dao.readReservationsForUser(username);
+
+        for (reservation reservation : reservationsForUser) {
+            Object[] row = {
+                reservation.getId(),
+                reservation.getUserName(),
+                reservation.getDate(),
+                reservation.getQuantity(),
+                this.event.getEventsName(reservation.getIdEvent())
+            };
             model.addRow(row);
         }
     }
@@ -96,6 +114,24 @@ public class ctrlReservation {
             return false;
         }
         return true;
+    }
+
+    public void deleteReservationByID(int reservationID, JTable table) {
+        if (reservationID != -1) {
+            dao.deleteReservation(reservationID);
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.removeRow(table.getSelectedRow());
+        }
+    }
+
+    public int getReservationIDFromTable(JTable table, MouseEvent evt) {
+        int eventID = -1;
+        int row = table.rowAtPoint(evt.getPoint());
+        int col = table.columnAtPoint(evt.getPoint());
+        if (row >= 0 && col >= 0) {
+            eventID = (int) table.getValueAt(row, 0);
+        }
+        return eventID;
     }
 
 }

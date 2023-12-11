@@ -198,12 +198,18 @@ public class login extends javax.swing.JFrame {
         String password = new String(Password.getPassword());
 
         loginDAO login = new loginDAO();
-        currentUser = login.authenticateUser(email, password);
+        user currentUser = login.authenticateUser(email, password);
 
         if (currentUser != null) {
-            view.mainView MainView = new view.mainView();
-            MainView.setUserData(currentUser); 
-            MainView.setVisible(true);
+            int roleId = currentUser.getRoleId();
+            if (roleId == 1) { // ID del rol de administrador
+                adminUI admin = new adminUI();
+                admin.setVisible(true);
+            } else if (roleId == 2) { // ID del rol de usuario
+                view.mainView MainView = new view.mainView();
+                MainView.setUserData(currentUser);
+                MainView.setVisible(true);
+            }
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Credenciales incorrectas. Por favor, inténtelo de nuevo.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);

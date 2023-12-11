@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import org.json.JSONObject;
 
 public class mainView extends javax.swing.JFrame {
@@ -24,7 +25,9 @@ public class mainView extends javax.swing.JFrame {
     ctrlApiHandler ctah = new ctrlApiHandler();
     placeDAO placeDAO = new placeDAO();
     eventDAO eventDAO = new eventDAO();
+    reservationDAO reservationDAO = new reservationDAO();
     private ShowAPI showAPI;
+    private int eventID = -1;
 
     public mainView() {
         initComponents();
@@ -32,6 +35,7 @@ public class mainView extends javax.swing.JFrame {
         this.setResizable(false);
         FlatIntelliJLaf.setup();
         this.currentUser = currentUser;
+
     }
 
     public void setShowAPI(ShowAPI showAPI) {
@@ -44,7 +48,7 @@ public class mainView extends javax.swing.JFrame {
         try {
             parsedDate = dateFormat.parse(dateString);
         } catch (ParseException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
         return parsedDate;
     }
@@ -52,6 +56,8 @@ public class mainView extends javax.swing.JFrame {
     public void setUserData(user currentUser) {
         this.currentUser = currentUser;
         ctu.loadUserDataIntoFields(txtId, txtIdNumber, txtName, txtLastName, txtBirthDate, txtEmail, txtPhoneNumber, txtPassword, currentUser);
+        String username = currentUser.getName();
+        ctr.loadDataReservationForUser(tblEvents, username);
     }
 
     public void actualizarFecha(int idEvent) {
@@ -69,6 +75,7 @@ public class mainView extends javax.swing.JFrame {
     public void getpnBooking() {
         pnBooking.setVisible(true);
     }
+
     public void setEventDetails(event event) {
         try {
             eventDAO.createEvent(event);
@@ -154,8 +161,10 @@ public class mainView extends javax.swing.JFrame {
         btnFinishBooking = new javax.swing.JPanel();
         lblfinsih = new javax.swing.JLabel();
         lblCheckBooking = new javax.swing.JLabel();
+        btnDeleteEvent = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblReservation = new javax.swing.JTable();
+        tblEvents = new javax.swing.JTable();
         lblBackgroundBooking = new javax.swing.JLabel();
         pnProfile = new javax.swing.JPanel();
         jPaneMain = new javax.swing.JPanel();
@@ -461,9 +470,19 @@ public class mainView extends javax.swing.JFrame {
 
         pnFinishBooking.add(btnFinishBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 180, 50));
 
+        btnDeleteEvent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete1.png"))); // NOI18N
+        btnDeleteEvent.setBorderPainted(false);
+        btnDeleteEvent.setContentAreaFilled(false);
+        btnDeleteEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteEventActionPerformed(evt);
+            }
+        });
+        pnFinishBooking.add(btnDeleteEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, 40, 50));
+
         pnBooking.add(pnFinishBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 820, 180));
 
-        tblReservation.setModel(new javax.swing.table.DefaultTableModel(
+        tblEvents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -471,9 +490,16 @@ public class mainView extends javax.swing.JFrame {
                 "ID", "Usuario", "Fecha", "Cantidad", "Evento"
             }
         ));
-        jScrollPane1.setViewportView(tblReservation);
+        tblEvents.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEventsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblEvents);
 
-        pnBooking.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 770, 240));
+        jScrollPane2.setViewportView(jScrollPane1);
+
+        pnBooking.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 800, 250));
 
         lblBackgroundBooking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/celeste-blanco.jpg"))); // NOI18N
         pnBooking.add(lblBackgroundBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 520));
@@ -1255,9 +1281,8 @@ public class mainView extends javax.swing.JFrame {
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
         if (currentUser != null) {
-            updateUser(); // Llama al método para actualizar la información del usuario en la interfaz
+            updateUser(); 
         } else {
-            // Manejo de la situación en la que currentUser es nulo
             System.out.println("El usuario no está cargado correctamente");
         }
     }//GEN-LAST:event_btnEditMouseClicked
@@ -1318,14 +1343,10 @@ public class mainView extends javax.swing.JFrame {
 
     private void btnWeatherInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWeatherInfoMouseClicked
         String locationName = txtLocationName.getText();
-
         JSONObject weatherJSON = OpenWeatherMapAPI.callWeatherAPI(locationName);
-
         if (weatherJSON != null) {
             String jsonString = weatherJSON.toString(); // Convertir JSONObject a String
-
             WeatherInfo weatherInfo = OpenWeatherMapAPI.parseWeatherJSON(jsonString, locationName);
-
             if (weatherInfo != null) {
                 OpenWeatherMapAPI.displayWeatherInfo(weatherInfo);
             } else {
@@ -1347,18 +1368,17 @@ public class mainView extends javax.swing.JFrame {
     private void btnFinishBookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinishBookingMouseClicked
         event selectedEvent = showAPI.getSelectedEvent();
         place selectedPlace = showAPI.getSelectedPlace();
-        int option = JOptionPane.showConfirmDialog(this, "¿Quiere reservar el evento '" + selectedEvent.getName() + "'?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(this, "¿Quiere reservar el evento: '" + selectedEvent.getName(), "Confirmar", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
-            // Set event and venue details in the database
             setPlaceDetails(selectedPlace);
             int generatedPlaceId = placeDAO.getIDPlaces(selectedPlace.getName());
             selectedEvent.setPlaceId(generatedPlaceId);
-
             setEventDetails(selectedEvent);
             int generatedEventId = eventDAO.getIDEvents(selectedEvent.getName());
-
             Integer quantity = (Integer) spQuantityPeopel.getValue();
             ctr.createReservation(txtUserReservation, txtDateReservation, quantity, generatedEventId);
+            String username = currentUser.getName();
+            ctr.loadDataReservationForUser(tblEvents, username);
         } else {
         }
     }//GEN-LAST:event_btnFinishBookingMouseClicked
@@ -1370,6 +1390,23 @@ public class mainView extends javax.swing.JFrame {
     private void btnFinishBookingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinishBookingMouseExited
         btnFinishBooking.setBackground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_btnFinishBookingMouseExited
+
+    private void btnDeleteEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEventActionPerformed
+        if (eventID != -1) {
+            reservationDAO.deleteReservation(eventID); 
+            DefaultTableModel model = (DefaultTableModel) tblEvents.getModel();
+            model.removeRow(tblEvents.getSelectedRow()); 
+            eventID = -1; 
+        }
+    }//GEN-LAST:event_btnDeleteEventActionPerformed
+
+    private void tblEventsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEventsMouseClicked
+        int row = tblEvents.rowAtPoint(evt.getPoint());
+        int col = tblEvents.columnAtPoint(evt.getPoint());
+        if (row >= 0 && col >= 0) {
+            eventID = (int) tblEvents.getValueAt(row, 0); 
+        }
+    }//GEN-LAST:event_tblEventsMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BookingPane;
@@ -1384,6 +1421,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPanel barPane;
     private javax.swing.JComboBox<String> boxCategory;
     private javax.swing.JPanel btnDelete;
+    private javax.swing.JButton btnDeleteEvent;
     private javax.swing.JPanel btnEdit;
     private javax.swing.JPanel btnEnter;
     private javax.swing.JPanel btnFinishBooking;
@@ -1398,6 +1436,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPaneMain;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -1456,7 +1495,7 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JSeparator separator1;
     private javax.swing.JSeparator separator2;
     private javax.swing.JSpinner spQuantityPeopel;
-    private javax.swing.JTable tblReservation;
+    private javax.swing.JTable tblEvents;
     private javax.swing.JTextField txtBirthDate;
     private javax.swing.JTextField txtCodeReservation;
     private javax.swing.JTextField txtDateReservation;

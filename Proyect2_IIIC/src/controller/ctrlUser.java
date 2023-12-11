@@ -65,7 +65,7 @@ public class ctrlUser {
     }
 
     public void addUser(JTextField idNumber, JTextField name, JTextField lastName, JTextField email, JTextField phoneNumber,
-            JTextField birthDate, JTextField password) throws ParseException {
+            JTextField birthDate, JTextField password, JComboBox<String> cbxRole) throws ParseException {
         validation validator = new validation();
 
         // Validates date to be "yyyy-MM-dd"
@@ -111,8 +111,11 @@ public class ctrlUser {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date flowDate = dateFormat.parse(dateText);
+             String roleName = (String) cbxRole.getSelectedItem();
+            ctrlRol ctrlRol = new ctrlRol();
+            int roleId = ctrlRol.getRoleIdByName2(roleName);
 
-            this.dao.createUser(new user(Integer.parseInt(idNumberText), nameText, lastNameText, flowDate, emailText, Integer.parseInt(phoneNumberText), passwordText));
+            this.dao.createUser(new user(Integer.parseInt(idNumberText), nameText, lastNameText, flowDate, emailText, Integer.parseInt(phoneNumberText), passwordText,roleId));
             this.clearFields(name, idNumber, lastName, email, birthDate, phoneNumber, password);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error de formato en legal ID o número de teléfono.");
@@ -200,6 +203,10 @@ public class ctrlUser {
         phoneNumber.setText("");
         password.setText("");
 
+    }
+    public void loadRolesToUserComboBox(JComboBox<String> comboBox) {
+        ctrlRol ctrlRol = new ctrlRol();
+        ctrlRol.loadRolesToComboBox(comboBox);
     }
 
 }

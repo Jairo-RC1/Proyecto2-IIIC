@@ -1,6 +1,7 @@
 
 package controller;
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -11,10 +12,7 @@ import javax.swing.table.TableRowSorter;
 import model.place;
 import model.placeDAO;
 
-/**
- *
- * @author jefry
- */
+
 public class ctrlPlace {
     placeDAO dao = new placeDAO();
     int id;
@@ -63,5 +61,22 @@ public class ctrlPlace {
         latitude.setText("");
         longitude.setText("");
         tripAdvisorLink.setText("");
+    }
+    public void deleteReservationByID(int reservationID, JTable table) {
+        if (reservationID != -1) {
+            dao.deletePlace(reservationID);
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.removeRow(table.getSelectedRow());
+        }
+    }
+
+    public int getReservationIDFromTable(JTable table, MouseEvent evt) {
+        int eventID = -1;
+        int row = table.rowAtPoint(evt.getPoint());
+        int col = table.columnAtPoint(evt.getPoint());
+        if (row >= 0 && col >= 0) {
+            eventID = (int) table.getValueAt(row, 0);
+        }
+        return eventID;
     }
 }

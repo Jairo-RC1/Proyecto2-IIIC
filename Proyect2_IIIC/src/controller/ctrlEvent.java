@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -109,5 +110,23 @@ public class ctrlEvent {
         price.setText("");
         room.setText("");
         placeId.setText("");
+    }
+    
+    public void deleteReservationByID(int reservationID, JTable table) {
+        if (reservationID != -1) {
+            eventDAO.deleteEvent(reservationID);
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.removeRow(table.getSelectedRow());
+        }
+    }
+
+    public int getReservationIDFromTable(JTable table, MouseEvent evt) {
+        int eventID = -1;
+        int row = table.rowAtPoint(evt.getPoint());
+        int col = table.columnAtPoint(evt.getPoint());
+        if (row >= 0 && col >= 0) {
+            eventID = (int) table.getValueAt(row, 0);
+        }
+        return eventID;
     }
 }

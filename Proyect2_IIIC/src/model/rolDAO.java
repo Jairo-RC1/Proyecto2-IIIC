@@ -1,4 +1,5 @@
 package model;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -80,25 +81,25 @@ public class rolDAO {
     }
 
     // Retrieve the name of a role by its ID
-    public String getRoleNameById(int roleId) {
+    public static String getRoleNameById(int roleId) {
         // Establish a connection to the database
         DBConnectionJava db = new DBConnectionJava();
 
         // SQL query to select the name of a role based on its ID
         String sql = "SELECT name FROM roles WHERE id = ?";
 
-        try {
-            // Prepare a SQL statement with a parameterized query
-            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+        try (Connection connection = db.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)) {
+
             // Set the value of the parameter to the provided role ID
             ps.setInt(1, roleId);
-            // Execute the SQL query and store the result set
-            ResultSet resultSet = ps.executeQuery();
 
-            // Check if there is a result in the result set
-            if (resultSet.next()) {
-                // Return the name of the role found in the result set
-                return resultSet.getString("name");
+            // Execute the SQL query and store the result set
+            try (ResultSet resultSet = ps.executeQuery()) {
+                // Check if there is a result in the result set
+                if (resultSet.next()) {
+                    // Return the name of the role found in the result set
+                    return resultSet.getString("name");
+                }
             }
         } catch (SQLException e) {
             // Print an error message if a SQL exception occurs

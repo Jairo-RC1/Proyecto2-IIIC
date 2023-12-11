@@ -10,12 +10,14 @@ import javax.swing.JOptionPane;
 public class register extends javax.swing.JFrame {
 
     ctrlUser ctu = new ctrlUser();
+    ctrlRol ctrol = new ctrlRol();
 
     public register() {
         initComponents();
         FlatIntelliJLaf.setup();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.ctrol.loadRolesToComboBox(cbxRoles);
     }
 
     @SuppressWarnings("unchecked")
@@ -40,6 +42,8 @@ public class register extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         btnRegis = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cbxRoles = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,6 +186,13 @@ public class register extends javax.swing.JFrame {
             }
         });
         jPaneMain.add(btnRegis, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 150, 50));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/usuario.png"))); // NOI18N
+        jPaneMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, 40));
+
+        cbxRoles.setBackground(new java.awt.Color(255, 255, 255));
+        cbxRoles.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jPaneMain.add(cbxRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 206, 210, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -442,7 +453,7 @@ public class register extends javax.swing.JFrame {
 
     private void btnRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisActionPerformed
         try {
-            this.ctu.addUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword);
+            this.ctu.addUser(txtIdNumber, txtName, txtLastName, txtEmail, txtPhoneNumber, txtBirthDate, txtPassword,cbxRoles);
         } catch (ParseException ex) {
             // Manejo de la excepción ParseException
             ex.printStackTrace(); // Aquí puedes imprimir o manejar la excepción según sea necesario
@@ -458,6 +469,8 @@ public class register extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
     private javax.swing.JButton btnRegis;
+    private javax.swing.JComboBox<String> cbxRoles;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPaneMain;
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblEmail;

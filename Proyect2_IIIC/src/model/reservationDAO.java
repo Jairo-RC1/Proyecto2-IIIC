@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 public class reservationDAO {
 
     // This method creates a new reservation in the database.
@@ -57,6 +56,32 @@ public class reservationDAO {
             db.disconnect();
         }
         return reservation;
+    }
+
+    public List<reservation> readReservationsForUser(String username) {
+        DBConnectionJava db = new DBConnectionJava();
+        List<reservation> reservationsForUser = new ArrayList<>();
+        String sql = "SELECT * FROM reservations WHERE user_name = ?";
+
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setString(1, username); // Establecer el nombre de usuario en la consulta
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String userName = resultSet.getString("user_name");
+                Date date = resultSet.getDate("date");
+                int quantity = resultSet.getInt("quantity");
+                int idEvent = resultSet.getInt("event_id");
+                reservationsForUser.add(new reservation(id, userName, date, quantity, idEvent));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return reservationsForUser;
     }
 
     // This method updates a reservation in a database using the provided Reservation object.

@@ -1,11 +1,11 @@
 package model;
 
-import java.sql.PreparedStatement;// Provides the functionality to prepare and execute SQL 
-import java.sql.ResultSet;// Represents a set of results from an SQL query.
-import java.sql.SQLException;// Handle specific SQL exceptions.
-import java.util.ArrayList;//Implementation of ArrayList, used to store result sets
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;// Provides the List interface to store result sets.
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class eventDAO {
@@ -58,7 +58,7 @@ public class eventDAO {
                 int postal_code = Integer.parseInt(resultSet.getString("postal_code")); 
                 double price = Double.parseDouble(resultSet.getString("price")); 
                 int room = Integer.parseInt(resultSet.getString("room")); 
-                int place_id = Integer.parseInt(resultSet.getString("district_id")); 
+                int place_id = Integer.parseInt(resultSet.getString("place_id")); 
                 
                 event.add(new event(id, name, description, date, address, city, postal_code, price, room, place_id));
             }

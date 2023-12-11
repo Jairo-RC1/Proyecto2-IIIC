@@ -20,7 +20,7 @@ public class userDAO {
         DBConnectionJava db = new DBConnectionJava();
 
         // SQL query to insert user information into the "users" table
-        String consultaSQL = "INSERT INTO users (id_number, name, last_name, email, birth_date, phone_number, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String consultaSQL = "INSERT INTO users (id_number, name, last_name, email, birth_date, phone_number, password, role_id) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
         try {
             // Prepare a SQL statement with the provided query
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
@@ -33,6 +33,7 @@ public class userDAO {
             ps.setDate(5, new java.sql.Date(user.getBirthDate().getTime()));
             ps.setInt(6, user.getPhoneNumber());
             ps.setString(7, user.getPassword());
+            ps.setInt(8, user.getRoleId());
 
             // Execute the SQL statement to insert the user into the database
             ps.execute();
@@ -57,7 +58,7 @@ public class userDAO {
         List<user> users = new ArrayList<>();
 
         // SQL query to select user information from the 'users' table
-        String sql = "SELECT id, id_number, name, last_name, birth_date, email, phone_number, password FROM users";
+        String sql = "SELECT id, id_number, name, last_name, birth_date, email, phone_number, password, role_id FROM users";
 
         try {
             // Prepare the SQL statement and execute it to get the result set
@@ -75,9 +76,10 @@ public class userDAO {
                 String email = resultSet.getString("email");
                 int phoneNumber = resultSet.getInt("phone_number");
                 String password = resultSet.getString("password");
+                int roleId = resultSet.getInt("role_id");
 
                 // Create a new user object with the retrieved attributes
-                user newUser = new user(id, idNumber, name, lastName, birthDate, email, phoneNumber, password);
+                user newUser = new user(id, idNumber, name, lastName, birthDate, email, phoneNumber, password, roleId);
 
                 // Add the new user object to the list
                 users.add(newUser);
@@ -102,7 +104,7 @@ public class userDAO {
             DBConnectionJava db = new DBConnectionJava();
 
             // SQL query to update user information in the 'users' table
-            String consultaSQL = "UPDATE users SET id_number=?, name=?, last_name=?, birth_date=?, email=?, phone_number=?, password=? WHERE id=?";
+            String consultaSQL = "UPDATE users SET id_number=?, name=?, last_name=?, birth_date=?, email=?, phone_number=?, password=?, role_id=? WHERE id=?";
 
             try {
                 // Establish a prepared statement with the SQL query
@@ -115,7 +117,8 @@ public class userDAO {
                 ps.setString(5, currentUser.getEmail());
                 ps.setInt(6, currentUser.getPhoneNumber());
                 ps.setString(7, currentUser.getPassword());
-                ps.setInt(8, currentUser.getId());
+                ps.setInt(8, currentUser.getRoleId());
+                ps.setInt(9, currentUser.getId());
 
                 // Execute the update query
                 ps.executeUpdate();
