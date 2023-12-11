@@ -58,7 +58,7 @@ public class userDAO {
         List<user> users = new ArrayList<>();
 
         // SQL query to select user information from the 'users' table
-        String sql = "SELECT id, id_number, name, last_name, birth_date, email, phone_number, password, role_id FROM users";
+        String sql = "SELECT id, id_number, name, last_name, birth_date, email, phone_number, password, rol_id FROM users";
 
         try {
             // Prepare the SQL statement and execute it to get the result set
@@ -76,7 +76,7 @@ public class userDAO {
                 String email = resultSet.getString("email");
                 int phoneNumber = resultSet.getInt("phone_number");
                 String password = resultSet.getString("password");
-                int roleId = resultSet.getInt("role_id");
+                int roleId = resultSet.getInt("rol_id");
 
                 // Create a new user object with the retrieved attributes
                 user newUser = new user(id, idNumber, name, lastName, birthDate, email, phoneNumber, password, roleId);
@@ -104,7 +104,7 @@ public class userDAO {
             DBConnectionJava db = new DBConnectionJava();
 
             // SQL query to update user information in the 'users' table
-            String consultaSQL = "UPDATE users SET id_number=?, name=?, last_name=?, birth_date=?, email=?, phone_number=?, password=?, role_id=? WHERE id=?";
+            String consultaSQL = "UPDATE users SET id_number=?, name=?, last_name=?, birth_date=?, email=?, phone_number=?, password=?, rol_id=? WHERE id=?";
 
             try {
                 // Establish a prepared statement with the SQL query
