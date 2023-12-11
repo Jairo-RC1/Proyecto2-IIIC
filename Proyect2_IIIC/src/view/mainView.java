@@ -60,15 +60,15 @@ public class mainView extends javax.swing.JFrame {
         ctr.loadDataReservationForUser(tblEvents, username);
     }
 
-    public void actualizarFecha(int idEvent) {
+    public void updateDate(int eventId) {
         // Get the current date and time
-        LocalDateTime fechaActual = LocalDateTime.now();
+        LocalDateTime currentDate = LocalDateTime.now();
 
         // Format the date as a string in the desired format
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String fechaFormateada = fechaActual.format(formato);
-        txtDateReservation.setText(fechaFormateada);
-        txtCodeReservation.setText(String.valueOf(idEvent));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = currentDate.format(formatter);
+        txtDateReservation.setText(formattedDate);
+        txtCodeReservation.setText(String.valueOf(eventId));
         txtUserReservation.setText(currentUser.getName());
     }
 
@@ -91,9 +91,9 @@ public class mainView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al insertar el lugar en la base de datos: " + e.toString());
         }
     }
-
+    // this method updated the user in the txtfields
     public void updateUser() {
-        // Obtener los valores actualizados de los campos de texto
+        
         int idNumber = Integer.parseInt(txtIdNumber.getText());
         String name = txtName.getText();
         String lastName = txtLastName.getText();
@@ -103,7 +103,6 @@ public class mainView extends javax.swing.JFrame {
         Date birthDate = parseDate(txtBirthDate.getText());
         String password = txtPassword.getText();
 
-        // Actualizar los valores en currentUser
         currentUser.setIdNumber(idNumber);
         currentUser.setName(name);
         currentUser.setLastName(lastName);
@@ -112,9 +111,7 @@ public class mainView extends javax.swing.JFrame {
         currentUser.setBirthDate(birthDate);
         currentUser.setPassword(password);
 
-        // Actualizar la interfaz y la base de datos
-        // Llama al método para actualizar el usuario con los nuevos valores
-        ctu.updateUser(currentUser);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -1158,7 +1155,7 @@ public class mainView extends javax.swing.JFrame {
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
         if (currentUser != null) {
-            updateUser(); 
+            updateUser();
         } else {
             System.out.println("El usuario no está cargado correctamente");
         }
@@ -1266,10 +1263,10 @@ public class mainView extends javax.swing.JFrame {
 
     private void btnDeleteEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEventActionPerformed
         if (eventID != -1) {
-            reservationDAO.deleteReservation(eventID); 
+            reservationDAO.deleteReservation(eventID);
             DefaultTableModel model = (DefaultTableModel) tblEvents.getModel();
-            model.removeRow(tblEvents.getSelectedRow()); 
-            eventID = -1; 
+            model.removeRow(tblEvents.getSelectedRow());
+            eventID = -1;
         }
     }//GEN-LAST:event_btnDeleteEventActionPerformed
 
@@ -1277,7 +1274,7 @@ public class mainView extends javax.swing.JFrame {
         int row = tblEvents.rowAtPoint(evt.getPoint());
         int col = tblEvents.columnAtPoint(evt.getPoint());
         if (row >= 0 && col >= 0) {
-            eventID = (int) tblEvents.getValueAt(row, 0); 
+            eventID = (int) tblEvents.getValueAt(row, 0);
         }
     }//GEN-LAST:event_tblEventsMouseClicked
 

@@ -198,7 +198,7 @@ public class ShowAPI extends javax.swing.JPanel {
         if (option == JOptionPane.YES_OPTION) {
             main.setShowAPI(this);
             main.getpnBooking();
-            main.actualizarFecha(selectedEventId);
+            main.updateDate(selectedEventId);
         } else {
         } 
     }//GEN-LAST:event_btnReserveMouseClicked
