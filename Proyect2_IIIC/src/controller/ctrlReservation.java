@@ -100,15 +100,20 @@ public class ctrlReservation {
         date.setText("");
     }
 
+    // Method to validate a user's name entered in a JTextField.
+    // The method takes a JTextField as a parameter.
     public boolean validateName(JTextField userName) {
+        // Check if the entered name does not match the specified format using a validation helper method.
         if (!vali.validateABCWithSpaces(userName.getText())) {
             JOptionPane.showMessageDialog(null, "El nombre que ingresaste no cumple con el formato");
             return false;
         }
-        return true;
+        return true; // If the name passes validation, return true to indicate successful validation.
     }
 
+    // This method validates the quantity entered in a JTextField.
     public boolean validateQuantity(JTextField valor) {
+        // Check if the text in the JTextField contains only numbers
         if (!vali.validateNumbers(valor.getText())) {
             JOptionPane.showMessageDialog(null, "La canitidad que ingresaste no cumple con el formato");
             return false;
@@ -116,21 +121,37 @@ public class ctrlReservation {
         return true;
     }
 
+    // This method deletes a reservation based on the provided reservation ID.
     public void deleteReservationByID(int reservationID, JTable table) {
+        // Check if a valid reservation ID is provided (-1 indicates no selection).
         if (reservationID != -1) {
+            // Call the deleteReservation method from the dao (data access object) to delete the reservation from the database.
             dao.deleteReservation(reservationID);
+
+            // Get the table model associated with the provided JTable.
             DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+            // Remove the row corresponding to the selected reservation from the table.
             model.removeRow(table.getSelectedRow());
         }
     }
 
+    // This method retrieves the reservation ID associated with the clicked cell in a JTable.
     public int getReservationIDFromTable(JTable table, MouseEvent evt) {
+        // Initialize eventID with -1, indicating no valid reservation ID found initially.
         int eventID = -1;
+
+        // Get the row and column indices of the cell where the mouse event occurred.
         int row = table.rowAtPoint(evt.getPoint());
         int col = table.columnAtPoint(evt.getPoint());
+
+        // Check if the mouse event is within a valid cell (row and column indices are non-negative).
         if (row >= 0 && col >= 0) {
+            // Retrieve the reservation ID from the cell at the specified row and the first column (column index 0).
             eventID = (int) table.getValueAt(row, 0);
         }
+
+        // Return the obtained reservation ID. If no valid ID is found, the method returns -1.
         return eventID;
     }
 

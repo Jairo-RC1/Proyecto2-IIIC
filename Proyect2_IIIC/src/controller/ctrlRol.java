@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import model.*;
@@ -9,6 +5,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 
 public class ctrlRol {
+
     // Load roles to a JComboBox
     public void loadRolesToComboBox(JComboBox<String> comboBox) {
         rolDAO rolDAO = new rolDAO();
@@ -20,11 +17,12 @@ public class ctrlRol {
             comboBox.addItem(role.getName());
         }
     }
+
     // Get the role ID by name
     public int getRoleIdByName(String roleName) {
         rolDAO rolDAO = new rolDAO();
         rol rol = rolDAO.getRolByName(roleName);
-        
+
         if (rol != null) {
             return rol.getId();
         } else {
@@ -32,16 +30,17 @@ public class ctrlRol {
             return -1; // Default value or error handling
         }
     }
+
     // Get the role name by ID
     public String getRoleNameById(int roleId) {
         rolDAO rolDAO = new rolDAO();
         return rolDAO.getRoleNameById(roleId);
     }
-     // Alternative method to get the role ID by name
-    public int getRoleIdByName2(String roleName) {
-    rolDAO rolDAO = new rolDAO();
-    return rolDAO.getRoleIdByName(roleName);
-}
+    // Alternative method to get the role ID by name
 
+    public int getRoleIdByName2(String roleName) {
+        rolDAO rolDAO = new rolDAO();
+        return rolDAO.getRoleIdByName(roleName);
+    }
 
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import java.text.ParseException;
@@ -12,7 +8,6 @@ import model.*;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -42,15 +37,15 @@ public class ctrlUser {
             JTextField txtBirthDate, JTextField txtEmail, JTextField txtPhoneNumber, JTextField txtPassword,
             user currentUser) {
 
-        // Verificar si el usuario actual no es nulo
+        // Check if the current user is not null
         if (currentUser != null) {
-            // Establecer la información del usuario en los campos de texto
+            // Set user information in text fields
             txtId.setText(String.valueOf(currentUser.getId()));
             txtIdNumber.setText(String.valueOf(currentUser.getIdNumber()));
             txtName.setText(currentUser.getName());
             txtLastName.setText(currentUser.getLastName());
 
-            // Convertir la fecha de nacimiento a un formato legible
+            // Convert the date of birth to a readable format
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String birthDateString = dateFormat.format(currentUser.getBirthDate());
             txtBirthDate.setText(birthDateString);
@@ -59,7 +54,7 @@ public class ctrlUser {
             txtPhoneNumber.setText(String.valueOf(currentUser.getPhoneNumber()));
             txtPassword.setText(currentUser.getPassword());
         } else {
-            // Si el usuario es nulo, podría manejar este caso según tus necesidades
+            // If user is null, you could handle this case depending on your needs
             System.out.println("El usuario actual es nulo");
         }
     }
@@ -108,26 +103,46 @@ public class ctrlUser {
         }
         String passwordText = password.getText();
 
+        // Attempt to execute the following code block
         try {
+            // Create a SimpleDateFormat object with the pattern "yyyy-MM-dd"
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Parse the dateText using the dateFormat and store it in a Date object named flowDate
             Date flowDate = dateFormat.parse(dateText);
-             String roleName = (String) cbxRole.getSelectedItem();
+
+            // Get the selected item from a combo box named cbxRole and cast it to a String
+            String roleName = (String) cbxRole.getSelectedItem();
+
+            // Create an instance of the ctrlRol class
             ctrlRol ctrlRol = new ctrlRol();
+
+            // Get the role ID by calling the getRoleIdByName2 method of ctrlRol with the roleName as a parameter
             int roleId = ctrlRol.getRoleIdByName2(roleName);
 
-            this.dao.createUser(new user(Integer.parseInt(idNumberText), nameText, lastNameText, flowDate, emailText, Integer.parseInt(phoneNumberText), passwordText,roleId));
+            // Create a new user object with the provided input data and the obtained role ID
+            this.dao.createUser(new user(Integer.parseInt(idNumberText), nameText, lastNameText, flowDate, emailText, Integer.parseInt(phoneNumberText), passwordText, roleId));
+
+            // Clear the input fields
             this.clearFields(name, idNumber, lastName, email, birthDate, phoneNumber, password);
         } catch (NumberFormatException ex) {
+            // Handle an exception if there's a NumberFormatException
             JOptionPane.showMessageDialog(null, "Error de formato en legal ID o número de teléfono.");
         }
+
     }
 
+    // Method to update a user in the system
     public void updateUser(user currentUser) {
+        // Check if the provided user is valid
         if (validateUser(currentUser)) {
+            // If the user is valid, update the user using the data access object (dao)
             dao.updateUser(currentUser);
         }
     }
 
+    // Method to validate an object of type 'user'.
+    // Receives as a parameter a 'user' object called 'currentUser'.
     private boolean validateUser(user currentUser) {
         String idNumberText = String.valueOf(currentUser.getIdNumber());
         String nameText = currentUser.getName();
@@ -137,21 +152,25 @@ public class ctrlUser {
 
         validation validator = new validation();
 
+        // Check if the ID number is not valid using the validator object
         if (!validator.validateID(idNumberText)) {
             JOptionPane.showMessageDialog(null, "Número de cédula no válido. Debe seguir el formato correcto.");
             return false;
         }
 
+        // The following code checks the validity of the 'nameText' and 'lastNameText' strings using a custom validation method called 'validateABCWithSpaces'.
         if (!(validator.validateABCWithSpaces(nameText) && validator.validateABCWithSpaces(lastNameText))) {
             JOptionPane.showMessageDialog(null, "Nombre o Apellido no válido");
             return false;
         }
 
+        // Check if the email address does not pass the validation using the validateMail method.
         if (!validator.validateMail(emailText)) {
             JOptionPane.showMessageDialog(null, "Correo electrónico no válido. Debe tener un formato válido.");
             return false;
         }
 
+        // The condition "!validator.validatePhone(phoneNumberText)" checks if the phone number fails the validation.
         if (!validator.validatePhone(phoneNumberText)) {
             JOptionPane.showMessageDialog(null, "Número de teléfono no válido. Debe contener solo números.");
             return false;
@@ -170,13 +189,17 @@ public class ctrlUser {
         return true;
     }
 
+    // This method is a part of a class and is designed to delete a user.
     public void deleteUser() {
         dao.deleteUser(this.id);
     }
 
+    // This method populates text fields with data from the selected row in a JTable.
     public void selectedRow(JTable table, JTextField IDNumber, JTextField name, JTextField lastName, JTextField birthDate, JTextField email, JTextField phoneNumber, JTextField password) {
         try {
+            // Get the index of the selected row in the JTable.
             int row = table.getSelectedRow();
+            // Check if a row is selected.
             if (row >= 0) {
                 this.id = Integer.parseInt(table.getValueAt(row, 0).toString());
                 IDNumber.setText(table.getValueAt(row, 1).toString());
@@ -194,6 +217,7 @@ public class ctrlUser {
         }
     }
 
+    // This method clears the text content of the specified JTextField components.
     public void clearFields(JTextField name, JTextField idNumber, JTextField lastName, JTextField email, JTextField birthDate, JTextField phoneNumber, JTextField password) {
         name.setText("");
         idNumber.setText("");
@@ -204,8 +228,15 @@ public class ctrlUser {
         password.setText("");
 
     }
+
+    // This method populates a JComboBox with user roles.
+    // The method takes a JComboBox<String> as a parameter.
     public void loadRolesToUserComboBox(JComboBox<String> comboBox) {
+        // Create an instance of the 'ctrlRol' class, which presumably handles role-related operations.
         ctrlRol ctrlRol = new ctrlRol();
+
+        // Call the 'loadRolesToComboBox' method of the 'ctrlRol' instance,
+        // passing the provided 'comboBox' as a parameter.
         ctrlRol.loadRolesToComboBox(comboBox);
     }
 
