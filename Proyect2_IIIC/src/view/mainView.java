@@ -91,15 +91,15 @@ public class mainView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al insertar el lugar en la base de datos: " + e.toString());
         }
     }
+
     // this method updated the user in the txtfields
     public void updateUser() {
-        
+
         int idNumber = Integer.parseInt(txtIdNumber.getText());
         String name = txtName.getText();
         String lastName = txtLastName.getText();
         String email = txtEmail.getText();
         int phoneNumber = Integer.parseInt(txtPhoneNumber.getText());
-
         Date birthDate = parseDate(txtBirthDate.getText());
         String password = txtPassword.getText();
 
@@ -111,7 +111,7 @@ public class mainView extends javax.swing.JFrame {
         currentUser.setBirthDate(birthDate);
         currentUser.setPassword(password);
 
-
+        ctu.updateUser(currentUser);
     }
 
     @SuppressWarnings("unchecked")

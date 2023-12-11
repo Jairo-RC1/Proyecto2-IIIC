@@ -20,7 +20,7 @@ public class userDAO {
         DBConnectionJava db = new DBConnectionJava();
 
         // SQL query to insert user information into the "users" table
-        String consultaSQL = "INSERT INTO users (id_number, name, last_name, email, birth_date, phone_number, password, role_id) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+        String consultaSQL = "INSERT INTO users (id_number, name, last_name, email, birth_date, phone_number, password, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
         try {
             // Prepare a SQL statement with the provided query
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
