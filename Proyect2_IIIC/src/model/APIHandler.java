@@ -12,10 +12,7 @@ import javax.swing.JOptionPane; // Java Swing library for creating graphical use
 import org.json.JSONArray; // JSON array handling
 import org.json.JSONObject; // JSON object handling
 
-/**
- *
- * @author jefry
- */
+
 public class APIHandler {
 
     // The main URL for searching locations on the TripAdvisor API.

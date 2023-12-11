@@ -16,15 +16,14 @@ public class ShowAPI extends javax.swing.JPanel {
     private APIHandler apiE = new APIHandler();
     private List<String> imageUrls;
         private ApiPlace apiP = new ApiPlace();
-    private mainView parent;
-    private int currentIndex;
+    private mainView main;
 
-    public ShowAPI(event event, APIHandler api, mainView parent) {
+
+    public ShowAPI(event event, APIHandler api, mainView main) {
         initComponents();
         this.event = event;
         this.imageUrls = imageUrls;
-        this.parent = parent;
-        this.currentIndex = 0;
+        this.main = main;
         lblName.setText(event.getName());
         lblAddress.setText("Direccion: " + event.getAddress());
 
@@ -194,12 +193,12 @@ public class ShowAPI extends javax.swing.JPanel {
         String eventName = event.getName();
 
         // Show a confirmation dialog
-        int option = JOptionPane.showConfirmDialog(this, "Serás dirigido a la pagina de reservas del evento: '" + eventName, "Confirmar", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(this, "¿Quieres ir a la pagina de reservas para el evento: '" + eventName, "?" + "Confirmar", JOptionPane.YES_NO_OPTION);
         // Check the user response
         if (option == JOptionPane.YES_OPTION) {
-            parent.setShowAPI(this);
-            parent.getpnBooking();
-            parent.actualizarFecha(selectedEventId);
+            main.setShowAPI(this);
+            main.getpnBooking();
+            main.actualizarFecha(selectedEventId);
         } else {
         } 
     }//GEN-LAST:event_btnReserveMouseClicked

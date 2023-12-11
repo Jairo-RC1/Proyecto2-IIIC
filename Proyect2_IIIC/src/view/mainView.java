@@ -1347,7 +1347,7 @@ public class mainView extends javax.swing.JFrame {
     private void btnFinishBookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinishBookingMouseClicked
         event selectedEvent = showAPI.getSelectedEvent();
         place selectedPlace = showAPI.getSelectedPlace();
-        int option = JOptionPane.showConfirmDialog(this, "¿Deseas reservar el evento '" + selectedEvent.getName() + "'?", "Confirmar Reserva", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(this, "¿Quiere reservar el evento '" + selectedEvent.getName() + "'?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             // Set event and venue details in the database
             setPlaceDetails(selectedPlace);

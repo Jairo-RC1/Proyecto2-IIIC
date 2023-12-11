@@ -1,64 +1,64 @@
 package model;
 
-import java.util.Date;//Provides methods for working with dates and times.
-import java.util.List;//To manage dates and times more effectively.
+import java.util.Date;
+import java.util.List;
 
-//** @author JRS
+
 public class event {
 
-    private int id;// Unique identifier of the event
-    private String name;// Name of the event
-    private String description;// Description of the event
-    private Date date;// Event date
-    private String address;// Event address
-    private int postalCode;// Zip code of the event
-    private String city;// City where the event takes place
-    private double price;// Event price
-    private int room;// Event room number
-    private int placeId;// Identifier of the place where the event takes place
-    private List<String> urlImages;// List of URLs of images related to the event
-    private String calification;// Event rating
-    private String cantReviews;// Number of reviews or reviews of the event
-    private String calificationUrlImages;// URL of images related to the event rating
-    private int locationId;// Event location identifier
+    private int id;
+    private String name;
+    private String description;
+    private Date date;
+    private String address;
+    private int postalCode;
+    private String city;
+    private double price;
+    private int room;
+    private int placeId;
+    private List<String> urlImages;
+    private String calification;
+    private String cantReviews;
+    private String calificationUrlImages;
+    private int locationId;
 
     //Constructor for the Event class.
     public event(int id, String name, String description, Date date, String address, String city, int postalCode, double price, int room, int placeId) {
-        this.id = id;//id The unique identifier for the event.
-        this.name = name;//name The name or title of the event.
-        this.description = description;//description A brief description of the event.
-        this.date = date;//date The date on which the event is scheduled to occur.
-        this.address = address;//address The street address of the location where the event takes place.
-        this.postalCode = postalCode;//postalCode The postal code of the location where the event takes place.
-        this.city = city;//city The city where the event is held.
-        this.price = price;//price The price or cost associated with attending the event.
-        this.room = room;//room The room or venue number where the event is hosted.
-        this.placeId = placeId;//placeId The identifier of the place or venue where the event is held.
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.price = price;
+        this.room = room;
+        this.placeId = placeId;
 
     }
 
     //Constructs an Event object with the specified attributes.
     public event(String name, String description, Date date, String address, String city, int postalCode, double price, int room, int placeId) {
-        this.name = name;//The name of the event.
-        this.description = description;//The description of the event.
-        this.date = date;//The date of the event.
-        this.address = address;//The address where the event takes place.
-        this.postalCode = postalCode;//The postal code of the event location.
-        this.city = city;//The city where the event is located.
-        this.price = price;//The price of the event.
-        this.room = room;//The room number or identifier for the event.
-        this.placeId = placeId;// The identifier of the place where the event is held.
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.price = price;
+        this.room = room;
+        this.placeId = placeId;
 
     }
 
     // Getter method for retrieving the value of the 'city' variable.
     public String getCity() {
-        return city;// Returns: A String representing the city.
+        return city;
     }
 
     // Setter method for updating the value of the 'city' variable.
     public void setCity(String city) {
-        this.city = city;//   city - A String representing the new value for the city.
+        this.city = city;
     }
 
     //This class represents an Event and provides getters and setters for its attributes.

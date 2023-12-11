@@ -1,38 +1,33 @@
 package model;
 
-/**
- *
- * @author jairo
- */
-// WeatherInfo class represents information about weather conditions at a specific location.
+
 public class WeatherInfo {
 
-    // Private fields to store various weather-related data.
-    private String locationName;        // Name of the location
-    private double latitude;            // Latitude of the location
-    private double longitude;           // Longitude of the location
-    private String weatherDescription;  // Description of the weather conditions
-    private String temperature;         // Temperature at the location
-    private String humidity;            // Humidity level at the location
-    private String feelsLike;           // "Feels like" temperature
-    private int cloudiness;             // Cloudiness percentage
-    private String windSpeed;           // Wind speed at the location
+
+    private String locationName;        
+    private double latitude;            
+    private double longitude;           
+    private String weatherDescription;  
+    private String temperature;         
+    private String humidity;            
+    private String feelsLike;           
+    private int cloudiness;             
+    private String windSpeed;           
 
     public WeatherInfo(String locationName, double latitude, double longitude, String weatherDescription, String temperature, String humidity, String feelsLike, int cloudiness, String windSpeed) {
 
-        // Assigning the provided values to the corresponding attributes of the WeatherInfo object.
-        this.locationName = locationName; // String representing the name of the location.
-        this.latitude = latitude;//Double representing the latitude of the location.
-        this.longitude = longitude;//Double representing the longitude of the location.
-        this.weatherDescription = weatherDescription;//String describing the current weather conditions.
-        this.temperature = temperature;//String representing the temperature at the location.
-        this.humidity = humidity;//String representing the humidity level at the location.
-        this.feelsLike = feelsLike;//String representing the perceived temperature at the location.
-        this.cloudiness = cloudiness;//Integer representing the cloudiness percentage at the location.
-        this.windSpeed = windSpeed;//String representing the wind speed at the location.
+        this.locationName = locationName; 
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.weatherDescription = weatherDescription;
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.feelsLike = feelsLike;
+        this.cloudiness = cloudiness;
+        this.windSpeed = windSpeed;
     }
 
-    // Default constructor for WeatherInfo class.
+
     public WeatherInfo() {
     }
 

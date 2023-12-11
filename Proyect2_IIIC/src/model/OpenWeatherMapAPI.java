@@ -8,8 +8,7 @@ import java.net.HttpURLConnection;//This class allows applications to connect to
 import java.net.URL;//This class represents a Uniform Resource Locator, which is a pointer to a "resource" on the World Wide Web.
 import javax.swing.JOptionPane;// This class provides methods to create and show simple dialog boxes for user interaction.
 
-//** @author jairo
-//Is designed to make API calls to the OpenWeatherMap service
+
 public class OpenWeatherMapAPI {
 
     // API key for accessing the OpenWeatherMap service
