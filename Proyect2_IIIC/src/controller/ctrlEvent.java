@@ -81,11 +81,11 @@ public class ctrlEvent {
     //Updates an existing event with the provided information.
     public void updateEvent(JTextField name, JTextField description, JTextField utilDate, JTextField address,
             JTextField postalCode, JTextField city, JTextField price, JTextField room, JTextField placeId) {
-        // Create a date formatter with the specified format.
+        // Create a date formatecified format.
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
-            // Parse the date string from the JTextField into a Date object.
+            //the date string from the JTextField into a Date object.
             Date date = dateFormat.parse(utilDate.getText());
 
             // Update the event using the EventDAO with the provided information.
