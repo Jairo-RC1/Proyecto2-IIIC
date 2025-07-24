@@ -94,7 +94,7 @@ public class ctrlEvent {
                     Double.parseDouble(price.getText()), Integer.parseInt(room.getText()),
                     Integer.parseInt(placeId.getText())));
 
-            // Show a success message using a JOptionPane.
+            // Show a  message using a JOptionPane.
             JOptionPane.showMessageDialog(null, "Evento actualizado con éxito");
         } catch (NumberFormatException e) {
             // Show an error message for a number format exception.
