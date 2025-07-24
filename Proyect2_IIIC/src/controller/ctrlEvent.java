@@ -78,7 +78,7 @@ public class ctrlEvent {
         this.clearFields(name, description, utilDate, address, city, postalCode, price, room, placeId);
     }
 
-    //Updates an existing event with the provided information.
+    //Updates an existing event with the provided information.jtdgjrc
     public void updateEvent(JTextField name, JTextField description, JTextField utilDate, JTextField address,
             JTextField postalCode, JTextField city, JTextField price, JTextField room, JTextField placeId) {
         // Create a date formatter with the specified format.
